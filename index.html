@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover, maximum-scale=1.0">
-    <title>🌸 Милая Копилка | Cute Piggy Bank</title>
-    <meta name="description" content="Милое приложение-копилка для накопления денег">
+    <title>🌸 Милая Копилка</title>
+    <meta name="description" content="Милое приложение-копилка">
     <meta name="theme-color" content="#ff99b9">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -12,9 +12,6 @@
     <meta name="mobile-web-app-capable" content="yes">
     
     <link rel="apple-touch-icon" sizes="180x180" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'><defs><radialGradient id='g' cx='50%25' cy='40%25' r='50%25'><stop offset='0%25' stop-color='%23ffb3c6'/><stop offset='100%25' stop-color='%23ff6b8a'/></radialGradient></defs><circle cx='90' cy='90' r='85' fill='url(%23g)'/><circle cx='90' cy='90' r='78' fill='none' stroke='white' stroke-width='4' stroke-dasharray='16 8'/><text x='90' y='115' text-anchor='middle' font-size='70' font-family='Arial'>🐷</text></svg>">
-    
-    <!-- MANIFEST для Android/Chrome PWA -->
-    <link rel="manifest" href="data:application/manifest+json,{name:'🌸 Милая Копилка',short_name:'Копилка',description:'Милое приложение-копилка',start_url:'.',scope:'.',display:'standalone',background_color:'#fff0f5',theme_color:'#ff99b9',orientation:'any',icons:[{src:'data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 192 192%22><defs><radialGradient id=%22g%22 cx=%2250%25%22 cy=%2240%25%22 r=%2250%25%22><stop offset=%220%25%22 stop-color=%22%23ffb3c6%22/><stop offset=%22100%25%22 stop-color=%22%23ff6b8a%22/></radialGradient></defs><circle cx=%2296%22 cy=%2296%22 r=%2290%22 fill=%22url(%23g)%22/><circle cx=%2296%22 cy=%2296%22 r=%2283%22 fill=%22none%22 stroke=%22white%22 stroke-width=%224%22 stroke-dasharray=%2218 9%22/><text x=%2296%22 y=%22124%22 text-anchor=%22middle%22 font-size=%2275%22 font-family=%22Arial%22>🐷</text></svg>',sizes:'192x192',type:'image/svg+xml',purpose:'any maskable'},{src:'data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 512 512%22><defs><radialGradient id=%22g%22 cx=%2250%25%22 cy=%2240%25%22 r=%2250%25%22><stop offset=%220%25%22 stop-color=%22%23ffb3c6%22/><stop offset=%22100%25%22 stop-color=%22%23ff6b8a%22/></radialGradient></defs><circle cx=%22256%22 cy=%22256%22 r=%22240%22 fill=%22url(%23g)%22/><circle cx=%22256%22 cy=%22256%22 r=%22220%22 fill=%22none%22 stroke=%22white%22 stroke-width=%228%22 stroke-dasharray=%2230 15%22/><text x=%22256%22 y=%22310%22 text-anchor=%22middle%22 font-size=%22160%22 font-family=%22Arial%22>🐷</text></svg>',sizes:'512x512',type:'image/svg+xml',purpose:'any maskable'}]}">
     
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Comfortaa:wght@400;700&display=swap');
@@ -28,7 +25,6 @@
             --header-gradient: linear-gradient(135deg, #ffb3c6, #ff8fab);
             --font-main: 'Nunito','Comfortaa',sans-serif;
             --font-cute: 'Comfortaa',cursive;
-            --button-hover: #ff7da3;
         }
         .theme-pink { --bg: #fff0f5; --accent: #ff99b9; --accent-dark: #ff6b8a; --accent-light: #ffd6e8; --progress-bg: #fce4ec; --input-bg: #fff5f8; --paid-color: #ff99b9; }
         .theme-peach { --bg: #fff5f0; --accent: #ffb899; --accent-dark: #ff9a6c; --accent-light: #ffe0cc; --progress-bg: #fde8d8; --input-bg: #fff8f5; --paid-color: #ffb899; }
@@ -38,12 +34,7 @@
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html, body { width: 100%; height: 100%; overflow: hidden; position: fixed; top: 0; left: 0; }
-        body {
-            font-family: var(--font-main); background: var(--bg); color: var(--text);
-            display: flex; justify-content: center; align-items: center;
-            transition: background 0.3s ease;
-            -webkit-tap-highlight-color: transparent; user-select: none; -webkit-user-select: none;
-        }
+        body { font-family: var(--font-main); background: var(--bg); color: var(--text); display: flex; justify-content: center; align-items: center; transition: background 0.3s; -webkit-tap-highlight-color: transparent; user-select: none; -webkit-user-select: none; }
 
         .sparkles-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
         .sparkle { position: absolute; animation: sparkleFloat 6s ease-in-out infinite; opacity: 0; }
@@ -58,7 +49,7 @@
         .setup-section { margin-bottom: 18px; text-align: left; }
         .setup-label { font-family: var(--font-cute); font-size: 0.9rem; font-weight: 700; color: var(--accent-dark); margin-bottom: 8px; display: block; }
         .setup-options { display: flex; flex-wrap: wrap; gap: 8px; }
-        .setup-option { padding: 8px 14px; border-radius: 15px; border: 2px solid var(--accent-light); background: var(--input-bg); font-family: var(--font-cute); font-size: 0.85rem; font-weight: 600; color: var(--text); cursor: pointer; transition: all 0.15s; white-space: nowrap; }
+        .setup-option { padding: 8px 14px; border-radius: 15px; border: 2px solid var(--accent-light); background: var(--input-bg); font-family: var(--font-cute); font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: all 0.15s; white-space: nowrap; }
         .setup-option:active { transform: scale(0.95); }
         .setup-option.selected { background: var(--accent); color: #fff; border-color: var(--accent-dark); }
         .setup-color-dot { width: 36px; height: 36px; border-radius: 50%; cursor: pointer; border: 3px solid transparent; transition: all 0.15s; }
@@ -181,12 +172,7 @@
         .history-item .h-badge { font-size: 0.65rem; padding: 2px 8px; border-radius: 8px; font-weight: 700; }
         .badge-done { background: var(--accent-light); color: var(--accent-dark); }
         .no-history { text-align: center; padding: 12px; opacity: 0.5; font-style: italic; font-size: 0.8rem; }
-        @media (max-width:380px) {
-            .title { font-size: 1.2rem; }
-            .progress-circle { width: 65px; height: 65px; }
-            .btn { padding: 9px 12px; font-size: 0.82rem; }
-            .card-item { font-size: 0.7rem; min-height: 34px; }
-        }
+        @media (max-width:380px) { .title { font-size: 1.2rem; } .progress-circle { width: 65px; height: 65px; } .btn { padding: 9px 12px; font-size: 0.82rem; } .card-item { font-size: 0.7rem; min-height: 34px; } }
     </style>
 </head>
 <body class="theme-pink">
@@ -198,27 +184,9 @@
             <div class="setup-icon">🐷</div>
             <div class="setup-title" id="setupTitle">Добро пожаловать!</div>
             <div class="setup-subtitle" id="setupSubtitle">Настроим копилку под тебя ✨</div>
-            <div class="setup-section">
-                <span class="setup-label" id="setupLangLabel">🌍 Язык / Language</span>
-                <div class="setup-options" id="setupLangOptions">
-                    <span class="setup-option selected" data-lang="ru">🇷🇺 Русский</span>
-                    <span class="setup-option" data-lang="en">🇬🇧 English</span>
-                </div>
-            </div>
-            <div class="setup-section">
-                <span class="setup-label" id="setupThemeLabel">🎨 Цвет темы</span>
-                <div class="setup-options" style="gap:10px;">
-                    <span class="setup-color-dot pink selected" data-theme="pink" style="background:#ff99b9;"></span>
-                    <span class="setup-color-dot peach" data-theme="peach" style="background:#ffb899;"></span>
-                    <span class="setup-color-dot lavender" data-theme="lavender" style="background:#c4a8ff;"></span>
-                    <span class="setup-color-dot mint" data-theme="mint" style="background:#99d8b9;"></span>
-                    <span class="setup-color-dot sky" data-theme="sky" style="background:#99c8ff;"></span>
-                </div>
-            </div>
-            <div class="setup-section">
-                <span class="setup-label" id="setupCurrencyLabel">💱 Валюта</span>
-                <div class="setup-currency-options" id="setupCurrencyOptions"></div>
-            </div>
+            <div class="setup-section"><span class="setup-label" id="setupLangLabel">🌍 Язык / Language</span><div class="setup-options" id="setupLangOptions"><span class="setup-option selected" data-lang="ru">🇷🇺 Русский</span><span class="setup-option" data-lang="en">🇬🇧 English</span></div></div>
+            <div class="setup-section"><span class="setup-label" id="setupThemeLabel">🎨 Цвет темы</span><div class="setup-options" style="gap:10px;"><span class="setup-color-dot pink selected" data-theme="pink" style="background:#ff99b9;"></span><span class="setup-color-dot peach" data-theme="peach" style="background:#ffb899;"></span><span class="setup-color-dot lavender" data-theme="lavender" style="background:#c4a8ff;"></span><span class="setup-color-dot mint" data-theme="mint" style="background:#99d8b9;"></span><span class="setup-color-dot sky" data-theme="sky" style="background:#99c8ff;"></span></div></div>
+            <div class="setup-section"><span class="setup-label" id="setupCurrencyLabel">💱 Валюта</span><div class="setup-currency-options" id="setupCurrencyOptions"></div></div>
             <button class="setup-btn" id="setupDoneBtn">✨ Начать копить!</button>
         </div>
     </div>
@@ -227,27 +195,9 @@
         <div class="settings-modal">
             <button class="settings-close" id="settingsClose">✕</button>
             <div class="settings-title" id="settingsTitle">⚙️ Настройки</div>
-            <div class="settings-section">
-                <span class="settings-label" id="settingsLangLabel2">🌍 Язык / Language</span>
-                <div class="settings-options" id="settingsLangOptions2">
-                    <span class="settings-option selected" data-lang="ru">🇷🇺 Русский</span>
-                    <span class="settings-option" data-lang="en">🇬🇧 English</span>
-                </div>
-            </div>
-            <div class="settings-section">
-                <span class="settings-label" id="settingsThemeLabel">🎨 Цвет темы</span>
-                <div class="settings-options" style="gap:8px;" id="settingsColorOptions">
-                    <span class="settings-color-dot pink selected" data-theme="pink" style="background:#ff99b9;"></span>
-                    <span class="settings-color-dot peach" data-theme="peach" style="background:#ffb899;"></span>
-                    <span class="settings-color-dot lavender" data-theme="lavender" style="background:#c4a8ff;"></span>
-                    <span class="settings-color-dot mint" data-theme="mint" style="background:#99d8b9;"></span>
-                    <span class="settings-color-dot sky" data-theme="sky" style="background:#99c8ff;"></span>
-                </div>
-            </div>
-            <div class="settings-section">
-                <span class="settings-label" id="settingsCurrencyLabel">💱 Валюта</span>
-                <div class="settings-currency-grid" id="settingsCurrencyOptions"></div>
-            </div>
+            <div class="settings-section"><span class="settings-label" id="settingsLangLabel2">🌍 Язык / Language</span><div class="settings-options" id="settingsLangOptions2"><span class="settings-option selected" data-lang="ru">🇷🇺 Русский</span><span class="settings-option" data-lang="en">🇬🇧 English</span></div></div>
+            <div class="settings-section"><span class="settings-label" id="settingsThemeLabel">🎨 Цвет темы</span><div class="settings-options" style="gap:8px;" id="settingsColorOptions"><span class="settings-color-dot pink selected" data-theme="pink" style="background:#ff99b9;"></span><span class="settings-color-dot peach" data-theme="peach" style="background:#ffb899;"></span><span class="settings-color-dot lavender" data-theme="lavender" style="background:#c4a8ff;"></span><span class="settings-color-dot mint" data-theme="mint" style="background:#99d8b9;"></span><span class="settings-color-dot sky" data-theme="sky" style="background:#99c8ff;"></span></div></div>
+            <div class="settings-section"><span class="settings-label" id="settingsCurrencyLabel">💱 Валюта</span><div class="settings-currency-grid" id="settingsCurrencyOptions"></div></div>
             <div class="settings-footer">✨ by LISITHEYA ✨</div>
         </div>
     </div>
@@ -276,65 +226,93 @@
                 <button class="settings-icon-btn" id="openSettingsBtn" title="Настройки">⚙️</button>
             </div>
             <div class="progress-section">
-                <div class="progress-circle">
-                    <svg viewBox="0 0 100 100"><circle class="bg-circle" cx="50" cy="50" r="42"/><circle class="fg-circle" id="progressCircle" cx="50" cy="50" r="42" stroke-dasharray="263.89" stroke-dashoffset="263.89"/></svg>
-                    <div class="progress-percent" id="percentText">0%</div>
-                </div>
-                <div class="progress-info">
-                    <div class="saved" id="savedAmount">0</div>
-                    <div class="goal" id="goalAmount">Цель: 0</div>
-                    <div class="remaining" id="remainingAmount">Осталось: 0</div>
-                </div>
+                <div class="progress-circle"><svg viewBox="0 0 100 100"><circle class="bg-circle" cx="50" cy="50" r="42"/><circle class="fg-circle" id="progressCircle" cx="50" cy="50" r="42" stroke-dasharray="263.89" stroke-dashoffset="263.89"/></svg><div class="progress-percent" id="percentText">0%</div></div>
+                <div class="progress-info"><div class="saved" id="savedAmount">0</div><div class="goal" id="goalAmount">Цель: 0</div><div class="remaining" id="remainingAmount">Осталось: 0</div></div>
             </div>
-            <div class="input-row">
-                <input type="number" id="goalInput" placeholder="🎯 Сумма цели" inputmode="numeric" min="1">
-                <button class="btn btn-primary" id="setGoalBtn">✨ Создать</button>
-            </div>
-            <div class="input-row">
-                <input type="number" id="addAmountInput" placeholder="💰 Добавить сумму" inputmode="numeric" min="1">
-                <button class="btn btn-secondary" id="addAmountBtn">➕ Внести</button>
-            </div>
+            <div class="input-row"><input type="number" id="goalInput" placeholder="🎯 Сумма цели" inputmode="numeric" min="1"><button class="btn btn-primary" id="setGoalBtn">✨ Создать</button></div>
+            <div class="input-row"><input type="number" id="addAmountInput" placeholder="💰 Добавить сумму" inputmode="numeric" min="1"><button class="btn btn-secondary" id="addAmountBtn">➕ Внести</button></div>
             <div class="affirmation-box" id="affirmationBox"></div>
-            <div class="actions-row">
-                <button class="btn btn-outline btn-sm" id="unpayAllBtn">🔄 Сбросить</button>
-                <button class="btn btn-outline btn-sm" id="resetBtn">🗑 Новая цель</button>
-            </div>
-            <div class="history-section" id="historySection">
-                <h3 id="historyTitle">📋 История целей</h3>
-                <div id="historyList"><div class="no-history" id="noHistory">Пока нет завершённых целей ✨</div></div>
-            </div>
+            <div class="actions-row"><button class="btn btn-outline btn-sm" id="unpayAllBtn">🔄 Сбросить</button><button class="btn btn-outline btn-sm" id="resetBtn">🗑 Новая цель</button></div>
+            <div class="history-section" id="historySection"><h3 id="historyTitle">📋 История целей</h3><div id="historyList"><div class="no-history">Пока нет завершённых целей ✨</div></div></div>
         </div>
-        <div class="right-panel">
-            <div class="cards-section" id="cardsSection">
-                <div class="cards-grid" id="cardsGrid">
-                    <div style="text-align:center;padding:30px;opacity:0.6;grid-column:1/-1;">✨ Введи сумму и создай карточки ✨</div>
-                </div>
-            </div>
-        </div>
+        <div class="right-panel"><div class="cards-section" id="cardsSection"><div class="cards-grid" id="cardsGrid"><div style="text-align:center;padding:30px;opacity:0.6;grid-column:1/-1;">✨ Введи сумму и создай карточки ✨</div></div></div></div>
     </div>
 
     <script>
+        // Регистрируем Service Worker для PWA
+        if ('serviceWorker' in navigator) {
+            const swCode = `self.addEventListener('install',e=>{self.skipWaiting()});self.addEventListener('activate',e=>{e.waitUntil(clients.claim())});self.addEventListener('fetch',e=>{e.respondWith(fetch(e.request).catch(()=>new Response('Offline')))})`;
+            const blob = new Blob([swCode], { type: 'application/javascript' });
+            const swUrl = URL.createObjectURL(blob);
+            navigator.serviceWorker.register(swUrl, { scope: '/' }).then(reg => {
+                console.log('✅ Service Worker зарегистрирован! PWA готово к установке.');
+            }).catch(err => console.log('SW не требуется:', err));
+        }
+
+        // Создаём manifest динамически для гарантии
+        function createManifest() {
+            const manifest = {
+                name: '🌸 Милая Копилка',
+                short_name: 'Копилка',
+                description: 'Милое приложение-копилка',
+                start_url: location.href.split('?')[0],
+                scope: location.href.split('?')[0],
+                display: 'standalone',
+                background_color: '#fff0f5',
+                theme_color: '#ff99b9',
+                orientation: 'any',
+                icons: [{
+                    src: 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192"><defs><radialGradient id="g" cx="50%" cy="40%" r="50%"><stop offset="0%" stop-color="#ffb3c6"/><stop offset="100%" stop-color="#ff6b8a"/></radialGradient></defs><circle cx="96" cy="96" r="90" fill="url(#g)"/><circle cx="96" cy="96" r="83" fill="none" stroke="white" stroke-width="4" stroke-dasharray="18 9"/><text x="96" y="124" text-anchor="middle" font-size="75" font-family="Arial">🐷</text></svg>'),
+                    sizes: '192x192',
+                    type: 'image/svg+xml',
+                    purpose: 'any maskable'
+                }, {
+                    src: 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><defs><radialGradient id="g" cx="50%" cy="40%" r="50%"><stop offset="0%" stop-color="#ffb3c6"/><stop offset="100%" stop-color="#ff6b8a"/></radialGradient></defs><circle cx="256" cy="256" r="240" fill="url(#g)"/><circle cx="256" cy="256" r="220" fill="none" stroke="white" stroke-width="8" stroke-dasharray="30 15"/><text x="256" y="310" text-anchor="middle" font-size="160" font-family="Arial">🐷</text></svg>'),
+                    sizes: '512x512',
+                    type: 'image/svg+xml',
+                    purpose: 'any maskable'
+                }]
+            };
+            const blob = new Blob([JSON.stringify(manifest)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            let link = document.querySelector('link[rel="manifest"]');
+            if (!link) {
+                link = document.createElement('link');
+                link.rel = 'manifest';
+                document.head.appendChild(link);
+            }
+            link.href = url;
+        }
+        createManifest();
+
+        // Слушаем событие установки
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            console.log('📱 Приложение готово к установке! Нажмите "Установить" в меню браузера.');
+        });
+        window.addEventListener('appinstalled', () => {
+            console.log('🎉 Приложение установлено как отдельное!');
+            deferredPrompt = null;
+        });
+
         (function(){
             const currencies=[{code:'RUB',symbol:'₽',name:'Российский рубль',nameEn:'Russian Ruble',denominations:[1000,500,200,100,50,10]},{code:'USD',symbol:'$',name:'Доллар США',nameEn:'US Dollar',denominations:[100,50,20,10,5,1]},{code:'EUR',symbol:'€',name:'Евро',nameEn:'Euro',denominations:[500,200,100,50,20,10,5,2,1]},{code:'GBP',symbol:'£',name:'Фунт стерлингов',nameEn:'British Pound',denominations:[50,20,10,5,2,1]},{code:'JPY',symbol:'¥',name:'Японская йена',nameEn:'Japanese Yen',denominations:[10000,5000,2000,1000,500,100,50,10,5,1]},{code:'CNY',symbol:'¥',name:'Китайский юань',nameEn:'Chinese Yuan',denominations:[100,50,20,10,5,1]},{code:'KRW',symbol:'₩',name:'Южнокорейская вона',nameEn:'South Korean Won',denominations:[50000,10000,5000,1000,500,100,50,10,5,1]},{code:'INR',symbol:'₹',name:'Индийская рупия',nameEn:'Indian Rupee',denominations:[2000,500,200,100,50,20,10,5,2,1]},{code:'BRL',symbol:'R$',name:'Бразильский реал',nameEn:'Brazilian Real',denominations:[200,100,50,20,10,5,2,1]},{code:'TRY',symbol:'₺',name:'Турецкая лира',nameEn:'Turkish Lira',denominations:[200,100,50,20,10,5,2,1]},{code:'UAH',symbol:'₴',name:'Украинская гривна',nameEn:'Ukrainian Hryvnia',denominations:[1000,500,200,100,50,20,10,5,2,1]},{code:'KZT',symbol:'₸',name:'Казахстанский тенге',nameEn:'Kazakhstani Tenge',denominations:[20000,10000,5000,2000,1000,500,200,100,50,20,10,5,2,1]}];
             const tr={ru:{appTitle:'Копилка',splashTitle:'Милая Копилка',splashLoading:'Загружаем волшебство...',goal:'Цель',remaining:'Осталось',goalPlaceholder:'🎯 Сумма цели',addPlaceholder:'💰 Добавить сумму',createBtn:'✨ Создать',addBtn:'➕ Внести',resetCards:'🔄 Сбросить',newGoal:'🗑 Новая цель',historyTitle:'📋 История целей',noHistory:'Пока нет завершённых целей ✨',emptyCards:'✨ Введи сумму и создай карточки ✨',congratsTitle:'Поздравляем!',congratsBtn:'Спасибо! ✨',day:'день',days2:'дня',days5:'дней',setupTitle:'Добро пожаловать!',setupSubtitle:'Настроим копилку под тебя ✨',setupLangLabel:'🌍 Язык / Language',setupThemeLabel:'🎨 Цвет темы',setupCurrencyLabel:'💱 Валюта',setupDone:'✨ Начать копить!',settingsTitle:'⚙️ Настройки',splashPhrases:["Собираем мечты в реальность... 🌸","Готовим волшебство... ✨","Заряжаемся позитивом... 💖","Настраиваем уют... 🧸","Раскладываем карточки... 🃏","Шепчем аффирмации... 💬","Считаем будущие богатства... 💰","Добавляем щепотку радости... 🎀"],affirmations:["Деньги приходят ко мне легко и с радостью 💖","Я магнит для финансового изобилия ✨","Каждый рубль — это семя моего процветания 🌱","Я достойна богатства и благополучия 💎","Мои доходы растут с каждым днём 📈","Финансовая свобода — мой выбор 🦋","Я с благодарностью принимаю деньги 🌸","Изобилие течёт ко мне непрерывным потоком 🌊","Я ценю деньги, и они ценят меня 💝","Мой кошелёк всегда полон 💰","Я открыта для новых источников дохода 🌟","Деньги любят меня взаимно 💗","Я управляю финансами мудро и легко 🧠","Богатство — моё естественное состояние 🏡","Я притягиваю выгодные возможности 🎯","Мои сбережения растут как на дрожжах 🍞","Я благодарна за всё, что имею 🙏","Деньги — это энергия, и я ею управляю ⚡","Финансовый успех сопутствует мне во всём 🏆","Я доверяю потоку изобилия 🌈","Мои мечты финансируются Вселенной 🌌","Я заслуживаю жить в достатке 👑","Каждая копейка работает на меня 💼","Я щедра, и деньги возвращаются сторицей 🎁","Моё будущее финансово защищено 🛡","Я наслаждаюсь процессом накопления 🐷","Денежная удача всегда на моей стороне 🍀","Я создаю свой богатый мир 🎨","Процветание — это про меня 💫","Я инвестирую в своё счастливое завтра 🌻","Моя копилка полна чудесных возможностей 🪄"],congratsMessages:['Ты накопила всю сумму!<br>Ты невероятная! 💖','Цель достигнута!<br>Горжусь тобой бесконечно! 🌟','Копилка полна!<br>Ты волшебница! ✨','Ура! Получилось!<br>Продолжай сиять! 🎯']},en:{appTitle:'Piggy Bank',splashTitle:'Cute Piggy Bank',splashLoading:'Loading magic...',goal:'Goal',remaining:'Remaining',goalPlaceholder:'🎯 Goal amount',addPlaceholder:'💰 Add amount',createBtn:'✨ Create',addBtn:'➕ Add',resetCards:'🔄 Reset',newGoal:'🗑 New Goal',historyTitle:'📋 Goal History',noHistory:'No completed goals yet ✨',emptyCards:'✨ Enter an amount to create cards ✨',congratsTitle:'Congratulations!',congratsBtn:'Thank you! ✨',day:'day',days2:'days',days5:'days',setupTitle:'Welcome!',setupSubtitle:"Let's set up your piggy bank ✨",setupLangLabel:'🌍 Language',setupThemeLabel:'🎨 Theme Color',setupCurrencyLabel:'💱 Currency',setupDone:'✨ Start Saving!',settingsTitle:'⚙️ Settings',splashPhrases:["Turning dreams into reality... 🌸","Preparing magic... ✨","Charging with positivity... 💖","Setting up coziness... 🧸","Arranging cards... 🃏","Whispering affirmations... 💬","Counting future wealth... 💰","Adding a pinch of joy... 🎀"],affirmations:["Money comes to me easily and joyfully 💖","I am a magnet for financial abundance ✨","Every dollar is a seed of my prosperity 🌱","I deserve wealth and well-being 💎","My income grows every day 📈","Financial freedom is my choice 🦋","I gratefully accept money 🌸","Abundance flows to me continuously 🌊","I value money and it values me 💝","My wallet is always full 💰","I am open to new sources of income 🌟","Money loves me back 💗","I manage finances wisely and easily 🧠","Wealth is my natural state 🏡","I attract profitable opportunities 🎯","My savings grow exponentially 🍞","I am grateful for everything I have 🙏","Money is energy and I manage it ⚡","Financial success follows me everywhere 🏆","I trust the flow of abundance 🌈","My dreams are funded by the Universe 🌌","I deserve to live in abundance 👑","Every penny works for me 💼","I am generous and money returns multiplied 🎁","My future is financially secure 🛡","I enjoy the process of saving 🐷","Money luck is always on my side 🍀","I create my own rich world 🎨","Prosperity is all about me 💫","I invest in my happy tomorrow 🌻","My piggy bank is full of wonderful opportunities 🪄"],congratsMessages:['You saved the full amount!<br>You are incredible! 💖','Goal achieved!<br>So proud of you! 🌟','Piggy bank is full!<br>You are a magician! ✨','Hooray! You did it!<br>Keep shining! 🎯']}};
             let cl=localStorage.getItem('piggyBankLang')||'ru',cc=currencies[0],ga=0,sa=0,pc=new Map,ai=0,gc=!1,gs=null,ge=null,hi=[],cac=[],up=!1;
-            const CIRC=2*Math.PI*42,SK='piggyBankDataV23',STK='piggyBankSetupDoneV9';
+            const CIRC=2*Math.PI*42,SK='piggyBankDataV24',STK='piggyBankSetupDoneV10';
             const $=id=>document.getElementById(id),body=document.body;
             function t(k){return(tr[cl]||tr['ru'])[k]||k}
             function fm(a){return a.toLocaleString('ru-RU')+' '+cc.symbol}
             function gd(){return cc.denominations}
-
             function cS(){const c=$('sparklesContainer');c.innerHTML='';const f=document.createDocumentFragment(),e=['✨','💫','⭐','🌟','💖','🌸','🦋','💎','🎀'];for(let i=0;i<10;i++){const s=document.createElement('span');s.className='sparkle';s.textContent=e[i%e.length];s.style.cssText=`left:${Math.random()*90}%;top:${Math.random()*80+10}%;font-size:${Math.random()*0.8+0.4}rem;animation-delay:${Math.random()*6}s;animation-duration:${Math.random()*3+4}s;`;f.appendChild(s);}c.appendChild(f);}
-
             function ld(){try{const r=localStorage.getItem(SK);if(!r)return;const d=JSON.parse(r);ga=d.goalAmount||0;sa=d.savedAmount||0;pc=new Map(d.paidCards||[]);ai=d.affirmationIndex||0;gc=d.goalCompleted||!1;gs=d.goalStartDate||null;ge=d.goalEndDate||null;hi=d.history||[];cac=d.cardAmountsCache||[];cl=d.lang||'ru';if(d.currencyCode){const f=currencies.find(c=>c.code===d.currencyCode);if(f)cc=f;}}catch(e){}}
             function sd(){const d={goalAmount:ga,savedAmount:sa,paidCards:Array.from(pc.entries()),affirmationIndex:ai,goalCompleted:gc,goalStartDate:gs,goalEndDate:ge,history:hi,cardAmountsCache:cac,lang:cl,currencyCode:cc.code};try{localStorage.setItem(SK,JSON.stringify(d));}catch(e){}}
-
             function gca(){if(ga<=0)return[];if(cac.length>0&&cac.reduce((a,b)=>a+b,0)===ga)return[...cac];let c=[],r=ga;const dn=[...gd()].sort((a,b)=>b-a);for(const d of dn){let n=0;while(r>=d&&n<3){c.push(d);r-=d;n++;}}while(r>0){const av=dn.filter(d=>d<=r);if(av.length===0){c.push(r);break;}const sm=av.filter(d=>d<=100);const pool=(sm.length>0&&Math.random()>0.2)?sm:av;c.push(pool[Math.floor(Math.random()*pool.length)]);r-=c[c.length-1];}for(let i=c.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[c[i],c[j]]=[c[j],c[i]];}const t=c.reduce((a,b)=>a+b,0);if(t!==ga&&c.length>0)c[c.length-1]+=(ga-t);cac=c;return c;}
             function gds(ds){if(!ds)return'?';const e=ge?new Date(ge):new Date();return Math.ceil(Math.abs(e-new Date(ds))/86400000);}
             function gdw(d){if(d==='?')return t('days5');const n=parseInt(d);if(cl==='ru'){if(n%10===1&&n%100!==11)return t('day');if([2,3,4].includes(n%10)&&![12,13,14].includes(n%100))return t('days2');return t('days5');}return n===1?t('day'):t('days2');}
-
             function aaa(ata){if(ga<=0||ata<=0)return;const ma=Math.min(ata,ga-sa);if(ma<=0)return;let c=gca(),r=ma;for(let i=0;i<c.length;i++){if(pc.has(i))continue;if(r>=c[i]){pc.set(i,c[i]);sa+=c[i];r-=c[i];}else if(r>0){c[i]-=r;sa+=r;c.push(r);pc.set(c.length-1,r);r=0;break;}if(r<=0)break;}if(r>0){c.push(r);pc.set(c.length-1,r);sa+=r;}sa=Math.min(ga,sa);cac=c;su();}
-
             function su(){if(up)return;up=!0;requestAnimationFrame(()=>{uui();sd();up=!1;});}
             function uui(){const c=gca();const p=ga>0?Math.min(100,Math.round((sa/ga)*100)):0;const rm=Math.max(0,ga-sa);$('progressCircle').style.strokeDashoffset=CIRC-(p/100)*CIRC;$('percentText').textContent=p+'%';$('savedAmount').textContent=fm(sa);$('goalAmount').textContent=t('goal')+': '+fm(ga);$('remainingAmount').textContent=t('remaining')+': '+fm(rm);$('cardsGrid').innerHTML='';if(c.length===0){$('cardsGrid').innerHTML=`<div style="text-align:center;padding:30px;opacity:0.6;grid-column:1/-1;">${t('emptyCards')}</div>`;}else{const f=document.createDocumentFragment();const il=c.length>100;c.forEach((a,i)=>{const card=document.createElement('div');card.className='card-item'+(pc.has(i)?' paid':'');card.textContent=a.toLocaleString('ru-RU')+' '+cc.symbol;if(il){card.style.fontSize='0.65rem';card.style.padding='5px 2px';card.style.minHeight='30px';}card.addEventListener('click',()=>tc(i,a),{passive:!0});f.appendChild(card);});$('cardsGrid').appendChild(f);}const affs=tr[cl].affirmations;$('affirmationBox').textContent=affs[ai%affs.length];$('affirmationMini').textContent='💬 '+affs[ai%affs.length];if(ga>0&&sa>=ga&&!gc){gc=!0;ge=new Date().toISOString();hi.push({amount:ga,days:gds(gs),date:new Date().toISOString()});if(hi.length>20)hi.shift();sd();setTimeout(()=>sc(),300);}uhi();sd();}
             function tc(i,a){if(ga<=0)return;if(pc.has(i)){pc.delete(i);sa=Math.max(0,sa-a);gc=!1;ge=null;}else{pc.set(i,a);sa=Math.min(ga,sa+a);}if(navigator.vibrate)navigator.vibrate(6);su();}
@@ -354,33 +332,22 @@
             function ssp(){$('splashScreen').classList.remove('hidden');$('splashTitle').textContent=t('splashTitle');const ph=tr[cl].splashPhrases;let idx=0;const pe=$('splashPhrase');pe.textContent=ph[0];pe.classList.add('visible');const iv=setInterval(()=>{idx=(idx+1)%ph.length;pe.classList.remove('visible');requestAnimationFrame(()=>{pe.textContent=ph[idx];pe.classList.add('visible');});},1800);setTimeout(()=>{clearInterval(iv);$('splashScreen').classList.add('hidden');setTimeout(()=>{$('splashScreen').style.display='none';},500);},2500);}
             function sc(){const style=getComputedStyle(body);const colors=[style.getPropertyValue('--accent').trim(),'#ffb3c6','#ffd6e8','#ffffff','#ffd700','#ff6b8a'];const cx=innerWidth/2,cy=innerHeight/2;const ov=$('fireworkOverlay');const f=document.createDocumentFragment();for(let i=0;i<40;i++){const p=document.createElement('div');p.className='firework-particle';const a=Math.random()*Math.PI*2,d=Math.random()*200+60;p.style.cssText=`width:${Math.random()*6+2}px;height:${Math.random()*6+2}px;background:${colors[Math.floor(Math.random()*colors.length)]};left:${cx}px;top:${cy}px;--dx:${Math.cos(a)*d}px;--dy:${Math.sin(a)*d}px;animation-duration:${Math.random()*0.6+0.6}s;`;f.appendChild(p);}ov.appendChild(f);setTimeout(()=>{ov.innerHTML='';},2500);$('congratsText').innerHTML=tr[cl].congratsMessages[Math.floor(Math.random()*4)];$('congratsPopup').classList.add('show');if(navigator.vibrate)navigator.vibrate([40,30,40,30,100]);}
 
-            $('setGoalBtn').addEventListener('click',sgl);
-            $('goalInput').addEventListener('keydown',e=>{if(e.key==='Enter')sgl();});
-            $('addAmountBtn').addEventListener('click',haa);
-            $('addAmountInput').addEventListener('keydown',e=>{if(e.key==='Enter')haa();});
-            $('unpayAllBtn').addEventListener('click',upa);
-            $('resetBtn').addEventListener('click',ra);
+            $('setGoalBtn').addEventListener('click',sgl);$('goalInput').addEventListener('keydown',e=>{if(e.key==='Enter')sgl();});
+            $('addAmountBtn').addEventListener('click',haa);$('addAmountInput').addEventListener('keydown',e=>{if(e.key==='Enter')haa();});
+            $('unpayAllBtn').addEventListener('click',upa);$('resetBtn').addEventListener('click',ra);
             $('congratsCloseBtn').addEventListener('click',()=>$('congratsPopup').classList.remove('show'));
-            $('openSettingsBtn').addEventListener('click',os);
-            $('settingsClose').addEventListener('click',cs);
+            $('openSettingsBtn').addEventListener('click',os);$('settingsClose').addEventListener('click',cs);
             $('settingsOverlay').addEventListener('click',e=>{if(e.target===$('settingsOverlay'))cs();});
             $('setupDoneBtn').addEventListener('click',()=>{hss();localStorage.setItem(STK,'true');sd();ssp();uui();});
             document.querySelectorAll('.setup-option[data-lang]').forEach(o=>o.addEventListener('click',()=>swl(o.dataset.lang)));
             document.querySelectorAll('.settings-option[data-lang]').forEach(o=>o.addEventListener('click',()=>swl(o.dataset.lang)));
             document.querySelectorAll('.setup-color-dot').forEach(d=>d.addEventListener('click',()=>st(d.dataset.theme)));
             document.querySelectorAll('.settings-color-dot').forEach(d=>d.addEventListener('click',()=>st(d.dataset.theme)));
-
-            const shakeStyle=document.createElement('style');
-            shakeStyle.textContent='@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}50%{transform:translateX(6px)}75%{transform:translateX(-4px)}}';
-            document.head.appendChild(shakeStyle);
-
-            ld();
-            const sl=localStorage.getItem('piggyBankLang');if(sl)cl=sl;
-            st(localStorage.getItem('piggyBankTheme')||'pink',!1);
-            cS();uat();rco('setupCurrencyOptions',!0);rco('settingsCurrencyOptions',!1);
+            const shakeStyle=document.createElement('style');shakeStyle.textContent='@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}50%{transform:translateX(6px)}75%{transform:translateX(-4px)}}';document.head.appendChild(shakeStyle);
+            ld();const sl=localStorage.getItem('piggyBankLang');if(sl)cl=sl;
+            st(localStorage.getItem('piggyBankTheme')||'pink',!1);cS();uat();rco('setupCurrencyOptions',!0);rco('settingsCurrencyOptions',!1);
             if(!localStorage.getItem(STK)){sss();}else{ssp();uui();}
             setInterval(()=>{const today=new Date().toDateString();if(localStorage.getItem('piggyBankLastDate')!==today){ai=Math.floor(Math.random()*tr[cl].affirmations.length);localStorage.setItem('piggyBankLastDate',today);sd();uui();}},300000);
-            console.log('🐷 Копилка v23 — PWA ГОТОВО! Устанавливается как отдельное приложение!');
         })();
     </script>
 </body>
