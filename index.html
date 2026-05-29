@@ -2,353 +2,286 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover, maximum-scale=1.0">
-    <title>🌸 Милая Копилка</title>
-    <meta name="description" content="Милое приложение-копилка">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>🌸 Копилочка</title>
     <meta name="theme-color" content="#ff99b9">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="🌸 Копилка">
-    <meta name="mobile-web-app-capable" content="yes">
-    
-    <link rel="apple-touch-icon" sizes="180x180" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'><defs><radialGradient id='g' cx='50%25' cy='40%25' r='50%25'><stop offset='0%25' stop-color='%23ffb3c6'/><stop offset='100%25' stop-color='%23ff6b8a'/></radialGradient></defs><circle cx='90' cy='90' r='85' fill='url(%23g)'/><circle cx='90' cy='90' r='78' fill='none' stroke='white' stroke-width='4' stroke-dasharray='16 8'/><text x='90' y='115' text-anchor='middle' font-size='70' font-family='Arial'>🐷</text></svg>">
-    
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'><defs><radialGradient id='g' cx='50%25' cy='40%25' r='50%25'><stop offset='0%25' stop-color='%23ffb3c6'/><stop offset='100%25' stop-color='%23ff6b8a'/></radialGradient></defs><circle cx='90' cy='90' r='85' fill='url(%23g)'/><circle cx='90' cy='90' r='78' fill='none' stroke='white' stroke-width='4' stroke-dasharray='16 8'/><text x='90' y='120' text-anchor='middle' font-size='75' font-family='Arial'>🐷</text></svg>">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Comfortaa:wght@400;700&display=swap');
-
-        :root {
-            --bg: #fff0f5; --card-bg: #ffffff; --text: #5c3d5c;
-            --accent: #ff99b9; --accent-dark: #ff6b8a; --accent-light: #ffd6e8;
-            --progress-bg: #fce4ec; --shadow: 0 4px 15px rgba(255,150,180,0.2);
-            --border-radius: 28px; --card-radius: 22px;
-            --paid-color: #ff99b9; --input-bg: #fff5f8;
-            --header-gradient: linear-gradient(135deg, #ffb3c6, #ff8fab);
-            --font-main: 'Nunito','Comfortaa',sans-serif;
-            --font-cute: 'Comfortaa',cursive;
-        }
-        .theme-pink { --bg: #fff0f5; --accent: #ff99b9; --accent-dark: #ff6b8a; --accent-light: #ffd6e8; --progress-bg: #fce4ec; --input-bg: #fff5f8; --paid-color: #ff99b9; }
-        .theme-peach { --bg: #fff5f0; --accent: #ffb899; --accent-dark: #ff9a6c; --accent-light: #ffe0cc; --progress-bg: #fde8d8; --input-bg: #fff8f5; --paid-color: #ffb899; }
-        .theme-lavender { --bg: #f5f0ff; --accent: #c4a8ff; --accent-dark: #a78bfa; --accent-light: #e8dcff; --progress-bg: #ede4fc; --input-bg: #f8f5ff; --paid-color: #c4a8ff; }
-        .theme-mint { --bg: #f0fff8; --accent: #99d8b9; --accent-dark: #6ecf9a; --accent-light: #d0f5e0; --progress-bg: #e0f8ec; --input-bg: #f5fffa; --paid-color: #99d8b9; }
-        .theme-sky { --bg: #f0f8ff; --accent: #99c8ff; --accent-dark: #6aa8f0; --accent-light: #d8eaff; --progress-bg: #e0effc; --input-bg: #f5f9ff; --paid-color: #99c8ff; }
-
+        :root { --bg: #fff0f5; --card: #ffffff; --text: #5c3d5c; --accent: #ff99b9; --accent-dark: #ff6b8a; --accent-light: #ffd6e8; --progress-bg: #fce4ec; --input-bg: #fff5f8; --border: 28px; --card-border: 22px; --font: 'Nunito', sans-serif; --cute: 'Comfortaa', cursive; }
+        .pink { --bg: #fff0f5; --accent: #ff99b9; --accent-dark: #ff6b8a; --accent-light: #ffd6e8; --progress-bg: #fce4ec; --input-bg: #fff5f8; }
+        .peach { --bg: #fff5f0; --accent: #ffb899; --accent-dark: #ff9a6c; --accent-light: #ffe0cc; --progress-bg: #fde8d8; --input-bg: #fff8f5; }
+        .lavender { --bg: #f5f0ff; --accent: #c4a8ff; --accent-dark: #a78bfa; --accent-light: #e8dcff; --progress-bg: #ede4fc; --input-bg: #f8f5ff; }
+        .mint { --bg: #f0fff8; --accent: #99d8b9; --accent-dark: #6ecf9a; --accent-light: #d0f5e0; --progress-bg: #e0f8ec; --input-bg: #f5fffa; }
+        .sky { --bg: #f0f8ff; --accent: #99c8ff; --accent-dark: #6aa8f0; --accent-light: #d8eaff; --progress-bg: #e0effc; --input-bg: #f5f9ff; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        html, body { width: 100%; height: 100%; overflow: hidden; position: fixed; top: 0; left: 0; }
-        body { font-family: var(--font-main); background: var(--bg); color: var(--text); display: flex; justify-content: center; align-items: center; transition: background 0.3s; -webkit-tap-highlight-color: transparent; user-select: none; -webkit-user-select: none; }
+        body { font-family: var(--font); background: var(--bg); color: var(--text); height: 100vh; height: 100dvh; overflow: hidden; -webkit-tap-highlight-color: transparent; user-select: none; }
+        button { cursor: pointer; border: none; background: none; font-family: var(--cute); }
+        input { font-family: var(--font); border: none; outline: none; }
 
-        .sparkles-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
-        .sparkle { position: absolute; animation: sparkleFloat 6s ease-in-out infinite; opacity: 0; }
-        @keyframes sparkleFloat { 0%{transform:translateY(0) scale(0);opacity:0} 20%{opacity:0.8} 50%{transform:translateY(-40px) scale(1);opacity:0.6} 80%{opacity:0.2} 100%{transform:translateY(-80px) scale(0);opacity:0} }
+        /* БОЛЬШЕ МИЛОТЫ НА ФОНЕ */
+        .cute-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; overflow: hidden; }
+        .floating { position: absolute; animation: floatAround 8s ease-in-out infinite; opacity: 0.6; font-size: 2.5rem; }
+        .floating:nth-child(1) { top: 5%; left: 5%; animation-delay: 0s; }
+        .floating:nth-child(2) { top: 15%; right: 10%; animation-delay: 1s; }
+        .floating:nth-child(3) { top: 50%; left: 3%; animation-delay: 2s; }
+        .floating:nth-child(4) { top: 60%; right: 5%; animation-delay: 3s; }
+        .floating:nth-child(5) { top: 80%; left: 10%; animation-delay: 4s; }
+        .floating:nth-child(6) { top: 85%; right: 15%; animation-delay: 5s; }
+        .floating:nth-child(7) { top: 30%; left: 50%; animation-delay: 6s; }
+        .floating:nth-child(8) { top: 70%; left: 50%; animation-delay: 7s; }
+        @keyframes floatAround { 0%,100%{transform:translateY(0) translateX(0) rotate(0deg) scale(1)} 25%{transform:translateY(-30px) translateX(15px) rotate(5deg) scale(1.1)} 50%{transform:translateY(-15px) translateX(-10px) rotate(-3deg) scale(0.9)} 75%{transform:translateY(-40px) translateX(5px) rotate(7deg) scale(1.05)} }
 
-        .setup-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg); display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 10001; transition: opacity 0.4s, visibility 0.4s; padding: 20px; overflow-y: auto; }
-        .setup-screen.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
-        .setup-card { background: var(--card-bg); border-radius: var(--border-radius); padding: 30px 25px; box-shadow: var(--shadow); max-width: 400px; width: 100%; text-align: center; }
-        .setup-icon { font-size: 4rem; animation: bounce 1.2s ease-in-out infinite; }
-        .setup-title { font-family: var(--font-cute); font-size: 1.5rem; font-weight: 700; color: var(--accent-dark); margin: 10px 0 5px; }
-        .setup-subtitle { font-size: 0.9rem; opacity: 0.7; margin-bottom: 20px; }
-        .setup-section { margin-bottom: 18px; text-align: left; }
-        .setup-label { font-family: var(--font-cute); font-size: 0.9rem; font-weight: 700; color: var(--accent-dark); margin-bottom: 8px; display: block; }
-        .setup-options { display: flex; flex-wrap: wrap; gap: 8px; }
-        .setup-option { padding: 8px 14px; border-radius: 15px; border: 2px solid var(--accent-light); background: var(--input-bg); font-family: var(--font-cute); font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: all 0.15s; white-space: nowrap; }
-        .setup-option:active { transform: scale(0.95); }
-        .setup-option.selected { background: var(--accent); color: #fff; border-color: var(--accent-dark); }
-        .setup-color-dot { width: 36px; height: 36px; border-radius: 50%; cursor: pointer; border: 3px solid transparent; transition: all 0.15s; }
-        .setup-color-dot.selected { border-color: var(--text); box-shadow: 0 0 0 4px rgba(0,0,0,0.1); }
-        .setup-currency-options { display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 6px; }
-        .setup-currency-option { padding: 8px 6px; border-radius: 12px; border: 2px solid var(--accent-light); background: var(--input-bg); font-family: var(--font-cute); font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: all 0.15s; text-align: center; }
-        .setup-currency-option.selected { background: var(--accent); color: #fff; border-color: var(--accent-dark); }
-        .setup-btn { margin-top: 20px; padding: 14px 30px; border-radius: 25px; border: none; background: var(--accent); color: #fff; font-family: var(--font-cute); font-weight: 700; font-size: 1rem; cursor: pointer; width: 100%; }
-        .setup-btn:active { transform: scale(0.96); }
+        .sparkles { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+        .sparkle { position: absolute; animation: sparkleFloat 4s ease-in-out infinite; opacity: 0; font-size: 1rem; }
+        @keyframes sparkleFloat { 0%{transform:translateY(0) scale(0);opacity:0} 20%{opacity:0.9} 50%{transform:translateY(-60px) scale(1.3);opacity:0.7} 80%{opacity:0.2} 100%{transform:translateY(-100px) scale(0);opacity:0} }
 
-        .settings-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); z-index: 10000; display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: all 0.25s; padding: 20px; }
-        .settings-overlay.show { opacity: 1; visibility: visible; }
-        .settings-modal { background: var(--card-bg); border-radius: var(--border-radius); padding: 25px 20px; box-shadow: 0 20px 60px rgba(0,0,0,0.25); max-width: 420px; width: 100%; max-height: 85vh; overflow-y: auto; position: relative; -webkit-overflow-scrolling: touch; overscroll-behavior: contain; }
-        .settings-close { position: absolute; top: 12px; right: 16px; font-size: 1.5rem; cursor: pointer; color: var(--text); opacity: 0.6; background: none; border: none; }
-        .settings-title { font-family: var(--font-cute); font-size: 1.4rem; font-weight: 700; color: var(--accent-dark); text-align: center; margin-bottom: 20px; }
-        .settings-section { margin-bottom: 16px; }
-        .settings-label { font-family: var(--font-cute); font-size: 0.85rem; font-weight: 700; color: var(--accent-dark); margin-bottom: 8px; display: block; }
-        .settings-options { display: flex; flex-wrap: wrap; gap: 6px; }
-        .settings-option { padding: 7px 12px; border-radius: 12px; border: 2px solid var(--accent-light); background: var(--input-bg); font-family: var(--font-cute); font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: all 0.15s; }
-        .settings-option.selected { background: var(--accent); color: #fff; border-color: var(--accent-dark); }
-        .settings-color-dot { width: 32px; height: 32px; border-radius: 50%; cursor: pointer; border: 3px solid transparent; transition: all 0.15s; }
-        .settings-color-dot.selected { border-color: var(--text); box-shadow: 0 0 0 4px rgba(0,0,0,0.1); }
-        .settings-currency-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(75px, 1fr)); gap: 5px; }
-        .settings-currency-option { padding: 7px 5px; border-radius: 10px; border: 2px solid var(--accent-light); background: var(--input-bg); font-family: var(--font-cute); font-size: 0.75rem; font-weight: 600; cursor: pointer; transition: all 0.15s; text-align: center; }
-        .settings-currency-option.selected { background: var(--accent); color: #fff; border-color: var(--accent-dark); }
-        .settings-footer { text-align: center; margin-top: 15px; padding-top: 12px; border-top: 1px solid var(--accent-light); font-family: var(--font-cute); font-size: 0.8rem; color: var(--accent-dark); opacity: 0.7; letter-spacing: 1px; }
+        #app { width: 100%; height: 100%; max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; padding: 16px; gap: 12px; position: relative; z-index: 1; }
+        .header { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: var(--cute); font-size: 1.8rem; font-weight: 800; background: linear-gradient(135deg, var(--accent-light), var(--accent-dark)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: flex; align-items: center; gap: 8px; }
+        .logo-emoji { font-size: 2rem; -webkit-text-fill-color: initial; animation: bounce 2s ease-in-out infinite; }
+        @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+        .settings-btn { background: var(--accent-light); border-radius: 50%; width: 42px; height: 42px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; transition: 0.2s; border: 2px solid var(--accent); }
+        .settings-btn:active { transform: scale(0.9); }
 
-        .splash-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg); display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 9999; transition: opacity 0.5s, visibility 0.5s; }
-        .splash-screen.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
-        .splash-icon { font-size: 5.5rem; animation: bounce 1.2s ease-in-out infinite; }
-        @keyframes bounce { 0%,100%{transform:translateY(0) scale(1)} 50%{transform:translateY(-22px) scale(1.1)} }
-        .splash-text { font-family: var(--font-cute); font-size: 1.6rem; font-weight: 700; background: var(--header-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-top: 15px; text-align: center; }
-        .splash-phrase { font-family: var(--font-cute); font-size: 1rem; color: var(--accent-dark); margin-top: 15px; text-align: center; opacity: 0; transition: opacity 0.6s; min-height: 30px; max-width: 300px; }
-        .splash-phrase.visible { opacity: 1; }
-        .splash-dots { display: flex; gap: 7px; margin-top: 22px; }
-        .splash-dot { width: 11px; height: 11px; border-radius: 50%; background: var(--accent); animation: dotPulse 1.4s ease-in-out infinite; }
-        .splash-dot:nth-child(2) { animation-delay: 0.2s; }
-        .splash-dot:nth-child(3) { animation-delay: 0.4s; }
-        @keyframes dotPulse { 0%,100%{transform:scale(0.6);opacity:0.4} 50%{transform:scale(1.4);opacity:1} }
+        .total-card { background: linear-gradient(135deg, var(--accent-light), var(--card)); border-radius: var(--border); padding: 20px 20px; text-align: center; box-shadow: 0 8px 30px rgba(255,150,180,0.25); position: relative; overflow: hidden; border: 2px solid var(--accent-light); }
+        .total-card::before { content: ''; position: absolute; top: -20px; right: -20px; width: 70px; height: 70px; border-radius: 50%; background: var(--accent); opacity: 0.1; }
+        .total-card::after { content: ''; position: absolute; bottom: -15px; left: -15px; width: 55px; height: 55px; border-radius: 50%; background: var(--accent-dark); opacity: 0.08; }
+        .total-emoji { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); font-size: 2.5rem; animation: bounce 2.5s ease-in-out infinite; }
+        .total-label { font-family: var(--cute); font-size: 0.9rem; opacity: 0.7; position: relative; z-index: 1; margin-top: 10px; }
+        .total-amount { font-family: var(--cute); font-size: 2.2rem; font-weight: 800; color: var(--accent-dark); position: relative; z-index: 1; }
+        .total-sub { font-family: var(--cute); font-size: 0.7rem; opacity: 0.5; position: relative; z-index: 1; }
 
-        .firework-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9998; }
-        .firework-particle { position: absolute; border-radius: 50%; pointer-events: none; animation: fireworkBurst 1s ease-out forwards; }
-        @keyframes fireworkBurst { 0%{transform:translate(0,0) scale(1);opacity:1} 100%{transform:translate(var(--dx),var(--dy)) scale(0);opacity:0} }
+        .affirmation { text-align: center; font-family: var(--cute); font-style: italic; font-size: 0.85rem; color: var(--accent-dark); padding: 10px 14px; background: var(--card); border-radius: 16px; box-shadow: 0 4px 15px rgba(255,150,180,0.12); border: 1px solid var(--accent-light); position: relative; }
+        .affirmation::before { content: '💬'; position: absolute; left: 10px; top: -12px; font-size: 1.2rem; }
+        .affirmation::after { content: '💖'; position: absolute; right: 10px; bottom: -12px; font-size: 1rem; }
 
-        .congrats-popup { position: fixed; top: 50%; left: 50%; transform: translate(-50%,-50%) scale(0); background: var(--card-bg); border-radius: var(--border-radius); padding: 35px 28px; text-align: center; z-index: 10000; box-shadow: 0 20px 60px rgba(0,0,0,0.2); transition: transform 0.4s cubic-bezier(0.175,0.885,0.32,1.275); max-width: 360px; width: 90%; }
-        .congrats-popup.show { transform: translate(-50%,-50%) scale(1); }
-        .congrats-icon { font-size: 4.5rem; animation: bounce 0.8s ease-in-out infinite; }
-        .congrats-title { font-family: var(--font-cute); font-size: 1.7rem; font-weight: 700; color: var(--accent-dark); margin: 12px 0; }
-        .congrats-text { font-size: 1rem; color: var(--text); margin-bottom: 22px; line-height: 1.6; }
-        .congrats-btn { padding: 13px 32px; border-radius: 28px; border: none; background: var(--accent); color: #fff; font-family: var(--font-cute); font-weight: 700; font-size: 1rem; cursor: pointer; }
+        .piggy-list { flex: 1; overflow-y: auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; padding: 4px; align-content: start; }
+        .piggy-list::-webkit-scrollbar { width: 4px; }
+        .piggy-list::-webkit-scrollbar-thumb { background: var(--accent-light); border-radius: 8px; }
+        .piggy-list::-webkit-scrollbar-track { background: var(--bg); }
 
-        .app-container { width: 100%; height: 100vh; height: 100dvh; max-width: 1000px; display: flex; flex-direction: column; padding: env(safe-area-inset-top,10px) 10px env(safe-area-inset-bottom,10px) 10px; gap: 10px; position: relative; z-index: 1; overflow: hidden; }
-        @media (orientation: landscape) and (min-width:700px) {
-            .app-container { flex-direction: row; gap: 12px; padding: 12px; }
-            .left-panel { flex: 0 0 44%; max-width: 420px; display: flex; flex-direction: column; gap: 8px; overflow-y: auto; height: 100%; -webkit-overflow-scrolling: touch; overscroll-behavior: contain; padding-right: 4px; }
-            .right-panel { flex: 1; min-width: 0; display: flex; flex-direction: column; height: 100%; overflow: hidden; }
-            .cards-section { flex: 1; overflow-y: auto !important; -webkit-overflow-scrolling: touch; overscroll-behavior: contain; height: 100%; min-height: 0; padding-right: 4px; }
-            .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(85px, 1fr)); gap: 6px; align-content: start; padding: 2px; }
-            .card-item { padding: 10px 5px; min-height: 40px; font-size: 0.78rem; }
-            .affirmation-mini { display: block !important; text-align: center; font-family: var(--font-cute); font-size: 0.8rem; color: var(--accent-dark); padding: 6px 12px; background: var(--accent-light); border-radius: 14px; opacity: 0.9; flex-shrink: 0; }
-        }
-        @media (orientation: portrait), (max-width:699px) {
-            .affirmation-mini { display: none; }
-            .app-container { flex-direction: column; max-width: 500px; margin: 0 auto; }
-            .left-panel { flex-shrink: 0; display: flex; flex-direction: column; gap: 8px; overflow-y: auto; max-height: 55%; }
-            .right-panel { flex: 1; min-height: 0; display: flex; flex-direction: column; overflow: hidden; }
-            .cards-section { flex: 1; overflow-y: auto !important; -webkit-overflow-scrolling: touch; overscroll-behavior: contain; min-height: 0; }
-            .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 5px; padding: 2px; align-content: start; }
-            .card-item { aspect-ratio: 1/1; padding: 6px 3px; min-height: 38px; font-size: 0.73rem; }
-        }
+        .piggy-card { background: var(--card); border-radius: var(--border); padding: 22px 15px; text-align: center; box-shadow: 0 6px 25px rgba(255,150,180,0.18); cursor: pointer; transition: 0.25s; position: relative; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 190px; border: 2px solid transparent; }
+        .piggy-card:hover { border-color: var(--accent-light); box-shadow: 0 10px 35px rgba(255,150,180,0.3); transform: translateY(-2px); }
+        .piggy-card:active { transform: scale(0.96); }
+        .piggy-card::after { content: ''; position: absolute; top: -30px; right: -30px; width: 60px; height: 60px; border-radius: 50%; background: var(--accent-light); opacity: 0.15; }
+        .piggy-emoji { font-size: 3.2rem; margin-bottom: 8px; display: block; position: relative; z-index: 1; filter: drop-shadow(0 3px 6px rgba(255,107,138,0.2)); }
+        .piggy-name { font-family: var(--cute); font-weight: 700; margin-bottom: 4px; position: relative; z-index: 1; font-size: 1rem; }
+        .piggy-saved { font-family: var(--cute); font-weight: 800; font-size: 1.3rem; color: var(--accent-dark); position: relative; z-index: 1; }
+        .piggy-goal { font-size: 0.7rem; opacity: 0.6; position: relative; z-index: 1; }
+        .progress-bar { width: 80%; height: 6px; background: var(--progress-bg); border-radius: 4px; margin-top: 10px; overflow: hidden; position: relative; z-index: 1; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent-light), var(--accent), var(--accent-dark)); border-radius: 4px; transition: 0.5s ease; }
+        .delete-btn { position: absolute; top: 8px; right: 10px; font-size: 0.9rem; opacity: 0.25; z-index: 2; transition: 0.2s; }
+        .delete-btn:hover { opacity: 0.7; }
+        .add-card { border: 3px dashed var(--accent-light); display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 2.5rem; color: var(--accent); min-height: 190px; opacity: 0.6; transition: 0.3s; background: rgba(255,255,255,0.3); }
+        .add-card:hover { opacity: 1; border-color: var(--accent); background: var(--accent-light); }
+        .add-card:active { opacity: 1; background: var(--accent-light); transform: scale(0.96); }
+        .add-text { font-family: var(--cute); font-size: 0.9rem; margin-top: 6px; color: var(--accent-dark); }
 
-        .header { display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-shrink: 0; }
-        .title { font-family: var(--font-cute); font-size: 1.5rem; font-weight: 700; background: var(--header-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; white-space: nowrap; display: flex; align-items: center; gap: 5px; }
-        .title-emoji { font-size: 1.6rem; -webkit-text-fill-color: initial; }
-        .settings-icon-btn { background: var(--accent-light); border: 2px solid var(--accent); border-radius: 50%; width: 36px; height: 36px; font-size: 1.1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--accent-dark); flex-shrink: 0; }
-        .settings-icon-btn:active { transform: scale(0.9); }
-
-        .progress-section { display: flex; align-items: center; gap: 12px; background: var(--card-bg); border-radius: var(--border-radius); padding: 14px; box-shadow: var(--shadow); flex-shrink: 0; }
-        .progress-circle { position: relative; width: 80px; height: 80px; flex-shrink: 0; }
-        .progress-circle svg { width: 100%; height: 100%; transform: rotate(-90deg); }
-        .progress-circle .bg-circle { fill: none; stroke: var(--progress-bg); stroke-width: 7; }
-        .progress-circle .fg-circle { fill: none; stroke: var(--accent); stroke-width: 7; stroke-linecap: round; transition: stroke-dashoffset 0.4s; }
-        .progress-percent { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); font-family: var(--font-cute); font-weight: 700; font-size: 1rem; color: var(--accent-dark); }
-        .progress-info { flex: 1; min-width: 0; }
-        .progress-info .saved { font-weight: 800; font-size: 1.3rem; color: var(--accent-dark); }
-        .progress-info .goal { font-size: 0.8rem; opacity: 0.7; }
-        .progress-info .remaining { font-size: 0.75rem; color: var(--accent); margin-top: 2px; }
-
-        .input-row { display: flex; gap: 6px; flex-shrink: 0; flex-wrap: wrap; }
-        .input-row input { flex: 1; min-width: 100px; padding: 11px 14px; border-radius: var(--card-radius); border: 2px solid var(--accent-light); background: var(--input-bg); font-family: var(--font-main); font-size: 0.95rem; color: var(--text); outline: none; -webkit-appearance: none; }
-        .input-row input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(255,153,185,0.15); }
-        .btn { padding: 11px 16px; border-radius: var(--card-radius); border: none; font-family: var(--font-cute); font-weight: 700; font-size: 0.9rem; cursor: pointer; white-space: nowrap; flex-shrink: 0; display: flex; align-items: center; gap: 4px; }
+        .detail-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; height: 100dvh; background: var(--bg); z-index: 50; display: none; flex-direction: column; padding: 16px; gap: 10px; overflow-y: auto; }
+        .detail-screen.active { display: flex; }
+        .detail-header { display: flex; align-items: center; gap: 8px; }
+        .back-btn { background: var(--accent-light); border-radius: 50%; width: 40px; height: 40px; font-size: 1.3rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; border: 2px solid var(--accent); }
+        .detail-name-input { flex: 1; font-family: var(--cute); font-size: 1.1rem; font-weight: 700; background: var(--input-bg); border: 2px solid var(--accent-light); border-radius: 16px; padding: 10px 14px; }
+        .detail-name-input:focus { border-color: var(--accent); box-shadow: 0 0 0 4px rgba(255,153,185,0.15); }
+        .emoji-btn { background: var(--accent-light); border-radius: 50%; width: 40px; height: 40px; font-size: 1.2rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; border: 2px solid var(--accent); }
+        .detail-progress { display: flex; align-items: center; gap: 14px; background: var(--card); border-radius: var(--border); padding: 16px; box-shadow: 0 4px 20px rgba(255,150,180,0.15); border: 2px solid var(--accent-light); }
+        .circle-wrap { position: relative; width: 75px; height: 75px; flex-shrink: 0; }
+        .circle-wrap svg { transform: rotate(-90deg); }
+        .circle-bg { fill: none; stroke: var(--progress-bg); stroke-width: 7; }
+        .circle-fg { fill: none; stroke: url(#gradient); stroke-width: 7; stroke-linecap: round; transition: 0.5s ease; }
+        .circle-pct { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); font-family: var(--cute); font-weight: 700; font-size: 0.9rem; color: var(--accent-dark); }
+        .detail-saved { font-weight: 800; font-size: 1.2rem; color: var(--accent-dark); }
+        .detail-inputs { display: flex; gap: 5px; flex-wrap: wrap; }
+        .detail-inputs input { flex: 1; min-width: 80px; padding: 11px 14px; border-radius: 14px; border: 2px solid var(--accent-light); background: var(--input-bg); font-size: 0.9rem; transition: 0.2s; }
+        .detail-inputs input:focus { border-color: var(--accent); box-shadow: 0 0 0 4px rgba(255,153,185,0.12); }
+        .btn { padding: 10px 16px; border-radius: 14px; font-weight: 700; font-size: 0.85rem; display: flex; align-items: center; gap: 4px; transition: 0.2s; white-space: nowrap; }
         .btn:active { transform: scale(0.94); }
-        .btn-primary { background: var(--accent); color: #fff; }
+        .btn-primary { background: linear-gradient(135deg, var(--accent), var(--accent-dark)); color: #fff; box-shadow: 0 4px 15px rgba(255,107,138,0.3); }
         .btn-secondary { background: var(--accent-light); color: var(--accent-dark); }
         .btn-outline { background: transparent; border: 2px solid var(--accent); color: var(--accent-dark); }
-        .btn-sm { padding: 7px 12px; font-size: 0.78rem; border-radius: 14px; }
+        .btn-sm { padding: 6px 10px; font-size: 0.72rem; border-radius: 10px; }
+        .card-grid { flex: 1; overflow-y: auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(68px, 1fr)); gap: 5px; padding: 2px; align-content: start; }
+        .card-grid::-webkit-scrollbar { width: 4px; }
+        .card-grid::-webkit-scrollbar-thumb { background: var(--accent-light); border-radius: 8px; }
+        .amount-card { background: var(--card); border: 2px solid var(--accent-light); border-radius: 16px; text-align: center; font-family: var(--cute); font-weight: 700; font-size: 0.72rem; padding: 9px 4px; cursor: pointer; transition: 0.2s; box-shadow: 0 2px 8px rgba(255,150,180,0.1); position: relative; display: flex; align-items: center; justify-content: center; min-height: 40px; }
+        .amount-card:active { transform: scale(0.9); }
+        .amount-card.paid { background: linear-gradient(135deg, var(--accent), var(--accent-dark)) !important; color: #fff !important; border-color: var(--accent-dark) !important; font-weight: 800; box-shadow: 0 4px 15px rgba(255,107,138,0.3); }
+        .amount-card.paid::after { content: '✓'; position: absolute; top: 3px; right: 4px; font-size: 0.5rem; opacity: 0.9; background: rgba(255,255,255,0.3); width: 13px; height: 13px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+        .amount-card:hover { border-color: var(--accent); box-shadow: 0 4px 12px rgba(255,150,180,0.2); }
 
-        .cards-section::-webkit-scrollbar { width: 3px; }
-        .cards-section::-webkit-scrollbar-thumb { background: var(--accent-light); border-radius: 8px; }
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); z-index: 100; display: none; align-items: center; justify-content: center; padding: 20px; backdrop-filter: blur(2px); }
+        .modal-overlay.active { display: flex; }
+        .modal-card { background: var(--card); border-radius: var(--border); padding: 25px 20px; box-shadow: 0 20px 60px rgba(0,0,0,0.2); width: 100%; max-width: 400px; max-height: 80vh; overflow-y: auto; position: relative; border: 2px solid var(--accent-light); }
+        .modal-close { position: absolute; top: 12px; right: 16px; font-size: 1.4rem; opacity: 0.5; transition: 0.2s; }
+        .modal-close:hover { opacity: 0.9; }
+        .modal-title { font-family: var(--cute); font-size: 1.3rem; font-weight: 700; text-align: center; margin-bottom: 16px; color: var(--accent-dark); }
+        .option-group { margin-bottom: 14px; }
+        .option-label { font-family: var(--cute); font-size: 0.82rem; font-weight: 700; margin-bottom: 6px; color: var(--accent-dark); display: block; }
+        .option-row { display: flex; flex-wrap: wrap; gap: 5px; }
+        .option-btn { padding: 7px 12px; border-radius: 12px; border: 2px solid var(--accent-light); background: var(--input-bg); font-size: 0.78rem; font-weight: 600; transition: 0.2s; }
+        .option-btn:hover { border-color: var(--accent); }
+        .option-btn.selected { background: linear-gradient(135deg, var(--accent), var(--accent-dark)); color: #fff; border-color: var(--accent-dark); }
+        .color-btn { width: 32px; height: 32px; border-radius: 50%; border: 3px solid transparent; transition: 0.2s; }
+        .color-btn:hover { transform: scale(1.1); }
+        .color-btn.selected { border-color: var(--text); box-shadow: 0 0 0 4px rgba(0,0,0,0.1); }
+        .emoji-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; justify-items: center; margin-top: 10px; }
+        .emoji-opt { font-size: 1.9rem; cursor: pointer; padding: 5px; border-radius: 10px; transition: 0.2s; }
+        .emoji-opt:hover { transform: scale(1.15); background: var(--accent-light); }
+        .emoji-opt:active { transform: scale(1.25); }
+        .emoji-opt.selected { background: var(--accent-light); border: 2px solid var(--accent); box-shadow: 0 0 0 3px rgba(255,153,185,0.2); }
+        .primary-btn { width: 100%; padding: 12px; background: linear-gradient(135deg, var(--accent), var(--accent-dark)); color: #fff; border-radius: 16px; font-size: 0.95rem; font-weight: 700; margin-top: 10px; box-shadow: 0 4px 15px rgba(255,107,138,0.3); transition: 0.2s; }
+        .primary-btn:hover { box-shadow: 0 6px 20px rgba(255,107,138,0.4); }
+        .primary-btn:active { transform: scale(0.96); }
+        .settings-footer { text-align: center; margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--accent-light); font-size: 0.72rem; color: var(--accent-dark); opacity: 0.6; letter-spacing: 1.5px; }
 
-        .card-item { background: var(--card-bg); border: 2px solid var(--accent-light); border-radius: var(--card-radius); text-align: center; font-family: var(--font-cute); font-weight: 700; color: var(--text); cursor: pointer; transition: all 0.2s; box-shadow: var(--shadow); display: flex; align-items: center; justify-content: center; }
-        .card-item:active { transform: scale(0.92); }
-        .card-item.paid { background: var(--paid-color) !important; border-color: var(--accent-dark) !important; color: #fff !important; box-shadow: 0 6px 20px rgba(255,120,150,0.35); font-weight: 800; animation: popIn 0.25s; }
-        .card-item.paid::after { content: '✓'; position: absolute; top: 3px; right: 5px; font-size: 0.6rem; opacity: 0.9; background: rgba(255,255,255,0.4); width: 14px; height: 14px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
-        @keyframes popIn { 0%{transform:scale(1)} 50%{transform:scale(1.06)} 100%{transform:scale(1)} }
-
-        .affirmation-box { background: var(--card-bg); border-radius: var(--border-radius); padding: 12px 16px; text-align: center; font-family: var(--font-cute); font-size: 0.85rem; color: var(--accent-dark); box-shadow: var(--shadow); flex-shrink: 0; font-style: italic; min-height: 42px; display: flex; align-items: center; justify-content: center; position: relative; }
-        .affirmation-box::before { content: '"'; position: absolute; left: 10px; top: 0; font-size: 1.8rem; color: var(--accent-light); }
-        .affirmation-box::after { content: '"'; position: absolute; right: 10px; bottom: -10px; font-size: 1.8rem; color: var(--accent-light); }
-        .affirmation-mini { display: none; }
-        .actions-row { display: flex; gap: 6px; flex-shrink: 0; flex-wrap: wrap; }
-
-        .history-section { background: var(--card-bg); border-radius: var(--border-radius); padding: 12px; box-shadow: var(--shadow); flex-shrink: 0; max-height: 150px; overflow-y: auto; -webkit-overflow-scrolling: touch; overscroll-behavior: contain; }
-        .history-section h3 { font-family: var(--font-cute); font-size: 0.9rem; color: var(--accent-dark); margin-bottom: 8px; }
-        .history-item { display: flex; align-items: center; justify-content: space-between; padding: 7px 10px; border-radius: 12px; background: var(--input-bg); margin-bottom: 5px; font-size: 0.78rem; gap: 6px; }
-        .history-item:last-child { margin-bottom: 0; }
-        .history-item .h-amount { font-weight: 700; color: var(--accent-dark); }
-        .history-item .h-days { font-size: 0.7rem; opacity: 0.7; }
-        .history-item .h-badge { font-size: 0.65rem; padding: 2px 8px; border-radius: 8px; font-weight: 700; }
-        .badge-done { background: var(--accent-light); color: var(--accent-dark); }
-        .no-history { text-align: center; padding: 12px; opacity: 0.5; font-style: italic; font-size: 0.8rem; }
-        @media (max-width:380px) { .title { font-size: 1.2rem; } .progress-circle { width: 65px; height: 65px; } .btn { padding: 9px 12px; font-size: 0.82rem; } .card-item { font-size: 0.7rem; min-height: 34px; } }
+        @media (max-width:380px) { .logo { font-size: 1.4rem; } .total-amount { font-size: 1.7rem; } .piggy-list { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 8px; } }
     </style>
 </head>
-<body class="theme-pink">
+<body class="pink">
 
-    <div class="sparkles-container" id="sparklesContainer"></div>
+<!-- ФОН С МИЛЫМИ ПАРЯЩИМИ ЭЛЕМЕНТАМИ -->
+<div class="cute-bg">
+    <span class="floating">🌸</span><span class="floating">🦋</span><span class="floating">💫</span>
+    <span class="floating">✨</span><span class="floating">💖</span><span class="floating">🎀</span>
+    <span class="floating">🌟</span><span class="floating">💎</span>
+</div>
+<div class="sparkles" id="sparklesContainer"></div>
 
-    <div class="setup-screen hidden" id="setupScreen">
-        <div class="setup-card">
-            <div class="setup-icon">🐷</div>
-            <div class="setup-title" id="setupTitle">Добро пожаловать!</div>
-            <div class="setup-subtitle" id="setupSubtitle">Настроим копилку под тебя ✨</div>
-            <div class="setup-section"><span class="setup-label" id="setupLangLabel">🌍 Язык / Language</span><div class="setup-options" id="setupLangOptions"><span class="setup-option selected" data-lang="ru">🇷🇺 Русский</span><span class="setup-option" data-lang="en">🇬🇧 English</span></div></div>
-            <div class="setup-section"><span class="setup-label" id="setupThemeLabel">🎨 Цвет темы</span><div class="setup-options" style="gap:10px;"><span class="setup-color-dot pink selected" data-theme="pink" style="background:#ff99b9;"></span><span class="setup-color-dot peach" data-theme="peach" style="background:#ffb899;"></span><span class="setup-color-dot lavender" data-theme="lavender" style="background:#c4a8ff;"></span><span class="setup-color-dot mint" data-theme="mint" style="background:#99d8b9;"></span><span class="setup-color-dot sky" data-theme="sky" style="background:#99c8ff;"></span></div></div>
-            <div class="setup-section"><span class="setup-label" id="setupCurrencyLabel">💱 Валюта</span><div class="setup-currency-options" id="setupCurrencyOptions"></div></div>
-            <button class="setup-btn" id="setupDoneBtn">✨ Начать копить!</button>
+<div id="app">
+    <div class="header">
+        <div class="logo"><span class="logo-emoji">🐷</span>Копилочка</div>
+        <button class="settings-btn" onclick="openModal('settingsModal')">⚙️</button>
+    </div>
+    <div class="total-card">
+        <div class="total-emoji">💰</div>
+        <div class="total-label">✨ Всего накоплено</div>
+        <div class="total-amount" id="totalAmount">0 ₽</div>
+        <div class="total-sub">по всем копилочкам</div>
+    </div>
+    <div class="affirmation" id="affirmation">✨</div>
+    <div class="piggy-list" id="piggyList"></div>
+</div>
+
+<div class="detail-screen" id="detailScreen">
+    <div class="detail-header"><button class="back-btn" onclick="closeDetail()">←</button><input class="detail-name-input" id="detailName" placeholder="Название копилки" maxlength="30"><button class="emoji-btn" onclick="openModal('emojiModal')">🎨</button></div>
+    <div class="detail-progress">
+        <div class="circle-wrap">
+            <svg viewBox="0 0 100 100">
+                <defs><linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="var(--accent-light)"/><stop offset="50%" stop-color="var(--accent)"/><stop offset="100%" stop-color="var(--accent-dark)"/></linearGradient></defs>
+                <circle class="circle-bg" cx="50" cy="50" r="44"/><circle class="circle-fg" id="detailCircle" cx="50" cy="50" r="44" stroke-dasharray="276.46" stroke-dashoffset="276.46"/>
+            </svg>
+            <div class="circle-pct" id="detailPercent">0%</div>
         </div>
+        <div><div class="detail-saved" id="detailSaved">0 ₽</div><div style="font-size:0.7rem;opacity:0.7;" id="detailGoal">Цель: не задана</div></div>
     </div>
+    <div class="detail-inputs"><input type="number" id="goalInput" placeholder="🎯 Сумма цели" inputmode="numeric" min="1"><button class="btn btn-primary" onclick="setGoal()">✨</button><input type="number" id="addInput" placeholder="💰 Внести" inputmode="numeric" min="1"><button class="btn btn-secondary" onclick="addAmount()">➕</button></div>
+    <div class="detail-inputs"><button class="btn btn-outline btn-sm" onclick="resetPiggy()">🔄 Сбросить всё</button></div>
+    <div class="card-grid" id="cardGrid"></div>
+</div>
 
-    <div class="settings-overlay" id="settingsOverlay">
-        <div class="settings-modal">
-            <button class="settings-close" id="settingsClose">✕</button>
-            <div class="settings-title" id="settingsTitle">⚙️ Настройки</div>
-            <div class="settings-section"><span class="settings-label" id="settingsLangLabel2">🌍 Язык / Language</span><div class="settings-options" id="settingsLangOptions2"><span class="settings-option selected" data-lang="ru">🇷🇺 Русский</span><span class="settings-option" data-lang="en">🇬🇧 English</span></div></div>
-            <div class="settings-section"><span class="settings-label" id="settingsThemeLabel">🎨 Цвет темы</span><div class="settings-options" style="gap:8px;" id="settingsColorOptions"><span class="settings-color-dot pink selected" data-theme="pink" style="background:#ff99b9;"></span><span class="settings-color-dot peach" data-theme="peach" style="background:#ffb899;"></span><span class="settings-color-dot lavender" data-theme="lavender" style="background:#c4a8ff;"></span><span class="settings-color-dot mint" data-theme="mint" style="background:#99d8b9;"></span><span class="settings-color-dot sky" data-theme="sky" style="background:#99c8ff;"></span></div></div>
-            <div class="settings-section"><span class="settings-label" id="settingsCurrencyLabel">💱 Валюта</span><div class="settings-currency-grid" id="settingsCurrencyOptions"></div></div>
-            <div class="settings-footer">✨ by LISITHEYA ✨</div>
-        </div>
-    </div>
+<div class="modal-overlay" id="settingsModal"><div class="modal-card"><button class="modal-close" onclick="closeModal('settingsModal')">✕</button><div class="modal-title">⚙️ Настройки</div><div class="option-group"><span class="option-label">🌍 Язык</span><div class="option-row" id="langOptions"><button class="option-btn selected" data-lang="ru">🇷🇺 RU</button><button class="option-btn" data-lang="en">🇬🇧 EN</button></div></div><div class="option-group"><span class="option-label">🎨 Тема</span><div class="option-row" id="themeOptions"><button class="color-btn pink selected" data-theme="pink" style="background:#ff99b9;"></button><button class="color-btn peach" data-theme="peach" style="background:#ffb899;"></button><button class="color-btn lavender" data-theme="lavender" style="background:#c4a8ff;"></button><button class="color-btn mint" data-theme="mint" style="background:#99d8b9;"></button><button class="color-btn sky" data-theme="sky" style="background:#99c8ff;"></button></div></div><div class="option-group"><span class="option-label">💱 Валюта</span><div class="option-row" id="currencyOptions" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(60px,1fr));gap:4px;"></div></div><div class="settings-footer">✨ by LISITHEYA ✨</div></div></div>
+<div class="modal-overlay" id="emojiModal"><div class="modal-card"><button class="modal-close" onclick="closeModal('emojiModal')">✕</button><div class="modal-title">🎨 Выбери эмодзи</div><div class="emoji-grid" id="emojiGrid"></div></div></div>
+<div class="modal-overlay" id="createModal"><div class="modal-card"><button class="modal-close" onclick="closeModal('createModal')">✕</button><div class="modal-title">✨ Новая копилка</div><input type="text" id="newPiggyName" placeholder="Название" maxlength="30" style="width:100%;padding:10px;border-radius:12px;border:2px solid var(--accent-light);background:var(--input-bg);margin-bottom:10px;"><div class="emoji-grid" id="createEmojiGrid"></div><button class="primary-btn" onclick="createPiggy()">✨ Создать</button></div></div>
 
-    <div class="splash-screen" id="splashScreen">
-        <div class="splash-icon">🐷</div>
-        <div class="splash-text" id="splashTitle">Милая Копилка</div>
-        <div class="splash-phrase" id="splashPhrase">Загружаем волшебство...</div>
-        <div class="splash-dots"><div class="splash-dot"></div><div class="splash-dot"></div><div class="splash-dot"></div></div>
-    </div>
+<script>
+const CURRENCIES = [
+    {code:'RUB',symbol:'₽',d:[1000,500,200,100,50,10]},{code:'USD',symbol:'$',d:[100,50,20,10,5,1]},
+    {code:'EUR',symbol:'€',d:[500,200,100,50,20,10,5,2,1]},{code:'GBP',symbol:'£',d:[50,20,10,5,2,1]},
+    {code:'JPY',symbol:'¥',d:[10000,5000,2000,1000,500,100,50,10,5,1]},{code:'CNY',symbol:'¥',d:[100,50,20,10,5,1]},
+    {code:'KRW',symbol:'₩',d:[50000,10000,5000,1000,500,100,50,10,5,1]},{code:'INR',symbol:'₹',d:[2000,500,200,100,50,20,10,5,2,1]},
+    {code:'BRL',symbol:'R$',d:[200,100,50,20,10,5,2,1]},{code:'TRY',symbol:'₺',d:[200,100,50,20,10,5,2,1]},
+    {code:'UAH',symbol:'₴',d:[1000,500,200,100,50,20,10,5,2,1]},{code:'KZT',symbol:'₸',d:[20000,10000,5000,2000,1000,500,200,100,50,20,10,5,2,1]}
+];
+const EMOJIS = ['🐷','💰','💎','🌟','🎯','🏠','🚗','✈️','💍','🎓','📱','💻','🐱','🐶','🌸','🎀','💖','✨','🦄','🌈','🍕','🎮','📚','💪','🎉','🛍','💄','👑','🏖','🎸'];
+const AFF = {ru:["Деньги приходят легко и с радостью 💖","Я магнит для изобилия ✨","Каждый рубль — семя процветания 🌱","Я достойна богатства 💎","Мои доходы растут 📈","Финансовая свобода — мой выбор 🦋","Я с благодарностью принимаю деньги 🌸","Изобилие течёт ко мне 🌊","Я ценю деньги, и они ценят меня 💝","Мой кошелёк всегда полон 💰"],en:["Money comes easily and joyfully 💖","I am a magnet for abundance ✨","Every dollar is a seed 🌱","I deserve wealth 💎","My income grows 📈","Financial freedom is my choice 🦋","I accept money with gratitude 🌸","Abundance flows to me 🌊","I value money and it values me 💝","My wallet is always full 💰"]};
 
-    <div class="firework-overlay" id="fireworkOverlay"></div>
+let lang = localStorage.getItem('lang')||'ru';
+let currency = CURRENCIES.find(c=>c.code===(localStorage.getItem('currency')||'RUB'))||CURRENCIES[0];
+let theme = localStorage.getItem('theme')||'pink';
+let piggies = JSON.parse(localStorage.getItem('piggies')||'[]');
+let currentId = null;
+let pendingEmoji = '🐷';
 
-    <div class="congrats-popup" id="congratsPopup">
-        <div class="congrats-icon">🎉</div>
-        <div class="congrats-title" id="congratsTitle">Поздравляем!</div>
-        <div class="congrats-text" id="congratsText">Ты накопила всю сумму!<br>Ты невероятная! 💖</div>
-        <button class="congrats-btn" id="congratsCloseBtn">Спасибо! ✨</button>
-    </div>
+function save() { localStorage.setItem('lang',lang); localStorage.setItem('currency',currency.code); localStorage.setItem('theme',theme); localStorage.setItem('piggies',JSON.stringify(piggies)); }
+function fm(a) { return (a||0).toLocaleString('ru-RU')+' '+currency.symbol; }
+function t(k) { const tr={ru:{goal:'Цель',noGoal:'не задана',newPiggy:'Новая копилка'},en:{goal:'Goal',noGoal:'not set',newPiggy:'New Bank'}}; return (tr[lang]||tr['ru'])[k]||k; }
 
-    <div class="app-container">
-        <div class="left-panel">
-            <div class="affirmation-mini" id="affirmationMini"></div>
-            <div class="header">
-                <span class="title"><span class="title-emoji">🌸</span> <span id="appTitle">Копилка</span></span>
-                <button class="settings-icon-btn" id="openSettingsBtn" title="Настройки">⚙️</button>
-            </div>
-            <div class="progress-section">
-                <div class="progress-circle"><svg viewBox="0 0 100 100"><circle class="bg-circle" cx="50" cy="50" r="42"/><circle class="fg-circle" id="progressCircle" cx="50" cy="50" r="42" stroke-dasharray="263.89" stroke-dashoffset="263.89"/></svg><div class="progress-percent" id="percentText">0%</div></div>
-                <div class="progress-info"><div class="saved" id="savedAmount">0</div><div class="goal" id="goalAmount">Цель: 0</div><div class="remaining" id="remainingAmount">Осталось: 0</div></div>
-            </div>
-            <div class="input-row"><input type="number" id="goalInput" placeholder="🎯 Сумма цели" inputmode="numeric" min="1"><button class="btn btn-primary" id="setGoalBtn">✨ Создать</button></div>
-            <div class="input-row"><input type="number" id="addAmountInput" placeholder="💰 Добавить сумму" inputmode="numeric" min="1"><button class="btn btn-secondary" id="addAmountBtn">➕ Внести</button></div>
-            <div class="affirmation-box" id="affirmationBox"></div>
-            <div class="actions-row"><button class="btn btn-outline btn-sm" id="unpayAllBtn">🔄 Сбросить</button><button class="btn btn-outline btn-sm" id="resetBtn">🗑 Новая цель</button></div>
-            <div class="history-section" id="historySection"><h3 id="historyTitle">📋 История целей</h3><div id="historyList"><div class="no-history">Пока нет завершённых целей ✨</div></div></div>
-        </div>
-        <div class="right-panel"><div class="cards-section" id="cardsSection"><div class="cards-grid" id="cardsGrid"><div style="text-align:center;padding:30px;opacity:0.6;grid-column:1/-1;">✨ Введи сумму и создай карточки ✨</div></div></div></div>
-    </div>
+function generateCards(goal) {
+    if (!goal || goal <= 0) return [];
+    let cards = [], remaining = goal;
+    const allDenoms = [1000, 500, 400, 300, 250, 200, 150, 100, 50, 20, 10];
+    for (const d of allDenoms) { if (remaining >= d) { cards.push(d); remaining -= d; } }
+    while (remaining > 0) {
+        let chosen = null;
+        for (const d of allDenoms) { if (d <= remaining && !cards.includes(d)) { chosen = d; break; } }
+        if (!chosen) { const countMap = {}; cards.forEach(c => countMap[c] = (countMap[c]||0) + 1); let minCount = Infinity; for (const d of allDenoms) { if (d <= remaining) { const cnt = countMap[d] || 0; if (cnt < minCount) { minCount = cnt; chosen = d; } } } }
+        if (!chosen || chosen > remaining) { chosen = remaining; }
+        cards.push(chosen); remaining -= chosen;
+    }
+    for (let i = cards.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [cards[i], cards[j]] = [cards[j], cards[i]]; }
+    return cards;
+}
 
-    <script>
-        // Регистрируем Service Worker для PWA
-        if ('serviceWorker' in navigator) {
-            const swCode = `self.addEventListener('install',e=>{self.skipWaiting()});self.addEventListener('activate',e=>{e.waitUntil(clients.claim())});self.addEventListener('fetch',e=>{e.respondWith(fetch(e.request).catch(()=>new Response('Offline')))})`;
-            const blob = new Blob([swCode], { type: 'application/javascript' });
-            const swUrl = URL.createObjectURL(blob);
-            navigator.serviceWorker.register(swUrl, { scope: '/' }).then(reg => {
-                console.log('✅ Service Worker зарегистрирован! PWA готово к установке.');
-            }).catch(err => console.log('SW не требуется:', err));
-        }
+function renderSparkles() { const c=document.getElementById('sparklesContainer');c.innerHTML='';const e=['✨','💫','⭐','🌟','💖','🌸','🦋','💎','🎀','💝'];for(let i=0;i<12;i++){const s=document.createElement('span');s.className='sparkle';s.textContent=e[i%10];s.style.cssText=`left:${Math.random()*90}%;top:${Math.random()*80+10}%;animation-delay:${Math.random()*4}s;animation-duration:${Math.random()*3+3}s;`;c.appendChild(s);} }
+function renderAll() {
+    document.getElementById('totalAmount').textContent = fm(piggies.reduce((s,p)=>s+(p.saved||0),0));
+    document.getElementById('affirmation').textContent = AFF[lang][Math.floor(Math.random()*AFF[lang].length)];
+    const list=document.getElementById('piggyList');list.innerHTML='';
+    piggies.forEach(p=>{
+        const card=document.createElement('div');card.className='piggy-card';
+        const pct=p.goal>0?Math.min(100,Math.round((p.saved||0)/p.goal*100)):0;
+        card.innerHTML=`<button class="delete-btn">🗑</button><span class="piggy-emoji">${p.emoji||'🐷'}</span><div class="piggy-name">${p.name||'Копилка'}</div><div class="piggy-saved">${fm(p.saved||0)}</div><div class="piggy-goal">${p.goal>0?t('goal')+': '+fm(p.goal):t('noGoal')}</div><div class="progress-bar"><div class="progress-fill" style="width:${pct}%"></div></div>`;
+        card.querySelector('.delete-btn').addEventListener('click',e=>{e.stopPropagation();if(confirm('Удалить?')){piggies=piggies.filter(x=>x.id!==p.id);save();renderAll();}});
+        card.addEventListener('click',()=>openPiggy(p.id));list.appendChild(card);
+    });
+    if(piggies.length<10){const add=document.createElement('div');add.className='piggy-card add-card';add.innerHTML='<div style="font-size:3rem;">➕</div><div class="add-text">'+t('newPiggy')+'</div>';add.addEventListener('click',()=>openModal('createModal'));list.appendChild(add);}
+}
 
-        // Создаём manifest динамически для гарантии
-        function createManifest() {
-            const manifest = {
-                name: '🌸 Милая Копилка',
-                short_name: 'Копилка',
-                description: 'Милое приложение-копилка',
-                start_url: location.href.split('?')[0],
-                scope: location.href.split('?')[0],
-                display: 'standalone',
-                background_color: '#fff0f5',
-                theme_color: '#ff99b9',
-                orientation: 'any',
-                icons: [{
-                    src: 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192"><defs><radialGradient id="g" cx="50%" cy="40%" r="50%"><stop offset="0%" stop-color="#ffb3c6"/><stop offset="100%" stop-color="#ff6b8a"/></radialGradient></defs><circle cx="96" cy="96" r="90" fill="url(#g)"/><circle cx="96" cy="96" r="83" fill="none" stroke="white" stroke-width="4" stroke-dasharray="18 9"/><text x="96" y="124" text-anchor="middle" font-size="75" font-family="Arial">🐷</text></svg>'),
-                    sizes: '192x192',
-                    type: 'image/svg+xml',
-                    purpose: 'any maskable'
-                }, {
-                    src: 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><defs><radialGradient id="g" cx="50%" cy="40%" r="50%"><stop offset="0%" stop-color="#ffb3c6"/><stop offset="100%" stop-color="#ff6b8a"/></radialGradient></defs><circle cx="256" cy="256" r="240" fill="url(#g)"/><circle cx="256" cy="256" r="220" fill="none" stroke="white" stroke-width="8" stroke-dasharray="30 15"/><text x="256" y="310" text-anchor="middle" font-size="160" font-family="Arial">🐷</text></svg>'),
-                    sizes: '512x512',
-                    type: 'image/svg+xml',
-                    purpose: 'any maskable'
-                }]
-            };
-            const blob = new Blob([JSON.stringify(manifest)], { type: 'application/json' });
-            const url = URL.createObjectURL(blob);
-            let link = document.querySelector('link[rel="manifest"]');
-            if (!link) {
-                link = document.createElement('link');
-                link.rel = 'manifest';
-                document.head.appendChild(link);
-            }
-            link.href = url;
-        }
-        createManifest();
+function openPiggy(id) { currentId=id;const p=piggies.find(x=>x.id===id);if(!p)return;document.getElementById('detailScreen').classList.add('active');document.getElementById('detailName').value=p.name||'';document.getElementById('goalInput').value='';document.getElementById('addInput').value='';if(!p.cardCache||p.cardCache.length===0||p.cardCache.reduce((a,b)=>a+b,0)!==p.goal){p.cardCache=generateCards(p.goal);}renderDetail(p); }
+function closeDetail() { const p=piggies.find(x=>x.id===currentId);if(p){p.name=document.getElementById('detailName').value.trim()||'Копилка';save();}document.getElementById('detailScreen').classList.remove('active');renderAll(); }
+function renderDetail(p) {
+    const cards=p.cardCache;
+    const pct=p.goal>0?Math.min(100,Math.round((p.saved||0)/p.goal*100)):0;
+    const circ=2*Math.PI*44;
+    document.getElementById('detailCircle').style.strokeDashoffset=circ-(pct/100)*circ;
+    document.getElementById('detailPercent').textContent=pct+'%';
+    document.getElementById('detailSaved').textContent=fm(p.saved||0);
+    document.getElementById('detailGoal').textContent=(p.goal>0?t('goal')+': '+fm(p.goal):t('noGoal'));
+    const grid=document.getElementById('cardGrid');grid.innerHTML='';
+    cards.forEach((amount,idx)=>{
+        const card=document.createElement('div');
+        card.className='amount-card'+((p.paidCards||[]).includes(idx)?' paid':'');
+        card.textContent=amount.toLocaleString('ru-RU')+' '+currency.symbol;
+        card.addEventListener('click',()=>{if((p.paidCards||[]).includes(idx)){p.paidCards=p.paidCards.filter(i=>i!==idx);p.saved=Math.max(0,(p.saved||0)-amount);}else{p.paidCards=[...(p.paidCards||[]),idx];p.saved=Math.min(p.goal,(p.saved||0)+amount);}save();renderDetail(p);renderAll();});
+        grid.appendChild(card);
+    });
+}
+function setGoal() { const p=piggies.find(x=>x.id===currentId);if(!p)return;const v=parseInt(document.getElementById('goalInput').value);if(isNaN(v)||v<1)return;p.goal=v;p.saved=0;p.paidCards=[];p.cardCache=generateCards(v);document.getElementById('goalInput').value='';save();renderDetail(p);renderAll(); }
+function addAmount() {
+    const p=piggies.find(x=>x.id===currentId);if(!p||!p.goal||p.goal<=0)return;
+    const v=parseInt(document.getElementById('addInput').value);if(isNaN(v)||v<=0)return;
+    const maxAdd=Math.min(v,p.goal-(p.saved||0));if(maxAdd<=0){document.getElementById('addInput').value='';return;}
+    const cards=p.cardCache;p.paidCards=p.paidCards||[];let remaining=maxAdd;
+    const available=cards.map((amount,idx)=>({idx,amount})).filter(item=>!p.paidCards.includes(item.idx)).sort((a,b)=>b.amount-a.amount);
+    for(const {idx,amount} of available){if(remaining>=amount){p.paidCards.push(idx);remaining-=amount;}if(remaining<=0)break;}
+    if(remaining>0){cards.push(remaining);p.paidCards.push(cards.length-1);}
+    p.saved=Math.min(p.goal,(p.saved||0)+maxAdd);p.cardCache=cards;
+    document.getElementById('addInput').value='';save();renderDetail(p);renderAll();
+}
+function resetPiggy() { const p=piggies.find(x=>x.id===currentId);if(!p)return;p.saved=0;p.paidCards=[];save();renderDetail(p);renderAll(); }
+function openModal(id) { document.getElementById(id).classList.add('active');if(id==='settingsModal')updateSettings();if(id==='createModal')renderEmojiGrid('createEmojiGrid');if(id==='emojiModal'&&currentId){const p=piggies.find(x=>x.id===currentId);pendingEmoji=p?p.emoji||'🐷':'🐷';renderEmojiGrid('emojiGrid');} }
+function closeModal(id) { document.getElementById(id).classList.remove('active'); }
+function renderEmojiGrid(gridId) { const grid=document.getElementById(gridId);grid.innerHTML='';EMOJIS.forEach(e=>{const el=document.createElement('span');el.className='emoji-opt'+(e===pendingEmoji?' selected':'');el.textContent=e;el.addEventListener('click',()=>{pendingEmoji=e;grid.querySelectorAll('.emoji-opt').forEach(o=>o.classList.remove('selected'));el.classList.add('selected');});grid.appendChild(el);}); }
+function createPiggy() { const name=document.getElementById('newPiggyName').value.trim()||'Копилка';piggies.push({id:Date.now(),name,emoji:pendingEmoji,goal:0,saved:0,paidCards:[],cardCache:[]});save();closeModal('createModal');renderAll(); }
+function updateSettings() { document.querySelectorAll('#langOptions .option-btn').forEach(b=>b.classList.toggle('selected',b.dataset.lang===lang));document.querySelectorAll('#themeOptions .color-btn').forEach(b=>b.classList.toggle('selected',b.dataset.theme===theme));const co=document.getElementById('currencyOptions');co.innerHTML='';CURRENCIES.forEach(c=>{const b=document.createElement('button');b.className='option-btn'+(c.code===currency.code?' selected':'');b.textContent=c.symbol+' '+c.code;b.addEventListener('click',()=>{currency=c;piggies.forEach(p=>{p.cardCache=[];p.paidCards=[];});save();updateSettings();renderAll();});co.appendChild(b);}); }
 
-        // Слушаем событие установки
-        let deferredPrompt;
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredPrompt = e;
-            console.log('📱 Приложение готово к установке! Нажмите "Установить" в меню браузера.');
-        });
-        window.addEventListener('appinstalled', () => {
-            console.log('🎉 Приложение установлено как отдельное!');
-            deferredPrompt = null;
-        });
+document.getElementById('langOptions').addEventListener('click',e=>{if(e.target.classList.contains('option-btn')){lang=e.target.dataset.lang;save();updateSettings();renderAll();}});
+document.getElementById('themeOptions').addEventListener('click',e=>{if(e.target.classList.contains('color-btn')){theme=e.target.dataset.theme;document.body.className=theme;save();updateSettings();renderSparkles();}});
+document.getElementById('detailName').addEventListener('change',()=>{const p=piggies.find(x=>x.id===currentId);if(p){p.name=document.getElementById('detailName').value.trim()||'Копилка';save();}});
 
-        (function(){
-            const currencies=[{code:'RUB',symbol:'₽',name:'Российский рубль',nameEn:'Russian Ruble',denominations:[1000,500,200,100,50,10]},{code:'USD',symbol:'$',name:'Доллар США',nameEn:'US Dollar',denominations:[100,50,20,10,5,1]},{code:'EUR',symbol:'€',name:'Евро',nameEn:'Euro',denominations:[500,200,100,50,20,10,5,2,1]},{code:'GBP',symbol:'£',name:'Фунт стерлингов',nameEn:'British Pound',denominations:[50,20,10,5,2,1]},{code:'JPY',symbol:'¥',name:'Японская йена',nameEn:'Japanese Yen',denominations:[10000,5000,2000,1000,500,100,50,10,5,1]},{code:'CNY',symbol:'¥',name:'Китайский юань',nameEn:'Chinese Yuan',denominations:[100,50,20,10,5,1]},{code:'KRW',symbol:'₩',name:'Южнокорейская вона',nameEn:'South Korean Won',denominations:[50000,10000,5000,1000,500,100,50,10,5,1]},{code:'INR',symbol:'₹',name:'Индийская рупия',nameEn:'Indian Rupee',denominations:[2000,500,200,100,50,20,10,5,2,1]},{code:'BRL',symbol:'R$',name:'Бразильский реал',nameEn:'Brazilian Real',denominations:[200,100,50,20,10,5,2,1]},{code:'TRY',symbol:'₺',name:'Турецкая лира',nameEn:'Turkish Lira',denominations:[200,100,50,20,10,5,2,1]},{code:'UAH',symbol:'₴',name:'Украинская гривна',nameEn:'Ukrainian Hryvnia',denominations:[1000,500,200,100,50,20,10,5,2,1]},{code:'KZT',symbol:'₸',name:'Казахстанский тенге',nameEn:'Kazakhstani Tenge',denominations:[20000,10000,5000,2000,1000,500,200,100,50,20,10,5,2,1]}];
-            const tr={ru:{appTitle:'Копилка',splashTitle:'Милая Копилка',splashLoading:'Загружаем волшебство...',goal:'Цель',remaining:'Осталось',goalPlaceholder:'🎯 Сумма цели',addPlaceholder:'💰 Добавить сумму',createBtn:'✨ Создать',addBtn:'➕ Внести',resetCards:'🔄 Сбросить',newGoal:'🗑 Новая цель',historyTitle:'📋 История целей',noHistory:'Пока нет завершённых целей ✨',emptyCards:'✨ Введи сумму и создай карточки ✨',congratsTitle:'Поздравляем!',congratsBtn:'Спасибо! ✨',day:'день',days2:'дня',days5:'дней',setupTitle:'Добро пожаловать!',setupSubtitle:'Настроим копилку под тебя ✨',setupLangLabel:'🌍 Язык / Language',setupThemeLabel:'🎨 Цвет темы',setupCurrencyLabel:'💱 Валюта',setupDone:'✨ Начать копить!',settingsTitle:'⚙️ Настройки',splashPhrases:["Собираем мечты в реальность... 🌸","Готовим волшебство... ✨","Заряжаемся позитивом... 💖","Настраиваем уют... 🧸","Раскладываем карточки... 🃏","Шепчем аффирмации... 💬","Считаем будущие богатства... 💰","Добавляем щепотку радости... 🎀"],affirmations:["Деньги приходят ко мне легко и с радостью 💖","Я магнит для финансового изобилия ✨","Каждый рубль — это семя моего процветания 🌱","Я достойна богатства и благополучия 💎","Мои доходы растут с каждым днём 📈","Финансовая свобода — мой выбор 🦋","Я с благодарностью принимаю деньги 🌸","Изобилие течёт ко мне непрерывным потоком 🌊","Я ценю деньги, и они ценят меня 💝","Мой кошелёк всегда полон 💰","Я открыта для новых источников дохода 🌟","Деньги любят меня взаимно 💗","Я управляю финансами мудро и легко 🧠","Богатство — моё естественное состояние 🏡","Я притягиваю выгодные возможности 🎯","Мои сбережения растут как на дрожжах 🍞","Я благодарна за всё, что имею 🙏","Деньги — это энергия, и я ею управляю ⚡","Финансовый успех сопутствует мне во всём 🏆","Я доверяю потоку изобилия 🌈","Мои мечты финансируются Вселенной 🌌","Я заслуживаю жить в достатке 👑","Каждая копейка работает на меня 💼","Я щедра, и деньги возвращаются сторицей 🎁","Моё будущее финансово защищено 🛡","Я наслаждаюсь процессом накопления 🐷","Денежная удача всегда на моей стороне 🍀","Я создаю свой богатый мир 🎨","Процветание — это про меня 💫","Я инвестирую в своё счастливое завтра 🌻","Моя копилка полна чудесных возможностей 🪄"],congratsMessages:['Ты накопила всю сумму!<br>Ты невероятная! 💖','Цель достигнута!<br>Горжусь тобой бесконечно! 🌟','Копилка полна!<br>Ты волшебница! ✨','Ура! Получилось!<br>Продолжай сиять! 🎯']},en:{appTitle:'Piggy Bank',splashTitle:'Cute Piggy Bank',splashLoading:'Loading magic...',goal:'Goal',remaining:'Remaining',goalPlaceholder:'🎯 Goal amount',addPlaceholder:'💰 Add amount',createBtn:'✨ Create',addBtn:'➕ Add',resetCards:'🔄 Reset',newGoal:'🗑 New Goal',historyTitle:'📋 Goal History',noHistory:'No completed goals yet ✨',emptyCards:'✨ Enter an amount to create cards ✨',congratsTitle:'Congratulations!',congratsBtn:'Thank you! ✨',day:'day',days2:'days',days5:'days',setupTitle:'Welcome!',setupSubtitle:"Let's set up your piggy bank ✨",setupLangLabel:'🌍 Language',setupThemeLabel:'🎨 Theme Color',setupCurrencyLabel:'💱 Currency',setupDone:'✨ Start Saving!',settingsTitle:'⚙️ Settings',splashPhrases:["Turning dreams into reality... 🌸","Preparing magic... ✨","Charging with positivity... 💖","Setting up coziness... 🧸","Arranging cards... 🃏","Whispering affirmations... 💬","Counting future wealth... 💰","Adding a pinch of joy... 🎀"],affirmations:["Money comes to me easily and joyfully 💖","I am a magnet for financial abundance ✨","Every dollar is a seed of my prosperity 🌱","I deserve wealth and well-being 💎","My income grows every day 📈","Financial freedom is my choice 🦋","I gratefully accept money 🌸","Abundance flows to me continuously 🌊","I value money and it values me 💝","My wallet is always full 💰","I am open to new sources of income 🌟","Money loves me back 💗","I manage finances wisely and easily 🧠","Wealth is my natural state 🏡","I attract profitable opportunities 🎯","My savings grow exponentially 🍞","I am grateful for everything I have 🙏","Money is energy and I manage it ⚡","Financial success follows me everywhere 🏆","I trust the flow of abundance 🌈","My dreams are funded by the Universe 🌌","I deserve to live in abundance 👑","Every penny works for me 💼","I am generous and money returns multiplied 🎁","My future is financially secure 🛡","I enjoy the process of saving 🐷","Money luck is always on my side 🍀","I create my own rich world 🎨","Prosperity is all about me 💫","I invest in my happy tomorrow 🌻","My piggy bank is full of wonderful opportunities 🪄"],congratsMessages:['You saved the full amount!<br>You are incredible! 💖','Goal achieved!<br>So proud of you! 🌟','Piggy bank is full!<br>You are a magician! ✨','Hooray! You did it!<br>Keep shining! 🎯']}};
-            let cl=localStorage.getItem('piggyBankLang')||'ru',cc=currencies[0],ga=0,sa=0,pc=new Map,ai=0,gc=!1,gs=null,ge=null,hi=[],cac=[],up=!1;
-            const CIRC=2*Math.PI*42,SK='piggyBankDataV24',STK='piggyBankSetupDoneV10';
-            const $=id=>document.getElementById(id),body=document.body;
-            function t(k){return(tr[cl]||tr['ru'])[k]||k}
-            function fm(a){return a.toLocaleString('ru-RU')+' '+cc.symbol}
-            function gd(){return cc.denominations}
-            function cS(){const c=$('sparklesContainer');c.innerHTML='';const f=document.createDocumentFragment(),e=['✨','💫','⭐','🌟','💖','🌸','🦋','💎','🎀'];for(let i=0;i<10;i++){const s=document.createElement('span');s.className='sparkle';s.textContent=e[i%e.length];s.style.cssText=`left:${Math.random()*90}%;top:${Math.random()*80+10}%;font-size:${Math.random()*0.8+0.4}rem;animation-delay:${Math.random()*6}s;animation-duration:${Math.random()*3+4}s;`;f.appendChild(s);}c.appendChild(f);}
-            function ld(){try{const r=localStorage.getItem(SK);if(!r)return;const d=JSON.parse(r);ga=d.goalAmount||0;sa=d.savedAmount||0;pc=new Map(d.paidCards||[]);ai=d.affirmationIndex||0;gc=d.goalCompleted||!1;gs=d.goalStartDate||null;ge=d.goalEndDate||null;hi=d.history||[];cac=d.cardAmountsCache||[];cl=d.lang||'ru';if(d.currencyCode){const f=currencies.find(c=>c.code===d.currencyCode);if(f)cc=f;}}catch(e){}}
-            function sd(){const d={goalAmount:ga,savedAmount:sa,paidCards:Array.from(pc.entries()),affirmationIndex:ai,goalCompleted:gc,goalStartDate:gs,goalEndDate:ge,history:hi,cardAmountsCache:cac,lang:cl,currencyCode:cc.code};try{localStorage.setItem(SK,JSON.stringify(d));}catch(e){}}
-            function gca(){if(ga<=0)return[];if(cac.length>0&&cac.reduce((a,b)=>a+b,0)===ga)return[...cac];let c=[],r=ga;const dn=[...gd()].sort((a,b)=>b-a);for(const d of dn){let n=0;while(r>=d&&n<3){c.push(d);r-=d;n++;}}while(r>0){const av=dn.filter(d=>d<=r);if(av.length===0){c.push(r);break;}const sm=av.filter(d=>d<=100);const pool=(sm.length>0&&Math.random()>0.2)?sm:av;c.push(pool[Math.floor(Math.random()*pool.length)]);r-=c[c.length-1];}for(let i=c.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[c[i],c[j]]=[c[j],c[i]];}const t=c.reduce((a,b)=>a+b,0);if(t!==ga&&c.length>0)c[c.length-1]+=(ga-t);cac=c;return c;}
-            function gds(ds){if(!ds)return'?';const e=ge?new Date(ge):new Date();return Math.ceil(Math.abs(e-new Date(ds))/86400000);}
-            function gdw(d){if(d==='?')return t('days5');const n=parseInt(d);if(cl==='ru'){if(n%10===1&&n%100!==11)return t('day');if([2,3,4].includes(n%10)&&![12,13,14].includes(n%100))return t('days2');return t('days5');}return n===1?t('day'):t('days2');}
-            function aaa(ata){if(ga<=0||ata<=0)return;const ma=Math.min(ata,ga-sa);if(ma<=0)return;let c=gca(),r=ma;for(let i=0;i<c.length;i++){if(pc.has(i))continue;if(r>=c[i]){pc.set(i,c[i]);sa+=c[i];r-=c[i];}else if(r>0){c[i]-=r;sa+=r;c.push(r);pc.set(c.length-1,r);r=0;break;}if(r<=0)break;}if(r>0){c.push(r);pc.set(c.length-1,r);sa+=r;}sa=Math.min(ga,sa);cac=c;su();}
-            function su(){if(up)return;up=!0;requestAnimationFrame(()=>{uui();sd();up=!1;});}
-            function uui(){const c=gca();const p=ga>0?Math.min(100,Math.round((sa/ga)*100)):0;const rm=Math.max(0,ga-sa);$('progressCircle').style.strokeDashoffset=CIRC-(p/100)*CIRC;$('percentText').textContent=p+'%';$('savedAmount').textContent=fm(sa);$('goalAmount').textContent=t('goal')+': '+fm(ga);$('remainingAmount').textContent=t('remaining')+': '+fm(rm);$('cardsGrid').innerHTML='';if(c.length===0){$('cardsGrid').innerHTML=`<div style="text-align:center;padding:30px;opacity:0.6;grid-column:1/-1;">${t('emptyCards')}</div>`;}else{const f=document.createDocumentFragment();const il=c.length>100;c.forEach((a,i)=>{const card=document.createElement('div');card.className='card-item'+(pc.has(i)?' paid':'');card.textContent=a.toLocaleString('ru-RU')+' '+cc.symbol;if(il){card.style.fontSize='0.65rem';card.style.padding='5px 2px';card.style.minHeight='30px';}card.addEventListener('click',()=>tc(i,a),{passive:!0});f.appendChild(card);});$('cardsGrid').appendChild(f);}const affs=tr[cl].affirmations;$('affirmationBox').textContent=affs[ai%affs.length];$('affirmationMini').textContent='💬 '+affs[ai%affs.length];if(ga>0&&sa>=ga&&!gc){gc=!0;ge=new Date().toISOString();hi.push({amount:ga,days:gds(gs),date:new Date().toISOString()});if(hi.length>20)hi.shift();sd();setTimeout(()=>sc(),300);}uhi();sd();}
-            function tc(i,a){if(ga<=0)return;if(pc.has(i)){pc.delete(i);sa=Math.max(0,sa-a);gc=!1;ge=null;}else{pc.set(i,a);sa=Math.min(ga,sa+a);}if(navigator.vibrate)navigator.vibrate(6);su();}
-            function sgl(){const v=parseInt($('goalInput').value);if(isNaN(v)||v<1){$('goalInput').style.animation='shake 0.4s';setTimeout(()=>$('goalInput').style.animation='',400);return;}if(ga>0&&!gc&&sa>0)hi.push({amount:ga,days:gds(gs),date:new Date().toISOString(),partial:!0});ga=v;sa=0;pc.clear();gc=!1;gs=new Date().toISOString();ge=null;cac=[];$('goalInput').value='';$('addAmountInput').value='';su();}
-            function haa(){const v=parseInt($('addAmountInput').value);if(isNaN(v)||v<=0){$('addAmountInput').style.animation='shake 0.4s';setTimeout(()=>$('addAmountInput').style.animation='',400);return;}aaa(v);$('addAmountInput').value='';}
-            function upa(){if(ga<=0)return;pc.clear();sa=0;gc=!1;ge=null;su();}
-            function ra(){if(ga>0&&!gc&&sa>0)hi.push({amount:ga,days:gds(gs),date:new Date().toISOString(),partial:!0});ga=0;sa=0;pc.clear();gc=!1;gs=null;ge=null;cac=[];$('goalInput').value='';$('addAmountInput').value='';su();}
-            function uhi(){if(!hi||hi.length===0){$('historyList').innerHTML=`<div class="no-history">${t('noHistory')}</div>`;return;}$('historyList').innerHTML=hi.slice().reverse().map(i=>`<div class="history-item"><span class="h-amount">${i.amount.toLocaleString('ru-RU')} ${cc.symbol}</span><span class="h-days">📅 ${i.days||'?'} ${gdw(i.days||'?')}</span><span class="h-badge badge-done">✅</span></div>`).join('');}
-            function st(tn,sv=!0){body.className='theme-'+tn;document.querySelectorAll('.setup-color-dot,.settings-color-dot').forEach(d=>d.classList.toggle('selected',d.dataset.theme===tn));if(sv)localStorage.setItem('piggyBankTheme',tn);cS();}
-            function swl(l){cl=l;localStorage.setItem('piggyBankLang',l);document.querySelectorAll('.setup-option[data-lang],.settings-option[data-lang]').forEach(o=>o.classList.toggle('selected',o.dataset.lang===l));uat();rco('setupCurrencyOptions',!0);rco('settingsCurrencyOptions',!1);sd();su();}
-            function uat(){document.title=cl==='ru'?'🌸 Милая Копилка':'🌸 Cute Piggy Bank';$('splashTitle').textContent=t('splashTitle');$('appTitle').textContent=t('appTitle');$('goalInput').placeholder=t('goalPlaceholder');$('addAmountInput').placeholder=t('addPlaceholder');$('setGoalBtn').innerHTML=t('createBtn');$('addAmountBtn').innerHTML=t('addBtn');$('unpayAllBtn').innerHTML=t('resetCards');$('resetBtn').innerHTML=t('newGoal');$('historyTitle').textContent=t('historyTitle');$('congratsTitle').textContent=t('congratsTitle');$('congratsCloseBtn').textContent=t('congratsBtn');$('setupTitle').textContent=t('setupTitle');$('setupSubtitle').textContent=t('setupSubtitle');$('setupLangLabel').textContent=t('setupLangLabel');$('setupThemeLabel').textContent=t('setupThemeLabel');$('setupCurrencyLabel').textContent=t('setupCurrencyLabel');$('setupDoneBtn').textContent=t('setupDone');$('settingsTitle').textContent=t('settingsTitle');}
-            function rco(cid,isS=!1){const c=$(cid);if(!c)return;c.innerHTML='';const cls=isS?'setup-currency-option':'settings-currency-option';currencies.forEach(cr=>{const el=document.createElement('span');el.className=cls+(cr.code===cc.code?' selected':'');el.textContent=cr.symbol+' '+cr.code;el.addEventListener('click',()=>{cc=cr;cac=[];c.querySelectorAll('.'+cls).forEach(o=>o.classList.remove('selected'));el.classList.add('selected');sd();su();});c.appendChild(el);});}
-            function sss(){$('setupScreen').classList.remove('hidden');uat();rco('setupCurrencyOptions',!0);}
-            function hss(){$('setupScreen').classList.add('hidden');}
-            function os(){$('settingsOverlay').classList.add('show');uat();rco('settingsCurrencyOptions',!1);}
-            function cs(){$('settingsOverlay').classList.remove('show');}
-            function ssp(){$('splashScreen').classList.remove('hidden');$('splashTitle').textContent=t('splashTitle');const ph=tr[cl].splashPhrases;let idx=0;const pe=$('splashPhrase');pe.textContent=ph[0];pe.classList.add('visible');const iv=setInterval(()=>{idx=(idx+1)%ph.length;pe.classList.remove('visible');requestAnimationFrame(()=>{pe.textContent=ph[idx];pe.classList.add('visible');});},1800);setTimeout(()=>{clearInterval(iv);$('splashScreen').classList.add('hidden');setTimeout(()=>{$('splashScreen').style.display='none';},500);},2500);}
-            function sc(){const style=getComputedStyle(body);const colors=[style.getPropertyValue('--accent').trim(),'#ffb3c6','#ffd6e8','#ffffff','#ffd700','#ff6b8a'];const cx=innerWidth/2,cy=innerHeight/2;const ov=$('fireworkOverlay');const f=document.createDocumentFragment();for(let i=0;i<40;i++){const p=document.createElement('div');p.className='firework-particle';const a=Math.random()*Math.PI*2,d=Math.random()*200+60;p.style.cssText=`width:${Math.random()*6+2}px;height:${Math.random()*6+2}px;background:${colors[Math.floor(Math.random()*colors.length)]};left:${cx}px;top:${cy}px;--dx:${Math.cos(a)*d}px;--dy:${Math.sin(a)*d}px;animation-duration:${Math.random()*0.6+0.6}s;`;f.appendChild(p);}ov.appendChild(f);setTimeout(()=>{ov.innerHTML='';},2500);$('congratsText').innerHTML=tr[cl].congratsMessages[Math.floor(Math.random()*4)];$('congratsPopup').classList.add('show');if(navigator.vibrate)navigator.vibrate([40,30,40,30,100]);}
-
-            $('setGoalBtn').addEventListener('click',sgl);$('goalInput').addEventListener('keydown',e=>{if(e.key==='Enter')sgl();});
-            $('addAmountBtn').addEventListener('click',haa);$('addAmountInput').addEventListener('keydown',e=>{if(e.key==='Enter')haa();});
-            $('unpayAllBtn').addEventListener('click',upa);$('resetBtn').addEventListener('click',ra);
-            $('congratsCloseBtn').addEventListener('click',()=>$('congratsPopup').classList.remove('show'));
-            $('openSettingsBtn').addEventListener('click',os);$('settingsClose').addEventListener('click',cs);
-            $('settingsOverlay').addEventListener('click',e=>{if(e.target===$('settingsOverlay'))cs();});
-            $('setupDoneBtn').addEventListener('click',()=>{hss();localStorage.setItem(STK,'true');sd();ssp();uui();});
-            document.querySelectorAll('.setup-option[data-lang]').forEach(o=>o.addEventListener('click',()=>swl(o.dataset.lang)));
-            document.querySelectorAll('.settings-option[data-lang]').forEach(o=>o.addEventListener('click',()=>swl(o.dataset.lang)));
-            document.querySelectorAll('.setup-color-dot').forEach(d=>d.addEventListener('click',()=>st(d.dataset.theme)));
-            document.querySelectorAll('.settings-color-dot').forEach(d=>d.addEventListener('click',()=>st(d.dataset.theme)));
-            const shakeStyle=document.createElement('style');shakeStyle.textContent='@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}50%{transform:translateX(6px)}75%{transform:translateX(-4px)}}';document.head.appendChild(shakeStyle);
-            ld();const sl=localStorage.getItem('piggyBankLang');if(sl)cl=sl;
-            st(localStorage.getItem('piggyBankTheme')||'pink',!1);cS();uat();rco('setupCurrencyOptions',!0);rco('settingsCurrencyOptions',!1);
-            if(!localStorage.getItem(STK)){sss();}else{ssp();uui();}
-            setInterval(()=>{const today=new Date().toDateString();if(localStorage.getItem('piggyBankLastDate')!==today){ai=Math.floor(Math.random()*tr[cl].affirmations.length);localStorage.setItem('piggyBankLastDate',today);sd();uui();}},300000);
-        })();
-    </script>
+document.body.className=theme;renderSparkles();renderAll();
+setInterval(()=>{document.getElementById('affirmation').textContent=AFF[lang][Math.floor(Math.random()*AFF[lang].length)];},60000);
+</script>
 </body>
 </html>
