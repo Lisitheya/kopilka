@@ -128,6 +128,16 @@
 <div class="modal-overlay" id="createModal"><div class="modal-card"><button class="modal-close" onclick="closeModal('createModal')">✕</button><div class="modal-title">✨ Новая копилка</div><input type="text" id="newPiggyName" placeholder="Название" maxlength="30" style="width:100%;padding:10px;border-radius:12px;border:2px solid var(--accent-light);background:var(--input-bg);margin-bottom:10px;"><div class="emoji-grid" id="createEmojiGrid"></div><button class="primary-btn" onclick="createPiggy()">✨ Создать</button></div></div>
 
 <script>
+// ============ SERVICE WORKER (правильный, с кэшированием) ============
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js', { scope: '/' })
+            .then(reg => console.log('SW registered:', reg.scope))
+            .catch(err => console.log('SW failed:', err));
+    });
+}
+
+// ============ ДАННЫЕ ============
 const CURRENCIES = [
     {code:'RUB',symbol:'₽',d:[1000,500,200,100,50,10]},{code:'USD',symbol:'$',d:[100,50,20,10,5,1]},
     {code:'EUR',symbol:'€',d:[500,200,100,50,20,10,5,2,1]},{code:'GBP',symbol:'£',d:[50,20,10,5,2,1]},
@@ -138,27 +148,72 @@ const CURRENCIES = [
 ];
 const EMOJIS = ['🐷','💰','💎','🌟','🎯','🏠','🚗','✈️','💍','🎓','📱','💻','🐱','🐶','🌸','🎀','💖','✨','🦄','🌈','🍕','🎮','📚','💪','🎉','🛍','💄','👑','🏖','🎸'];
 const AFF = {ru:["Деньги приходят легко 💖","Я магнит для изобилия ✨"],en:["Money comes easily 💖","Magnet for abundance ✨"]};
-let lang=localStorage.getItem('lang')||'ru',currency=CURRENCIES.find(c=>c.code===(localStorage.getItem('currency')||'RUB'))||CURRENCIES[0],theme=localStorage.getItem('theme')||'pink',piggies=JSON.parse(localStorage.getItem('piggies')||'[]'),currentId=null,pendingEmoji='🐷';
-function save(){localStorage.setItem('lang',lang);localStorage.setItem('currency',currency.code);localStorage.setItem('theme',theme);localStorage.setItem('piggies',JSON.stringify(piggies));}
-function fm(a){return(a||0).toLocaleString('ru-RU')+' '+currency.symbol;}
-function t(k){const tr={ru:{goal:'Цель',noGoal:'не задана',newPiggy:'Новая копилка'},en:{goal:'Goal',noGoal:'not set',newPiggy:'New Bank'}};return(tr[lang]||tr['ru'])[k]||k;}
-function generateCards(goal){if(!goal||goal<=0)return[];let cards=[],remaining=goal;const allDenoms=[1000,500,400,300,250,200,150,100,50,20,10];for(const d of allDenoms){if(remaining>=d){cards.push(d);remaining-=d;}}while(remaining>0){let chosen=null;for(const d of allDenoms){if(d<=remaining&&!cards.includes(d)){chosen=d;break;}}if(!chosen){const countMap={};cards.forEach(c=>countMap[c]=(countMap[c]||0)+1);let minCount=Infinity;for(const d of allDenoms){if(d<=remaining){const cnt=countMap[d]||0;if(cnt<minCount){minCount=cnt;chosen=d;}}}}if(!chosen||chosen>remaining){chosen=remaining;}cards.push(chosen);remaining-=chosen;}for(let i=cards.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[cards[i],cards[j]]=[cards[j],cards[i]];}return cards;}
-function renderSparkles(){const c=document.getElementById('sparklesContainer');c.innerHTML='';const e=['✨','💫','⭐','🌟','💖','🌸'];for(let i=0;i<10;i++){const s=document.createElement('span');s.className='sparkle';s.textContent=e[i%6];s.style.cssText=`left:${Math.random()*90}%;top:${Math.random()*80+10}%;animation-delay:${Math.random()*4}s;animation-duration:${Math.random()*3+3}s;`;c.appendChild(s);}}
-function renderAll(){document.getElementById('totalAmount').textContent=fm(piggies.reduce((s,p)=>s+(p.saved||0),0));document.getElementById('affirmation').textContent=AFF[lang][Math.floor(Math.random()*AFF[lang].length)];const list=document.getElementById('piggyList');list.innerHTML='';piggies.forEach(p=>{const card=document.createElement('div');card.className='piggy-card';const pct=p.goal>0?Math.min(100,Math.round((p.saved||0)/p.goal*100)):0;card.innerHTML=`<button class="delete-btn">🗑</button><span class="piggy-emoji">${p.emoji||'🐷'}</span><div class="piggy-name">${p.name||'Копилка'}</div><div class="piggy-saved">${fm(p.saved||0)}</div><div class="piggy-goal">${p.goal>0?t('goal')+': '+fm(p.goal):t('noGoal')}</div><div class="progress-bar"><div class="progress-fill" style="width:${pct}%"></div></div>`;card.querySelector('.delete-btn').addEventListener('click',e=>{e.stopPropagation();if(confirm('Удалить?')){piggies=piggies.filter(x=>x.id!==p.id);save();renderAll();}});card.addEventListener('click',()=>openPiggy(p.id));list.appendChild(card);});if(piggies.length<10){const add=document.createElement('div');add.className='piggy-card add-card';add.innerHTML='<div style="font-size:3rem;">➕</div><div class="add-text">'+t('newPiggy')+'</div>';add.addEventListener('click',()=>openModal('createModal'));list.appendChild(add);}}
-function openPiggy(id){currentId=id;const p=piggies.find(x=>x.id===id);if(!p)return;document.getElementById('detailScreen').classList.add('active');document.getElementById('detailName').value=p.name||'';document.getElementById('goalInput').value='';document.getElementById('addInput').value='';if(!p.cardCache||p.cardCache.length===0||p.cardCache.reduce((a,b)=>a+b,0)!==p.goal){p.cardCache=generateCards(p.goal);}renderDetail(p);}
-function closeDetail(){const p=piggies.find(x=>x.id===currentId);if(p){p.name=document.getElementById('detailName').value.trim()||'Копилка';save();}document.getElementById('detailScreen').classList.remove('active');renderAll();}
-function renderDetail(p){const cards=p.cardCache;const pct=p.goal>0?Math.min(100,Math.round((p.saved||0)/p.goal*100)):0;const circ=2*Math.PI*44;document.getElementById('detailCircle').style.strokeDashoffset=circ-(pct/100)*circ;document.getElementById('detailPercent').textContent=pct+'%';document.getElementById('detailSaved').textContent=fm(p.saved||0);document.getElementById('detailGoal').textContent=(p.goal>0?t('goal')+': '+fm(p.goal):t('noGoal'));const grid=document.getElementById('cardGrid');grid.innerHTML='';cards.forEach((amount,idx)=>{const card=document.createElement('div');card.className='amount-card'+((p.paidCards||[]).includes(idx)?' paid':'');card.textContent=amount.toLocaleString('ru-RU')+' '+currency.symbol;card.addEventListener('click',()=>{if((p.paidCards||[]).includes(idx)){p.paidCards=p.paidCards.filter(i=>i!==idx);p.saved=Math.max(0,(p.saved||0)-amount);}else{p.paidCards=[...(p.paidCards||[]),idx];p.saved=Math.min(p.goal,(p.saved||0)+amount);}save();renderDetail(p);renderAll();});grid.appendChild(card);});}
-function setGoal(){const p=piggies.find(x=>x.id===currentId);if(!p)return;const v=parseInt(document.getElementById('goalInput').value);if(isNaN(v)||v<1)return;p.goal=v;p.saved=0;p.paidCards=[];p.cardCache=generateCards(v);document.getElementById('goalInput').value='';save();renderDetail(p);renderAll();}
-function addAmount(){const p=piggies.find(x=>x.id===currentId);if(!p||!p.goal||p.goal<=0)return;const v=parseInt(document.getElementById('addInput').value);if(isNaN(v)||v<=0)return;const maxAdd=Math.min(v,p.goal-(p.saved||0));if(maxAdd<=0){document.getElementById('addInput').value='';return;}const cards=p.cardCache;p.paidCards=p.paidCards||[];let remaining=maxAdd;const available=cards.map((amount,idx)=>({idx,amount})).filter(item=>!p.paidCards.includes(item.idx)).sort((a,b)=>b.amount-a.amount);for(const {idx,amount} of available){if(remaining>=amount){p.paidCards.push(idx);remaining-=amount;}if(remaining<=0)break;}if(remaining>0){cards.push(remaining);p.paidCards.push(cards.length-1);}p.saved=Math.min(p.goal,(p.saved||0)+maxAdd);p.cardCache=cards;document.getElementById('addInput').value='';save();renderDetail(p);renderAll();}
-function resetPiggy(){const p=piggies.find(x=>x.id===currentId);if(!p)return;p.saved=0;p.paidCards=[];save();renderDetail(p);renderAll();}
-function openModal(id){document.getElementById(id).classList.add('active');if(id==='settingsModal')updateSettings();if(id==='createModal')renderEmojiGrid('createEmojiGrid');if(id==='emojiModal'&&currentId){const p=piggies.find(x=>x.id===currentId);pendingEmoji=p?p.emoji||'🐷':'🐷';renderEmojiGrid('emojiGrid');}}
-function closeModal(id){document.getElementById(id).classList.remove('active');}
-function renderEmojiGrid(gridId){const grid=document.getElementById(gridId);grid.innerHTML='';EMOJIS.forEach(e=>{const el=document.createElement('span');el.className='emoji-opt'+(e===pendingEmoji?' selected':'');el.textContent=e;el.addEventListener('click',()=>{pendingEmoji=e;grid.querySelectorAll('.emoji-opt').forEach(o=>o.classList.remove('selected'));el.classList.add('selected');});grid.appendChild(el);});}
-function createPiggy(){const name=document.getElementById('newPiggyName').value.trim()||'Копилка';piggies.push({id:Date.now(),name,emoji:pendingEmoji,goal:0,saved:0,paidCards:[],cardCache:[]});save();closeModal('createModal');renderAll();}
-function updateSettings(){document.querySelectorAll('#langOptions .option-btn').forEach(b=>b.classList.toggle('selected',b.dataset.lang===lang));document.querySelectorAll('#themeOptions .color-btn').forEach(b=>b.classList.toggle('selected',b.dataset.theme===theme));const co=document.getElementById('currencyOptions');co.innerHTML='';CURRENCIES.forEach(c=>{const b=document.createElement('button');b.className='option-btn'+(c.code===currency.code?' selected':'');b.textContent=c.symbol+' '+c.code;b.addEventListener('click',()=>{currency=c;piggies.forEach(p=>{p.cardCache=[];p.paidCards=[];});save();updateSettings();renderAll();});co.appendChild(b);});}
+
+let lang = localStorage.getItem('lang')||'ru';
+let currency = CURRENCIES.find(c=>c.code===(localStorage.getItem('currency')||'RUB'))||CURRENCIES[0];
+let theme = localStorage.getItem('theme')||'pink';
+let piggies = JSON.parse(localStorage.getItem('piggies')||'[]');
+let currentId = null;
+let pendingEmoji = '🐷';
+
+function save() { localStorage.setItem('lang',lang); localStorage.setItem('currency',currency.code); localStorage.setItem('theme',theme); localStorage.setItem('piggies',JSON.stringify(piggies)); }
+function fm(a) { return (a||0).toLocaleString('ru-RU')+' '+currency.symbol; }
+function t(k) { const tr={ru:{goal:'Цель',noGoal:'не задана',newPiggy:'Новая копилка'},en:{goal:'Goal',noGoal:'not set',newPiggy:'New Bank'}}; return (tr[lang]||tr['ru'])[k]||k; }
+
+function generateCards(goal) {
+    if (!goal || goal <= 0) return [];
+    let cards = [], remaining = goal;
+    const allDenoms = [1000, 500, 400, 300, 250, 200, 150, 100, 50, 20, 10];
+    for (const d of allDenoms) { if (remaining >= d) { cards.push(d); remaining -= d; } }
+    while (remaining > 0) {
+        let chosen = null;
+        for (const d of allDenoms) { if (d <= remaining && !cards.includes(d)) { chosen = d; break; } }
+        if (!chosen) { const countMap = {}; cards.forEach(c => countMap[c] = (countMap[c]||0) + 1); let minCount = Infinity; for (const d of allDenoms) { if (d <= remaining) { const cnt = countMap[d] || 0; if (cnt < minCount) { minCount = cnt; chosen = d; } } } }
+        if (!chosen || chosen > remaining) { chosen = remaining; }
+        cards.push(chosen); remaining -= chosen;
+    }
+    for (let i = cards.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [cards[i], cards[j]] = [cards[j], cards[i]]; }
+    return cards;
+}
+
+function renderSparkles() { const c=document.getElementById('sparklesContainer');c.innerHTML='';const e=['✨','💫','⭐','🌟','💖','🌸'];for(let i=0;i<10;i++){const s=document.createElement('span');s.className='sparkle';s.textContent=e[i%6];s.style.cssText=`left:${Math.random()*90}%;top:${Math.random()*80+10}%;animation-delay:${Math.random()*4}s;animation-duration:${Math.random()*3+3}s;`;c.appendChild(s);} }
+function renderAll() {
+    document.getElementById('totalAmount').textContent = fm(piggies.reduce((s,p)=>s+(p.saved||0),0));
+    document.getElementById('affirmation').textContent = AFF[lang][Math.floor(Math.random()*AFF[lang].length)];
+    const list=document.getElementById('piggyList');list.innerHTML='';
+    piggies.forEach(p=>{
+        const card=document.createElement('div');card.className='piggy-card';
+        const pct=p.goal>0?Math.min(100,Math.round((p.saved||0)/p.goal*100)):0;
+        card.innerHTML=`<button class="delete-btn">🗑</button><span class="piggy-emoji">${p.emoji||'🐷'}</span><div class="piggy-name">${p.name||'Копилка'}</div><div class="piggy-saved">${fm(p.saved||0)}</div><div class="piggy-goal">${p.goal>0?t('goal')+': '+fm(p.goal):t('noGoal')}</div><div class="progress-bar"><div class="progress-fill" style="width:${pct}%"></div></div>`;
+        card.querySelector('.delete-btn').addEventListener('click',e=>{e.stopPropagation();if(confirm('Удалить?')){piggies=piggies.filter(x=>x.id!==p.id);save();renderAll();}});
+        card.addEventListener('click',()=>openPiggy(p.id));list.appendChild(card);
+    });
+    if(piggies.length<10){const add=document.createElement('div');add.className='piggy-card add-card';add.innerHTML='<div style="font-size:3rem;">➕</div><div class="add-text">'+t('newPiggy')+'</div>';add.addEventListener('click',()=>openModal('createModal'));list.appendChild(add);}
+}
+function openPiggy(id) { currentId=id;const p=piggies.find(x=>x.id===id);if(!p)return;document.getElementById('detailScreen').classList.add('active');document.getElementById('detailName').value=p.name||'';document.getElementById('goalInput').value='';document.getElementById('addInput').value='';if(!p.cardCache||p.cardCache.length===0||p.cardCache.reduce((a,b)=>a+b,0)!==p.goal){p.cardCache=generateCards(p.goal);}renderDetail(p); }
+function closeDetail() { const p=piggies.find(x=>x.id===currentId);if(p){p.name=document.getElementById('detailName').value.trim()||'Копилка';save();}document.getElementById('detailScreen').classList.remove('active');renderAll(); }
+function renderDetail(p) { const cards=p.cardCache;const pct=p.goal>0?Math.min(100,Math.round((p.saved||0)/p.goal*100)):0;const circ=2*Math.PI*44;document.getElementById('detailCircle').style.strokeDashoffset=circ-(pct/100)*circ;document.getElementById('detailPercent').textContent=pct+'%';document.getElementById('detailSaved').textContent=fm(p.saved||0);document.getElementById('detailGoal').textContent=(p.goal>0?t('goal')+': '+fm(p.goal):t('noGoal'));const grid=document.getElementById('cardGrid');grid.innerHTML='';cards.forEach((amount,idx)=>{const card=document.createElement('div');card.className='amount-card'+((p.paidCards||[]).includes(idx)?' paid':'');card.textContent=amount.toLocaleString('ru-RU')+' '+currency.symbol;card.addEventListener('click',()=>{if((p.paidCards||[]).includes(idx)){p.paidCards=p.paidCards.filter(i=>i!==idx);p.saved=Math.max(0,(p.saved||0)-amount);}else{p.paidCards=[...(p.paidCards||[]),idx];p.saved=Math.min(p.goal,(p.saved||0)+amount);}save();renderDetail(p);renderAll();});grid.appendChild(card);}); }
+function setGoal() { const p=piggies.find(x=>x.id===currentId);if(!p)return;const v=parseInt(document.getElementById('goalInput').value);if(isNaN(v)||v<1)return;p.goal=v;p.saved=0;p.paidCards=[];p.cardCache=generateCards(v);document.getElementById('goalInput').value='';save();renderDetail(p);renderAll(); }
+function addAmount() { const p=piggies.find(x=>x.id===currentId);if(!p||!p.goal||p.goal<=0)return;const v=parseInt(document.getElementById('addInput').value);if(isNaN(v)||v<=0)return;const maxAdd=Math.min(v,p.goal-(p.saved||0));if(maxAdd<=0){document.getElementById('addInput').value='';return;}const cards=p.cardCache;p.paidCards=p.paidCards||[];let remaining=maxAdd;const available=cards.map((amount,idx)=>({idx,amount})).filter(item=>!p.paidCards.includes(item.idx)).sort((a,b)=>b.amount-a.amount);for(const {idx,amount} of available){if(remaining>=amount){p.paidCards.push(idx);remaining-=amount;}if(remaining<=0)break;}if(remaining>0){cards.push(remaining);p.paidCards.push(cards.length-1);}p.saved=Math.min(p.goal,(p.saved||0)+maxAdd);p.cardCache=cards;document.getElementById('addInput').value='';save();renderDetail(p);renderAll(); }
+function resetPiggy() { const p=piggies.find(x=>x.id===currentId);if(!p)return;p.saved=0;p.paidCards=[];save();renderDetail(p);renderAll(); }
+function openModal(id) { document.getElementById(id).classList.add('active');if(id==='settingsModal')updateSettings();if(id==='createModal')renderEmojiGrid('createEmojiGrid');if(id==='emojiModal'&&currentId){const p=piggies.find(x=>x.id===currentId);pendingEmoji=p?p.emoji||'🐷':'🐷';renderEmojiGrid('emojiGrid');} }
+function closeModal(id) { document.getElementById(id).classList.remove('active'); }
+function renderEmojiGrid(gridId) { const grid=document.getElementById(gridId);grid.innerHTML='';EMOJIS.forEach(e=>{const el=document.createElement('span');el.className='emoji-opt'+(e===pendingEmoji?' selected':'');el.textContent=e;el.addEventListener('click',()=>{pendingEmoji=e;grid.querySelectorAll('.emoji-opt').forEach(o=>o.classList.remove('selected'));el.classList.add('selected');});grid.appendChild(el);}); }
+function createPiggy() { const name=document.getElementById('newPiggyName').value.trim()||'Копилка';piggies.push({id:Date.now(),name,emoji:pendingEmoji,goal:0,saved:0,paidCards:[],cardCache:[]});save();closeModal('createModal');renderAll(); }
+function updateSettings() { document.querySelectorAll('#langOptions .option-btn').forEach(b=>b.classList.toggle('selected',b.dataset.lang===lang));document.querySelectorAll('#themeOptions .color-btn').forEach(b=>b.classList.toggle('selected',b.dataset.theme===theme));const co=document.getElementById('currencyOptions');co.innerHTML='';CURRENCIES.forEach(c=>{const b=document.createElement('button');b.className='option-btn'+(c.code===currency.code?' selected':'');b.textContent=c.symbol+' '+c.code;b.addEventListener('click',()=>{currency=c;piggies.forEach(p=>{p.cardCache=[];p.paidCards=[];});save();updateSettings();renderAll();});co.appendChild(b);}); }
+
+// ============ PWA INSTALL ============
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    console.log('✅ beforeinstallprompt сработал! Можно устанавливать.');
+});
+
 document.getElementById('langOptions').addEventListener('click',e=>{if(e.target.classList.contains('option-btn')){lang=e.target.dataset.lang;save();updateSettings();renderAll();}});
 document.getElementById('themeOptions').addEventListener('click',e=>{if(e.target.classList.contains('color-btn')){theme=e.target.dataset.theme;document.body.className=theme;save();updateSettings();renderSparkles();}});
 document.getElementById('detailName').addEventListener('change',()=>{const p=piggies.find(x=>x.id===currentId);if(p){p.name=document.getElementById('detailName').value.trim()||'Копилка';save();}});
+
 document.body.className=theme;renderSparkles();renderAll();
 setInterval(()=>{document.getElementById('affirmation').textContent=AFF[lang][Math.floor(Math.random()*AFF[lang].length)];},60000);
 </script>
