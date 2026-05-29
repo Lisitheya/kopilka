@@ -4,8 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>🌸 Копилочка</title>
+    <meta name="description" content="Милое приложение-копилка для накопления денег">
     <meta name="theme-color" content="#ff99b9">
-    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'><defs><radialGradient id='g' cx='50%25' cy='40%25' r='50%25'><stop offset='0%25' stop-color='%23ffb3c6'/><stop offset='100%25' stop-color='%23ff6b8a'/></radialGradient></defs><circle cx='90' cy='90' r='85' fill='url(%23g)'/><circle cx='90' cy='90' r='78' fill='none' stroke='white' stroke-width='4' stroke-dasharray='16 8'/><text x='90' y='120' text-anchor='middle' font-size='75' font-family='Arial'>🐷</text></svg>">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="🌸 Копилочка">
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="apple-touch-icon" sizes="180x180" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'><defs><radialGradient id='g' cx='50%25' cy='40%25' r='50%25'><stop offset='0%25' stop-color='%23ffb3c6'/><stop offset='100%25' stop-color='%23ff6b8a'/></radialGradient></defs><circle cx='90' cy='90' r='85' fill='url(%23g)'/><circle cx='90' cy='90' r='78' fill='none' stroke='white' stroke-width='4' stroke-dasharray='16 8'/><text x='90' y='120' text-anchor='middle' font-size='75' font-family='Arial'>🐷</text></svg>">
+    <link rel="manifest" href="data:application/json,{name:'🌸 Копилочка',short_name:'Копилочка',description:'Милое приложение-копилка',start_url:'.',scope:'.',display:'standalone',background_color:'#fff0f5',theme_color:'#ff99b9',orientation:'any',icons:[{src:'data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 192 192%22><defs><radialGradient id=%22g%22 cx=%2250%25%22 cy=%2240%25%22 r=%2250%25%22><stop offset=%220%25%22 stop-color=%22%23ffb3c6%22/><stop offset=%22100%25%22 stop-color=%22%23ff6b8a%22/></radialGradient></defs><circle cx=%2296%22 cy=%2296%22 r=%2290%22 fill=%22url(%23g)%22/><circle cx=%2296%22 cy=%2296%22 r=%2283%22 fill=%22none%22 stroke=%22white%22 stroke-width=%224%22 stroke-dasharray=%2218 9%22/><text x=%2296%22 y=%22124%22 text-anchor=%22middle%22 font-size=%2275%22 font-family=%22Arial%22>🐷</text></svg>',sizes:'192x192',type:'image/svg+xml',purpose:'any maskable'},{src:'data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 512 512%22><defs><radialGradient id=%22g%22 cx=%2250%25%22 cy=%2240%25%22 r=%2250%25%22><stop offset=%220%25%22 stop-color=%22%23ffb3c6%22/><stop offset=%22100%25%22 stop-color=%22%23ff6b8a%22/></radialGradient></defs><circle cx=%22256%22 cy=%22256%22 r=%22240%22 fill=%22url(%23g)%22/><circle cx=%22256%22 cy=%22256%22 r=%22220%22 fill=%22none%22 stroke=%22white%22 stroke-width=%228%22 stroke-dasharray=%2230 15%22/><text x=%22256%22 y=%22310%22 text-anchor=%22middle%22 font-size=%22160%22 font-family=%22Arial%22>🐷</text></svg>',sizes:'512x512',type:'image/svg+xml',purpose:'any maskable'}]}">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Comfortaa:wght@400;700&display=swap');
         :root { --bg: #fff0f5; --card: #ffffff; --text: #5c3d5c; --accent: #ff99b9; --accent-dark: #ff6b8a; --accent-light: #ffd6e8; --progress-bg: #fce4ec; --input-bg: #fff5f8; --border: 28px; --card-border: 22px; --font: 'Nunito', sans-serif; --cute: 'Comfortaa', cursive; }
@@ -19,7 +25,6 @@
         button { cursor: pointer; border: none; background: none; font-family: var(--cute); }
         input { font-family: var(--font); border: none; outline: none; }
 
-        /* БОЛЬШЕ МИЛОТЫ НА ФОНЕ */
         .cute-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; overflow: hidden; }
         .floating { position: absolute; animation: floatAround 8s ease-in-out infinite; opacity: 0.6; font-size: 2.5rem; }
         .floating:nth-child(1) { top: 5%; left: 5%; animation-delay: 0s; }
@@ -36,13 +41,27 @@
         .sparkle { position: absolute; animation: sparkleFloat 4s ease-in-out infinite; opacity: 0; font-size: 1rem; }
         @keyframes sparkleFloat { 0%{transform:translateY(0) scale(0);opacity:0} 20%{opacity:0.9} 50%{transform:translateY(-60px) scale(1.3);opacity:0.7} 80%{opacity:0.2} 100%{transform:translateY(-100px) scale(0);opacity:0} }
 
+        /* PWA Install Banner */
+        .install-banner { position: fixed; bottom: 0; left: 0; right: 0; background: var(--card); border-top: 2px solid var(--accent-light); padding: 14px 20px; z-index: 200; display: none; align-items: center; justify-content: space-between; gap: 12px; box-shadow: 0 -6px 25px rgba(0,0,0,0.12); font-family: var(--cute); animation: slideUp 0.4s ease; }
+        .install-banner.show { display: flex; }
+        @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+        .install-text { display: flex; align-items: center; gap: 10px; flex: 1; }
+        .install-emoji { font-size: 2rem; animation: bounce 2s ease-in-out infinite; }
+        @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+        .install-info { display: flex; flex-direction: column; }
+        .install-title { font-weight: 700; font-size: 0.95rem; color: var(--accent-dark); }
+        .install-desc { font-size: 0.75rem; opacity: 0.7; }
+        .install-btn { padding: 10px 20px; border-radius: 20px; border: none; background: linear-gradient(135deg, var(--accent), var(--accent-dark)); color: #fff; font-weight: 700; font-size: 0.9rem; cursor: pointer; white-space: nowrap; box-shadow: 0 4px 15px rgba(255,107,138,0.3); transition: 0.2s; }
+        .install-btn:active { transform: scale(0.95); }
+        .install-close { background: none; border: none; font-size: 1.3rem; cursor: pointer; color: var(--text); opacity: 0.4; padding: 4px; }
+
         #app { width: 100%; height: 100%; max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; padding: 16px; gap: 12px; position: relative; z-index: 1; }
         .header { display: flex; justify-content: space-between; align-items: center; }
         .logo { font-family: var(--cute); font-size: 1.8rem; font-weight: 800; background: linear-gradient(135deg, var(--accent-light), var(--accent-dark)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: flex; align-items: center; gap: 8px; }
         .logo-emoji { font-size: 2rem; -webkit-text-fill-color: initial; animation: bounce 2s ease-in-out infinite; }
-        @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
-        .settings-btn { background: var(--accent-light); border-radius: 50%; width: 42px; height: 42px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; transition: 0.2s; border: 2px solid var(--accent); }
-        .settings-btn:active { transform: scale(0.9); }
+        .header-btns { display: flex; gap: 6px; }
+        .settings-btn, .install-icon-btn { background: var(--accent-light); border-radius: 50%; width: 42px; height: 42px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; transition: 0.2s; border: 2px solid var(--accent); }
+        .settings-btn:active, .install-icon-btn:active { transform: scale(0.9); }
 
         .total-card { background: linear-gradient(135deg, var(--accent-light), var(--card)); border-radius: var(--border); padding: 20px 20px; text-align: center; box-shadow: 0 8px 30px rgba(255,150,180,0.25); position: relative; overflow: hidden; border: 2px solid var(--accent-light); }
         .total-card::before { content: ''; position: absolute; top: -20px; right: -20px; width: 70px; height: 70px; border-radius: 50%; background: var(--accent); opacity: 0.1; }
@@ -140,7 +159,6 @@
 </head>
 <body class="pink">
 
-<!-- ФОН С МИЛЫМИ ПАРЯЩИМИ ЭЛЕМЕНТАМИ -->
 <div class="cute-bg">
     <span class="floating">🌸</span><span class="floating">🦋</span><span class="floating">💫</span>
     <span class="floating">✨</span><span class="floating">💖</span><span class="floating">🎀</span>
@@ -148,10 +166,26 @@
 </div>
 <div class="sparkles" id="sparklesContainer"></div>
 
+<!-- БАННЕР УСТАНОВКИ PWA -->
+<div class="install-banner" id="installBanner">
+    <div class="install-text">
+        <span class="install-emoji">📱</span>
+        <div class="install-info">
+            <span class="install-title">Установи приложение</span>
+            <span class="install-desc">на главный экран ✨</span>
+        </div>
+    </div>
+    <button class="install-btn" id="installBtn">Установить</button>
+    <button class="install-close" id="installClose">✕</button>
+</div>
+
 <div id="app">
     <div class="header">
         <div class="logo"><span class="logo-emoji">🐷</span>Копилочка</div>
-        <button class="settings-btn" onclick="openModal('settingsModal')">⚙️</button>
+        <div class="header-btns">
+            <button class="install-icon-btn" id="showInstallBtn" title="Установить приложение">📱</button>
+            <button class="settings-btn" onclick="openModal('settingsModal')">⚙️</button>
+        </div>
     </div>
     <div class="total-card">
         <div class="total-emoji">💰</div>
@@ -185,6 +219,13 @@
 <div class="modal-overlay" id="createModal"><div class="modal-card"><button class="modal-close" onclick="closeModal('createModal')">✕</button><div class="modal-title">✨ Новая копилка</div><input type="text" id="newPiggyName" placeholder="Название" maxlength="30" style="width:100%;padding:10px;border-radius:12px;border:2px solid var(--accent-light);background:var(--input-bg);margin-bottom:10px;"><div class="emoji-grid" id="createEmojiGrid"></div><button class="primary-btn" onclick="createPiggy()">✨ Создать</button></div></div>
 
 <script>
+// ============ SERVICE WORKER ДЛЯ PWA ============
+if ('serviceWorker' in navigator) {
+    const swCode = `self.addEventListener('install',e=>{self.skipWaiting()});self.addEventListener('activate',e=>{e.waitUntil(clients.claim())});self.addEventListener('fetch',e=>{e.respondWith(fetch(e.request).catch(()=>new Response('Offline')))})`;
+    navigator.serviceWorker.register(URL.createObjectURL(new Blob([swCode],{type:'application/javascript'})),{scope:'/'}).then(()=>console.log('✅ Service Worker зарегистрирован')).catch(()=>{});
+}
+
+// ============ ДАННЫЕ ============
 const CURRENCIES = [
     {code:'RUB',symbol:'₽',d:[1000,500,200,100,50,10]},{code:'USD',symbol:'$',d:[100,50,20,10,5,1]},
     {code:'EUR',symbol:'€',d:[500,200,100,50,20,10,5,2,1]},{code:'GBP',symbol:'£',d:[50,20,10,5,2,1]},
@@ -202,6 +243,7 @@ let theme = localStorage.getItem('theme')||'pink';
 let piggies = JSON.parse(localStorage.getItem('piggies')||'[]');
 let currentId = null;
 let pendingEmoji = '🐷';
+let deferredPrompt = null;
 
 function save() { localStorage.setItem('lang',lang); localStorage.setItem('currency',currency.code); localStorage.setItem('theme',theme); localStorage.setItem('piggies',JSON.stringify(piggies)); }
 function fm(a) { return (a||0).toLocaleString('ru-RU')+' '+currency.symbol; }
@@ -276,6 +318,46 @@ function renderEmojiGrid(gridId) { const grid=document.getElementById(gridId);gr
 function createPiggy() { const name=document.getElementById('newPiggyName').value.trim()||'Копилка';piggies.push({id:Date.now(),name,emoji:pendingEmoji,goal:0,saved:0,paidCards:[],cardCache:[]});save();closeModal('createModal');renderAll(); }
 function updateSettings() { document.querySelectorAll('#langOptions .option-btn').forEach(b=>b.classList.toggle('selected',b.dataset.lang===lang));document.querySelectorAll('#themeOptions .color-btn').forEach(b=>b.classList.toggle('selected',b.dataset.theme===theme));const co=document.getElementById('currencyOptions');co.innerHTML='';CURRENCIES.forEach(c=>{const b=document.createElement('button');b.className='option-btn'+(c.code===currency.code?' selected':'');b.textContent=c.symbol+' '+c.code;b.addEventListener('click',()=>{currency=c;piggies.forEach(p=>{p.cardCache=[];p.paidCards=[];});save();updateSettings();renderAll();});co.appendChild(b);}); }
 
+// ============ PWA INSTALL ============
+window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    document.getElementById('installBanner').classList.add('show');
+});
+
+document.getElementById('installBtn').addEventListener('click', async () => {
+    if (deferredPrompt) {
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        console.log(`Установка: ${outcome}`);
+        deferredPrompt = null;
+        document.getElementById('installBanner').classList.remove('show');
+    }
+});
+
+document.getElementById('installClose').addEventListener('click', () => {
+    document.getElementById('installBanner').classList.remove('show');
+});
+
+document.getElementById('showInstallBtn').addEventListener('click', async () => {
+    if (deferredPrompt) {
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        deferredPrompt = null;
+        document.getElementById('installBanner').classList.remove('show');
+    } else {
+        // Если событие не сработало — показываем инструкцию
+        alert(lang==='ru'?'Откройте меню браузера и нажмите «Установить приложение» или «На экран Домой»':'Open browser menu and tap «Install app» or «Add to Home Screen»');
+    }
+});
+
+window.addEventListener('appinstalled', () => {
+    document.getElementById('installBanner').classList.remove('show');
+    deferredPrompt = null;
+    console.log('🎉 Приложение установлено!');
+});
+
+// Обработчики
 document.getElementById('langOptions').addEventListener('click',e=>{if(e.target.classList.contains('option-btn')){lang=e.target.dataset.lang;save();updateSettings();renderAll();}});
 document.getElementById('themeOptions').addEventListener('click',e=>{if(e.target.classList.contains('color-btn')){theme=e.target.dataset.theme;document.body.className=theme;save();updateSettings();renderSparkles();}});
 document.getElementById('detailName').addEventListener('change',()=>{const p=piggies.find(x=>x.id===currentId);if(p){p.name=document.getElementById('detailName').value.trim()||'Копилка';save();}});
