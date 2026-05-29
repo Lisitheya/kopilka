@@ -4,16 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>🌸 Копилочка</title>
-    <meta name="description" content="Милое приложение-копилка для накопления денег">
+    <meta name="description" content="Милое приложение-копилка">
     <meta name="theme-color" content="#ff99b9">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="🌸 Копилочка">
-    <meta name="mobile-web-app-capable" content="yes">
     <link rel="apple-touch-icon" sizes="180x180" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'><defs><radialGradient id='g' cx='50%25' cy='40%25' r='50%25'><stop offset='0%25' stop-color='%23ffb3c6'/><stop offset='100%25' stop-color='%23ff6b8a'/></radialGradient></defs><circle cx='90' cy='90' r='85' fill='url(%23g)'/><circle cx='90' cy='90' r='78' fill='none' stroke='white' stroke-width='4' stroke-dasharray='16 8'/><text x='90' y='120' text-anchor='middle' font-size='75' font-family='Arial'>🐷</text></svg>">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Comfortaa:wght@400;700&display=swap');
-        :root { --bg: #fff0f5; --card: #ffffff; --text: #5c3d5c; --accent: #ff99b9; --accent-dark: #ff6b8a; --accent-light: #ffd6e8; --progress-bg: #fce4ec; --input-bg: #fff5f8; --border: 28px; --card-border: 22px; --font: 'Nunito', sans-serif; --cute: 'Comfortaa', cursive; }
+        :root { --bg: #fff0f5; --card: #ffffff; --text: #5c3d5c; --accent: #ff99b9; --accent-dark: #ff6b8a; --accent-light: #ffd6e8; --progress-bg: #fce4ec; --input-bg: #fff5f8; --border: 28px; --font: 'Nunito', sans-serif; --cute: 'Comfortaa', cursive; }
         .pink { --bg: #fff0f5; --accent: #ff99b9; --accent-dark: #ff6b8a; --accent-light: #ffd6e8; --progress-bg: #fce4ec; --input-bg: #fff5f8; }
         .peach { --bg: #fff5f0; --accent: #ffb899; --accent-dark: #ff9a6c; --accent-light: #ffe0cc; --progress-bg: #fde8d8; --input-bg: #fff8f5; }
         .lavender { --bg: #f5f0ff; --accent: #c4a8ff; --accent-dark: #a78bfa; --accent-light: #e8dcff; --progress-bg: #ede4fc; --input-bg: #f8f5ff; }
@@ -23,71 +22,46 @@
         body { font-family: var(--font); background: var(--bg); color: var(--text); height: 100vh; height: 100dvh; overflow: hidden; -webkit-tap-highlight-color: transparent; user-select: none; }
         button { cursor: pointer; border: none; background: none; font-family: var(--cute); }
         input { font-family: var(--font); border: none; outline: none; }
-
         .cute-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; overflow: hidden; }
         .floating { position: absolute; animation: floatAround 8s ease-in-out infinite; opacity: 0.6; font-size: 2.5rem; }
-        .floating:nth-child(1) { top: 5%; left: 5%; animation-delay: 0s; }
-        .floating:nth-child(2) { top: 15%; right: 10%; animation-delay: 1s; }
-        .floating:nth-child(3) { top: 50%; left: 3%; animation-delay: 2s; }
-        .floating:nth-child(4) { top: 60%; right: 5%; animation-delay: 3s; }
-        .floating:nth-child(5) { top: 80%; left: 10%; animation-delay: 4s; }
-        .floating:nth-child(6) { top: 85%; right: 15%; animation-delay: 5s; }
-        .floating:nth-child(7) { top: 30%; left: 50%; animation-delay: 6s; }
-        .floating:nth-child(8) { top: 70%; left: 50%; animation-delay: 7s; }
-        @keyframes floatAround { 0%,100%{transform:translateY(0) translateX(0) rotate(0deg) scale(1)} 25%{transform:translateY(-30px) translateX(15px) rotate(5deg) scale(1.1)} 50%{transform:translateY(-15px) translateX(-10px) rotate(-3deg) scale(0.9)} 75%{transform:translateY(-40px) translateX(5px) rotate(7deg) scale(1.05)} }
-
+        .floating:nth-child(1) { top: 5%; left: 5%; } .floating:nth-child(2) { top: 15%; right: 10%; animation-delay: 1s; }
+        .floating:nth-child(3) { top: 50%; left: 3%; animation-delay: 2s; } .floating:nth-child(4) { top: 60%; right: 5%; animation-delay: 3s; }
+        .floating:nth-child(5) { top: 80%; left: 10%; animation-delay: 4s; } .floating:nth-child(6) { top: 85%; right: 15%; animation-delay: 5s; }
+        @keyframes floatAround { 0%,100%{transform:translateY(0) translateX(0) rotate(0deg) scale(1)} 50%{transform:translateY(-30px) translateX(10px) rotate(5deg) scale(1.1)} }
         .sparkles { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
         .sparkle { position: absolute; animation: sparkleFloat 4s ease-in-out infinite; opacity: 0; font-size: 1rem; }
-        @keyframes sparkleFloat { 0%{transform:translateY(0) scale(0);opacity:0} 20%{opacity:0.9} 50%{transform:translateY(-60px) scale(1.3);opacity:0.7} 80%{opacity:0.2} 100%{transform:translateY(-100px) scale(0);opacity:0} }
-
+        @keyframes sparkleFloat { 0%{transform:translateY(0) scale(0);opacity:0} 20%{opacity:0.9} 50%{transform:translateY(-60px) scale(1.3);opacity:0.7} 100%{transform:translateY(-100px) scale(0);opacity:0} }
         #app { width: 100%; height: 100%; max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; padding: 16px; gap: 12px; position: relative; z-index: 1; }
         .header { display: flex; justify-content: space-between; align-items: center; }
         .logo { font-family: var(--cute); font-size: 1.8rem; font-weight: 800; background: linear-gradient(135deg, var(--accent-light), var(--accent-dark)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: flex; align-items: center; gap: 8px; }
         .logo-emoji { font-size: 2rem; -webkit-text-fill-color: initial; animation: bounce 2s ease-in-out infinite; }
         @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
         .settings-btn { background: var(--accent-light); border-radius: 50%; width: 42px; height: 42px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; transition: 0.2s; border: 2px solid var(--accent); }
-        .settings-btn:active { transform: scale(0.9); }
-
-        .total-card { background: linear-gradient(135deg, var(--accent-light), var(--card)); border-radius: var(--border); padding: 20px 20px; text-align: center; box-shadow: 0 8px 30px rgba(255,150,180,0.25); position: relative; overflow: hidden; border: 2px solid var(--accent-light); }
-        .total-card::before { content: ''; position: absolute; top: -20px; right: -20px; width: 70px; height: 70px; border-radius: 50%; background: var(--accent); opacity: 0.1; }
-        .total-card::after { content: ''; position: absolute; bottom: -15px; left: -15px; width: 55px; height: 55px; border-radius: 50%; background: var(--accent-dark); opacity: 0.08; }
+        .total-card { background: linear-gradient(135deg, var(--accent-light), var(--card)); border-radius: var(--border); padding: 20px; text-align: center; box-shadow: 0 8px 30px rgba(255,150,180,0.25); position: relative; overflow: hidden; border: 2px solid var(--accent-light); }
         .total-emoji { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); font-size: 2.5rem; animation: bounce 2.5s ease-in-out infinite; }
         .total-label { font-family: var(--cute); font-size: 0.9rem; opacity: 0.7; position: relative; z-index: 1; margin-top: 10px; }
         .total-amount { font-family: var(--cute); font-size: 2.2rem; font-weight: 800; color: var(--accent-dark); position: relative; z-index: 1; }
-        .total-sub { font-family: var(--cute); font-size: 0.7rem; opacity: 0.5; position: relative; z-index: 1; }
-
-        .affirmation { text-align: center; font-family: var(--cute); font-style: italic; font-size: 0.85rem; color: var(--accent-dark); padding: 10px 14px; background: var(--card); border-radius: 16px; box-shadow: 0 4px 15px rgba(255,150,180,0.12); border: 1px solid var(--accent-light); position: relative; }
-        .affirmation::before { content: '💬'; position: absolute; left: 10px; top: -12px; font-size: 1.2rem; }
-        .affirmation::after { content: '💖'; position: absolute; right: 10px; bottom: -12px; font-size: 1rem; }
-
+        .affirmation { text-align: center; font-family: var(--cute); font-style: italic; font-size: 0.85rem; color: var(--accent-dark); padding: 10px 14px; background: var(--card); border-radius: 16px; box-shadow: 0 4px 15px rgba(255,150,180,0.12); border: 1px solid var(--accent-light); }
         .piggy-list { flex: 1; overflow-y: auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; padding: 4px; align-content: start; }
         .piggy-list::-webkit-scrollbar { width: 4px; }
         .piggy-list::-webkit-scrollbar-thumb { background: var(--accent-light); border-radius: 8px; }
-        .piggy-list::-webkit-scrollbar-track { background: var(--bg); }
-
         .piggy-card { background: var(--card); border-radius: var(--border); padding: 22px 15px; text-align: center; box-shadow: 0 6px 25px rgba(255,150,180,0.18); cursor: pointer; transition: 0.25s; position: relative; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 190px; border: 2px solid transparent; }
-        .piggy-card:hover { border-color: var(--accent-light); box-shadow: 0 10px 35px rgba(255,150,180,0.3); transform: translateY(-2px); }
         .piggy-card:active { transform: scale(0.96); }
-        .piggy-card::after { content: ''; position: absolute; top: -30px; right: -30px; width: 60px; height: 60px; border-radius: 50%; background: var(--accent-light); opacity: 0.15; }
-        .piggy-emoji { font-size: 3.2rem; margin-bottom: 8px; display: block; position: relative; z-index: 1; filter: drop-shadow(0 3px 6px rgba(255,107,138,0.2)); }
+        .piggy-emoji { font-size: 3.2rem; margin-bottom: 8px; display: block; position: relative; z-index: 1; }
         .piggy-name { font-family: var(--cute); font-weight: 700; margin-bottom: 4px; position: relative; z-index: 1; font-size: 1rem; }
         .piggy-saved { font-family: var(--cute); font-weight: 800; font-size: 1.3rem; color: var(--accent-dark); position: relative; z-index: 1; }
-        .piggy-goal { font-size: 0.7rem; opacity: 0.6; position: relative; z-index: 1; }
+        .piggy-goal { font-size: 0.7rem; opacity: 0.6; }
         .progress-bar { width: 80%; height: 6px; background: var(--progress-bg); border-radius: 4px; margin-top: 10px; overflow: hidden; position: relative; z-index: 1; }
         .progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent-light), var(--accent), var(--accent-dark)); border-radius: 4px; transition: 0.5s ease; }
-        .delete-btn { position: absolute; top: 8px; right: 10px; font-size: 0.9rem; opacity: 0.25; z-index: 2; transition: 0.2s; }
-        .delete-btn:hover { opacity: 0.7; }
+        .delete-btn { position: absolute; top: 8px; right: 10px; font-size: 0.9rem; opacity: 0.25; z-index: 2; }
         .add-card { border: 3px dashed var(--accent-light); display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 2.5rem; color: var(--accent); min-height: 190px; opacity: 0.6; transition: 0.3s; background: rgba(255,255,255,0.3); }
-        .add-card:hover { opacity: 1; border-color: var(--accent); background: var(--accent-light); }
-        .add-card:active { opacity: 1; background: var(--accent-light); transform: scale(0.96); }
+        .add-card:active { opacity: 1; background: var(--accent-light); }
         .add-text { font-family: var(--cute); font-size: 0.9rem; margin-top: 6px; color: var(--accent-dark); }
-
         .detail-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; height: 100dvh; background: var(--bg); z-index: 50; display: none; flex-direction: column; padding: 16px; gap: 10px; overflow-y: auto; }
         .detail-screen.active { display: flex; }
         .detail-header { display: flex; align-items: center; gap: 8px; }
         .back-btn { background: var(--accent-light); border-radius: 50%; width: 40px; height: 40px; font-size: 1.3rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; border: 2px solid var(--accent); }
         .detail-name-input { flex: 1; font-family: var(--cute); font-size: 1.1rem; font-weight: 700; background: var(--input-bg); border: 2px solid var(--accent-light); border-radius: 16px; padding: 10px 14px; }
-        .detail-name-input:focus { border-color: var(--accent); box-shadow: 0 0 0 4px rgba(255,153,185,0.15); }
         .emoji-btn { background: var(--accent-light); border-radius: 50%; width: 40px; height: 40px; font-size: 1.2rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; border: 2px solid var(--accent); }
         .detail-progress { display: flex; align-items: center; gap: 14px; background: var(--card); border-radius: var(--border); padding: 16px; box-shadow: 0 4px 20px rgba(255,150,180,0.15); border: 2px solid var(--accent-light); }
         .circle-wrap { position: relative; width: 75px; height: 75px; flex-shrink: 0; }
@@ -97,87 +71,53 @@
         .circle-pct { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); font-family: var(--cute); font-weight: 700; font-size: 0.9rem; color: var(--accent-dark); }
         .detail-saved { font-weight: 800; font-size: 1.2rem; color: var(--accent-dark); }
         .detail-inputs { display: flex; gap: 5px; flex-wrap: wrap; }
-        .detail-inputs input { flex: 1; min-width: 80px; padding: 11px 14px; border-radius: 14px; border: 2px solid var(--accent-light); background: var(--input-bg); font-size: 0.9rem; transition: 0.2s; }
-        .detail-inputs input:focus { border-color: var(--accent); box-shadow: 0 0 0 4px rgba(255,153,185,0.12); }
+        .detail-inputs input { flex: 1; min-width: 80px; padding: 11px 14px; border-radius: 14px; border: 2px solid var(--accent-light); background: var(--input-bg); font-size: 0.9rem; }
         .btn { padding: 10px 16px; border-radius: 14px; font-weight: 700; font-size: 0.85rem; display: flex; align-items: center; gap: 4px; transition: 0.2s; white-space: nowrap; }
         .btn:active { transform: scale(0.94); }
-        .btn-primary { background: linear-gradient(135deg, var(--accent), var(--accent-dark)); color: #fff; box-shadow: 0 4px 15px rgba(255,107,138,0.3); }
+        .btn-primary { background: linear-gradient(135deg, var(--accent), var(--accent-dark)); color: #fff; }
         .btn-secondary { background: var(--accent-light); color: var(--accent-dark); }
         .btn-outline { background: transparent; border: 2px solid var(--accent); color: var(--accent-dark); }
         .btn-sm { padding: 6px 10px; font-size: 0.72rem; border-radius: 10px; }
         .card-grid { flex: 1; overflow-y: auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(68px, 1fr)); gap: 5px; padding: 2px; align-content: start; }
-        .card-grid::-webkit-scrollbar { width: 4px; }
-        .card-grid::-webkit-scrollbar-thumb { background: var(--accent-light); border-radius: 8px; }
         .amount-card { background: var(--card); border: 2px solid var(--accent-light); border-radius: 16px; text-align: center; font-family: var(--cute); font-weight: 700; font-size: 0.72rem; padding: 9px 4px; cursor: pointer; transition: 0.2s; box-shadow: 0 2px 8px rgba(255,150,180,0.1); position: relative; display: flex; align-items: center; justify-content: center; min-height: 40px; }
         .amount-card:active { transform: scale(0.9); }
-        .amount-card.paid { background: linear-gradient(135deg, var(--accent), var(--accent-dark)) !important; color: #fff !important; border-color: var(--accent-dark) !important; font-weight: 800; box-shadow: 0 4px 15px rgba(255,107,138,0.3); }
-        .amount-card.paid::after { content: '✓'; position: absolute; top: 3px; right: 4px; font-size: 0.5rem; opacity: 0.9; background: rgba(255,255,255,0.3); width: 13px; height: 13px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
-        .amount-card:hover { border-color: var(--accent); box-shadow: 0 4px 12px rgba(255,150,180,0.2); }
-
+        .amount-card.paid { background: linear-gradient(135deg, var(--accent), var(--accent-dark)) !important; color: #fff !important; border-color: var(--accent-dark) !important; font-weight: 800; }
+        .amount-card.paid::after { content: '✓'; position: absolute; top: 3px; right: 4px; font-size: 0.5rem; opacity: 0.9; }
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); z-index: 100; display: none; align-items: center; justify-content: center; padding: 20px; backdrop-filter: blur(2px); }
         .modal-overlay.active { display: flex; }
         .modal-card { background: var(--card); border-radius: var(--border); padding: 25px 20px; box-shadow: 0 20px 60px rgba(0,0,0,0.2); width: 100%; max-width: 400px; max-height: 80vh; overflow-y: auto; position: relative; border: 2px solid var(--accent-light); }
-        .modal-close { position: absolute; top: 12px; right: 16px; font-size: 1.4rem; opacity: 0.5; transition: 0.2s; }
-        .modal-close:hover { opacity: 0.9; }
+        .modal-close { position: absolute; top: 12px; right: 16px; font-size: 1.4rem; opacity: 0.5; }
         .modal-title { font-family: var(--cute); font-size: 1.3rem; font-weight: 700; text-align: center; margin-bottom: 16px; color: var(--accent-dark); }
         .option-group { margin-bottom: 14px; }
         .option-label { font-family: var(--cute); font-size: 0.82rem; font-weight: 700; margin-bottom: 6px; color: var(--accent-dark); display: block; }
         .option-row { display: flex; flex-wrap: wrap; gap: 5px; }
         .option-btn { padding: 7px 12px; border-radius: 12px; border: 2px solid var(--accent-light); background: var(--input-bg); font-size: 0.78rem; font-weight: 600; transition: 0.2s; }
-        .option-btn:hover { border-color: var(--accent); }
         .option-btn.selected { background: linear-gradient(135deg, var(--accent), var(--accent-dark)); color: #fff; border-color: var(--accent-dark); }
         .color-btn { width: 32px; height: 32px; border-radius: 50%; border: 3px solid transparent; transition: 0.2s; }
-        .color-btn:hover { transform: scale(1.1); }
         .color-btn.selected { border-color: var(--text); box-shadow: 0 0 0 4px rgba(0,0,0,0.1); }
         .emoji-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; justify-items: center; margin-top: 10px; }
         .emoji-opt { font-size: 1.9rem; cursor: pointer; padding: 5px; border-radius: 10px; transition: 0.2s; }
-        .emoji-opt:hover { transform: scale(1.15); background: var(--accent-light); }
         .emoji-opt:active { transform: scale(1.25); }
-        .emoji-opt.selected { background: var(--accent-light); border: 2px solid var(--accent); box-shadow: 0 0 0 3px rgba(255,153,185,0.2); }
-        .primary-btn { width: 100%; padding: 12px; background: linear-gradient(135deg, var(--accent), var(--accent-dark)); color: #fff; border-radius: 16px; font-size: 0.95rem; font-weight: 700; margin-top: 10px; box-shadow: 0 4px 15px rgba(255,107,138,0.3); transition: 0.2s; }
-        .primary-btn:hover { box-shadow: 0 6px 20px rgba(255,107,138,0.4); }
-        .primary-btn:active { transform: scale(0.96); }
+        .emoji-opt.selected { background: var(--accent-light); border: 2px solid var(--accent); }
+        .primary-btn { width: 100%; padding: 12px; background: linear-gradient(135deg, var(--accent), var(--accent-dark)); color: #fff; border-radius: 16px; font-size: 0.95rem; font-weight: 700; margin-top: 10px; }
         .settings-footer { text-align: center; margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--accent-light); font-size: 0.72rem; color: var(--accent-dark); opacity: 0.6; letter-spacing: 1.5px; }
-
-        @media (max-width:380px) { .logo { font-size: 1.4rem; } .total-amount { font-size: 1.7rem; } .piggy-list { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 8px; } }
     </style>
 </head>
 <body class="pink">
 
-<div class="cute-bg">
-    <span class="floating">🌸</span><span class="floating">🦋</span><span class="floating">💫</span>
-    <span class="floating">✨</span><span class="floating">💖</span><span class="floating">🎀</span>
-    <span class="floating">🌟</span><span class="floating">💎</span>
-</div>
+<div class="cute-bg"><span class="floating">🌸</span><span class="floating">🦋</span><span class="floating">💫</span><span class="floating">✨</span><span class="floating">💖</span><span class="floating">🎀</span></div>
 <div class="sparkles" id="sparklesContainer"></div>
 
 <div id="app">
-    <div class="header">
-        <div class="logo"><span class="logo-emoji">🐷</span>Копилочка</div>
-        <button class="settings-btn" onclick="openModal('settingsModal')">⚙️</button>
-    </div>
-    <div class="total-card">
-        <div class="total-emoji">💰</div>
-        <div class="total-label">✨ Всего накоплено</div>
-        <div class="total-amount" id="totalAmount">0 ₽</div>
-        <div class="total-sub">по всем копилочкам</div>
-    </div>
+    <div class="header"><div class="logo"><span class="logo-emoji">🐷</span>Копилочка</div><button class="settings-btn" onclick="openModal('settingsModal')">⚙️</button></div>
+    <div class="total-card"><div class="total-emoji">💰</div><div class="total-label">✨ Всего накоплено</div><div class="total-amount" id="totalAmount">0 ₽</div></div>
     <div class="affirmation" id="affirmation">✨</div>
     <div class="piggy-list" id="piggyList"></div>
 </div>
 
 <div class="detail-screen" id="detailScreen">
     <div class="detail-header"><button class="back-btn" onclick="closeDetail()">←</button><input class="detail-name-input" id="detailName" placeholder="Название копилки" maxlength="30"><button class="emoji-btn" onclick="openModal('emojiModal')">🎨</button></div>
-    <div class="detail-progress">
-        <div class="circle-wrap">
-            <svg viewBox="0 0 100 100">
-                <defs><linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="var(--accent-light)"/><stop offset="50%" stop-color="var(--accent)"/><stop offset="100%" stop-color="var(--accent-dark)"/></linearGradient></defs>
-                <circle class="circle-bg" cx="50" cy="50" r="44"/><circle class="circle-fg" id="detailCircle" cx="50" cy="50" r="44" stroke-dasharray="276.46" stroke-dashoffset="276.46"/>
-            </svg>
-            <div class="circle-pct" id="detailPercent">0%</div>
-        </div>
-        <div><div class="detail-saved" id="detailSaved">0 ₽</div><div style="font-size:0.7rem;opacity:0.7;" id="detailGoal">Цель: не задана</div></div>
-    </div>
+    <div class="detail-progress"><div class="circle-wrap"><svg viewBox="0 0 100 100"><defs><linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="var(--accent-light)"/><stop offset="50%" stop-color="var(--accent)"/><stop offset="100%" stop-color="var(--accent-dark)"/></linearGradient></defs><circle class="circle-bg" cx="50" cy="50" r="44"/><circle class="circle-fg" id="detailCircle" cx="50" cy="50" r="44" stroke-dasharray="276.46" stroke-dashoffset="276.46"/></svg><div class="circle-pct" id="detailPercent">0%</div></div><div><div class="detail-saved" id="detailSaved">0 ₽</div><div style="font-size:0.7rem;opacity:0.7;" id="detailGoal">Цель: не задана</div></div></div>
     <div class="detail-inputs"><input type="number" id="goalInput" placeholder="🎯 Сумма цели" inputmode="numeric" min="1"><button class="btn btn-primary" onclick="setGoal()">✨</button><input type="number" id="addInput" placeholder="💰 Внести" inputmode="numeric" min="1"><button class="btn btn-secondary" onclick="addAmount()">➕</button></div>
     <div class="detail-inputs"><button class="btn btn-outline btn-sm" onclick="resetPiggy()">🔄 Сбросить всё</button></div>
     <div class="card-grid" id="cardGrid"></div>
@@ -188,31 +128,6 @@
 <div class="modal-overlay" id="createModal"><div class="modal-card"><button class="modal-close" onclick="closeModal('createModal')">✕</button><div class="modal-title">✨ Новая копилка</div><input type="text" id="newPiggyName" placeholder="Название" maxlength="30" style="width:100%;padding:10px;border-radius:12px;border:2px solid var(--accent-light);background:var(--input-bg);margin-bottom:10px;"><div class="emoji-grid" id="createEmojiGrid"></div><button class="primary-btn" onclick="createPiggy()">✨ Создать</button></div></div>
 
 <script>
-// ============ SERVICE WORKER ДЛЯ PWA ============
-if ('serviceWorker' in navigator) {
-    const swCode = `
-        const CACHE_NAME = 'kopilochka-v1';
-        const ASSETS = ['/'];
-        self.addEventListener('install', (event) => {
-            event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(ASSETS)));
-            self.skipWaiting();
-        });
-        self.addEventListener('activate', (event) => {
-            event.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(k => k !== CACHE_NAME).map(k => caches.delete(k)))));
-            event.waitUntil(clients.claim());
-        });
-        self.addEventListener('fetch', (event) => {
-            event.respondWith(fetch(event.request).catch(() => caches.match(event.request)));
-        });
-    `;
-    const swBlob = new Blob([swCode], { type: 'application/javascript' });
-    const swUrl = URL.createObjectURL(swBlob);
-    navigator.serviceWorker.register(swUrl, { scope: '/' })
-        .then(reg => console.log('✅ Service Worker зарегистрирован'))
-        .catch(err => console.log('SW:', err));
-}
-
-// ============ ДАННЫЕ ============
 const CURRENCIES = [
     {code:'RUB',symbol:'₽',d:[1000,500,200,100,50,10]},{code:'USD',symbol:'$',d:[100,50,20,10,5,1]},
     {code:'EUR',symbol:'€',d:[500,200,100,50,20,10,5,2,1]},{code:'GBP',symbol:'£',d:[50,20,10,5,2,1]},
@@ -222,93 +137,28 @@ const CURRENCIES = [
     {code:'UAH',symbol:'₴',d:[1000,500,200,100,50,20,10,5,2,1]},{code:'KZT',symbol:'₸',d:[20000,10000,5000,2000,1000,500,200,100,50,20,10,5,2,1]}
 ];
 const EMOJIS = ['🐷','💰','💎','🌟','🎯','🏠','🚗','✈️','💍','🎓','📱','💻','🐱','🐶','🌸','🎀','💖','✨','🦄','🌈','🍕','🎮','📚','💪','🎉','🛍','💄','👑','🏖','🎸'];
-const AFF = {ru:["Деньги приходят легко 💖","Я магнит для изобилия ✨","Каждый рубль — семя 🌱","Я достойна богатства 💎"],en:["Money comes easily 💖","Magnet for abundance ✨","Every dollar a seed 🌱","I deserve wealth 💎"]};
-
-let lang = localStorage.getItem('lang')||'ru';
-let currency = CURRENCIES.find(c=>c.code===(localStorage.getItem('currency')||'RUB'))||CURRENCIES[0];
-let theme = localStorage.getItem('theme')||'pink';
-let piggies = JSON.parse(localStorage.getItem('piggies')||'[]');
-let currentId = null;
-let pendingEmoji = '🐷';
-
-function save() { localStorage.setItem('lang',lang); localStorage.setItem('currency',currency.code); localStorage.setItem('theme',theme); localStorage.setItem('piggies',JSON.stringify(piggies)); }
-function fm(a) { return (a||0).toLocaleString('ru-RU')+' '+currency.symbol; }
-function t(k) { const tr={ru:{goal:'Цель',noGoal:'не задана',newPiggy:'Новая копилка'},en:{goal:'Goal',noGoal:'not set',newPiggy:'New Bank'}}; return (tr[lang]||tr['ru'])[k]||k; }
-
-function generateCards(goal) {
-    if (!goal || goal <= 0) return [];
-    let cards = [], remaining = goal;
-    const allDenoms = [1000, 500, 400, 300, 250, 200, 150, 100, 50, 20, 10];
-    for (const d of allDenoms) { if (remaining >= d) { cards.push(d); remaining -= d; } }
-    while (remaining > 0) {
-        let chosen = null;
-        for (const d of allDenoms) { if (d <= remaining && !cards.includes(d)) { chosen = d; break; } }
-        if (!chosen) { const countMap = {}; cards.forEach(c => countMap[c] = (countMap[c]||0) + 1); let minCount = Infinity; for (const d of allDenoms) { if (d <= remaining) { const cnt = countMap[d] || 0; if (cnt < minCount) { minCount = cnt; chosen = d; } } } }
-        if (!chosen || chosen > remaining) { chosen = remaining; }
-        cards.push(chosen); remaining -= chosen;
-    }
-    for (let i = cards.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [cards[i], cards[j]] = [cards[j], cards[i]]; }
-    return cards;
-}
-
-function renderSparkles() { const c=document.getElementById('sparklesContainer');c.innerHTML='';const e=['✨','💫','⭐','🌟','💖','🌸','🦋','💎','🎀','💝'];for(let i=0;i<12;i++){const s=document.createElement('span');s.className='sparkle';s.textContent=e[i%10];s.style.cssText=`left:${Math.random()*90}%;top:${Math.random()*80+10}%;animation-delay:${Math.random()*4}s;animation-duration:${Math.random()*3+3}s;`;c.appendChild(s);} }
-function renderAll() {
-    document.getElementById('totalAmount').textContent = fm(piggies.reduce((s,p)=>s+(p.saved||0),0));
-    document.getElementById('affirmation').textContent = AFF[lang][Math.floor(Math.random()*AFF[lang].length)];
-    const list=document.getElementById('piggyList');list.innerHTML='';
-    piggies.forEach(p=>{
-        const card=document.createElement('div');card.className='piggy-card';
-        const pct=p.goal>0?Math.min(100,Math.round((p.saved||0)/p.goal*100)):0;
-        card.innerHTML=`<button class="delete-btn">🗑</button><span class="piggy-emoji">${p.emoji||'🐷'}</span><div class="piggy-name">${p.name||'Копилка'}</div><div class="piggy-saved">${fm(p.saved||0)}</div><div class="piggy-goal">${p.goal>0?t('goal')+': '+fm(p.goal):t('noGoal')}</div><div class="progress-bar"><div class="progress-fill" style="width:${pct}%"></div></div>`;
-        card.querySelector('.delete-btn').addEventListener('click',e=>{e.stopPropagation();if(confirm('Удалить?')){piggies=piggies.filter(x=>x.id!==p.id);save();renderAll();}});
-        card.addEventListener('click',()=>openPiggy(p.id));list.appendChild(card);
-    });
-    if(piggies.length<10){const add=document.createElement('div');add.className='piggy-card add-card';add.innerHTML='<div style="font-size:3rem;">➕</div><div class="add-text">'+t('newPiggy')+'</div>';add.addEventListener('click',()=>openModal('createModal'));list.appendChild(add);}
-}
-
-function openPiggy(id) { currentId=id;const p=piggies.find(x=>x.id===id);if(!p)return;document.getElementById('detailScreen').classList.add('active');document.getElementById('detailName').value=p.name||'';document.getElementById('goalInput').value='';document.getElementById('addInput').value='';if(!p.cardCache||p.cardCache.length===0||p.cardCache.reduce((a,b)=>a+b,0)!==p.goal){p.cardCache=generateCards(p.goal);}renderDetail(p); }
-function closeDetail() { const p=piggies.find(x=>x.id===currentId);if(p){p.name=document.getElementById('detailName').value.trim()||'Копилка';save();}document.getElementById('detailScreen').classList.remove('active');renderAll(); }
-function renderDetail(p) {
-    const cards=p.cardCache;
-    const pct=p.goal>0?Math.min(100,Math.round((p.saved||0)/p.goal*100)):0;
-    const circ=2*Math.PI*44;
-    document.getElementById('detailCircle').style.strokeDashoffset=circ-(pct/100)*circ;
-    document.getElementById('detailPercent').textContent=pct+'%';
-    document.getElementById('detailSaved').textContent=fm(p.saved||0);
-    document.getElementById('detailGoal').textContent=(p.goal>0?t('goal')+': '+fm(p.goal):t('noGoal'));
-    const grid=document.getElementById('cardGrid');grid.innerHTML='';
-    cards.forEach((amount,idx)=>{
-        const card=document.createElement('div');
-        card.className='amount-card'+((p.paidCards||[]).includes(idx)?' paid':'');
-        card.textContent=amount.toLocaleString('ru-RU')+' '+currency.symbol;
-        card.addEventListener('click',()=>{if((p.paidCards||[]).includes(idx)){p.paidCards=p.paidCards.filter(i=>i!==idx);p.saved=Math.max(0,(p.saved||0)-amount);}else{p.paidCards=[...(p.paidCards||[]),idx];p.saved=Math.min(p.goal,(p.saved||0)+amount);}save();renderDetail(p);renderAll();});
-        grid.appendChild(card);
-    });
-}
-function setGoal() { const p=piggies.find(x=>x.id===currentId);if(!p)return;const v=parseInt(document.getElementById('goalInput').value);if(isNaN(v)||v<1)return;p.goal=v;p.saved=0;p.paidCards=[];p.cardCache=generateCards(v);document.getElementById('goalInput').value='';save();renderDetail(p);renderAll(); }
-function addAmount() {
-    const p=piggies.find(x=>x.id===currentId);if(!p||!p.goal||p.goal<=0)return;
-    const v=parseInt(document.getElementById('addInput').value);if(isNaN(v)||v<=0)return;
-    const maxAdd=Math.min(v,p.goal-(p.saved||0));if(maxAdd<=0){document.getElementById('addInput').value='';return;}
-    const cards=p.cardCache;p.paidCards=p.paidCards||[];let remaining=maxAdd;
-    const available=cards.map((amount,idx)=>({idx,amount})).filter(item=>!p.paidCards.includes(item.idx)).sort((a,b)=>b.amount-a.amount);
-    for(const {idx,amount} of available){if(remaining>=amount){p.paidCards.push(idx);remaining-=amount;}if(remaining<=0)break;}
-    if(remaining>0){cards.push(remaining);p.paidCards.push(cards.length-1);}
-    p.saved=Math.min(p.goal,(p.saved||0)+maxAdd);p.cardCache=cards;
-    document.getElementById('addInput').value='';save();renderDetail(p);renderAll();
-}
-function resetPiggy() { const p=piggies.find(x=>x.id===currentId);if(!p)return;p.saved=0;p.paidCards=[];save();renderDetail(p);renderAll(); }
-function openModal(id) { document.getElementById(id).classList.add('active');if(id==='settingsModal')updateSettings();if(id==='createModal')renderEmojiGrid('createEmojiGrid');if(id==='emojiModal'&&currentId){const p=piggies.find(x=>x.id===currentId);pendingEmoji=p?p.emoji||'🐷':'🐷';renderEmojiGrid('emojiGrid');} }
-function closeModal(id) { document.getElementById(id).classList.remove('active'); }
-function renderEmojiGrid(gridId) { const grid=document.getElementById(gridId);grid.innerHTML='';EMOJIS.forEach(e=>{const el=document.createElement('span');el.className='emoji-opt'+(e===pendingEmoji?' selected':'');el.textContent=e;el.addEventListener('click',()=>{pendingEmoji=e;grid.querySelectorAll('.emoji-opt').forEach(o=>o.classList.remove('selected'));el.classList.add('selected');});grid.appendChild(el);}); }
-function createPiggy() { const name=document.getElementById('newPiggyName').value.trim()||'Копилка';piggies.push({id:Date.now(),name,emoji:pendingEmoji,goal:0,saved:0,paidCards:[],cardCache:[]});save();closeModal('createModal');renderAll(); }
-function updateSettings() { document.querySelectorAll('#langOptions .option-btn').forEach(b=>b.classList.toggle('selected',b.dataset.lang===lang));document.querySelectorAll('#themeOptions .color-btn').forEach(b=>b.classList.toggle('selected',b.dataset.theme===theme));const co=document.getElementById('currencyOptions');co.innerHTML='';CURRENCIES.forEach(c=>{const b=document.createElement('button');b.className='option-btn'+(c.code===currency.code?' selected':'');b.textContent=c.symbol+' '+c.code;b.addEventListener('click',()=>{currency=c;piggies.forEach(p=>{p.cardCache=[];p.paidCards=[];});save();updateSettings();renderAll();});co.appendChild(b);}); }
-
-// Обработчики
+const AFF = {ru:["Деньги приходят легко 💖","Я магнит для изобилия ✨"],en:["Money comes easily 💖","Magnet for abundance ✨"]};
+let lang=localStorage.getItem('lang')||'ru',currency=CURRENCIES.find(c=>c.code===(localStorage.getItem('currency')||'RUB'))||CURRENCIES[0],theme=localStorage.getItem('theme')||'pink',piggies=JSON.parse(localStorage.getItem('piggies')||'[]'),currentId=null,pendingEmoji='🐷';
+function save(){localStorage.setItem('lang',lang);localStorage.setItem('currency',currency.code);localStorage.setItem('theme',theme);localStorage.setItem('piggies',JSON.stringify(piggies));}
+function fm(a){return(a||0).toLocaleString('ru-RU')+' '+currency.symbol;}
+function t(k){const tr={ru:{goal:'Цель',noGoal:'не задана',newPiggy:'Новая копилка'},en:{goal:'Goal',noGoal:'not set',newPiggy:'New Bank'}};return(tr[lang]||tr['ru'])[k]||k;}
+function generateCards(goal){if(!goal||goal<=0)return[];let cards=[],remaining=goal;const allDenoms=[1000,500,400,300,250,200,150,100,50,20,10];for(const d of allDenoms){if(remaining>=d){cards.push(d);remaining-=d;}}while(remaining>0){let chosen=null;for(const d of allDenoms){if(d<=remaining&&!cards.includes(d)){chosen=d;break;}}if(!chosen){const countMap={};cards.forEach(c=>countMap[c]=(countMap[c]||0)+1);let minCount=Infinity;for(const d of allDenoms){if(d<=remaining){const cnt=countMap[d]||0;if(cnt<minCount){minCount=cnt;chosen=d;}}}}if(!chosen||chosen>remaining){chosen=remaining;}cards.push(chosen);remaining-=chosen;}for(let i=cards.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[cards[i],cards[j]]=[cards[j],cards[i]];}return cards;}
+function renderSparkles(){const c=document.getElementById('sparklesContainer');c.innerHTML='';const e=['✨','💫','⭐','🌟','💖','🌸'];for(let i=0;i<10;i++){const s=document.createElement('span');s.className='sparkle';s.textContent=e[i%6];s.style.cssText=`left:${Math.random()*90}%;top:${Math.random()*80+10}%;animation-delay:${Math.random()*4}s;animation-duration:${Math.random()*3+3}s;`;c.appendChild(s);}}
+function renderAll(){document.getElementById('totalAmount').textContent=fm(piggies.reduce((s,p)=>s+(p.saved||0),0));document.getElementById('affirmation').textContent=AFF[lang][Math.floor(Math.random()*AFF[lang].length)];const list=document.getElementById('piggyList');list.innerHTML='';piggies.forEach(p=>{const card=document.createElement('div');card.className='piggy-card';const pct=p.goal>0?Math.min(100,Math.round((p.saved||0)/p.goal*100)):0;card.innerHTML=`<button class="delete-btn">🗑</button><span class="piggy-emoji">${p.emoji||'🐷'}</span><div class="piggy-name">${p.name||'Копилка'}</div><div class="piggy-saved">${fm(p.saved||0)}</div><div class="piggy-goal">${p.goal>0?t('goal')+': '+fm(p.goal):t('noGoal')}</div><div class="progress-bar"><div class="progress-fill" style="width:${pct}%"></div></div>`;card.querySelector('.delete-btn').addEventListener('click',e=>{e.stopPropagation();if(confirm('Удалить?')){piggies=piggies.filter(x=>x.id!==p.id);save();renderAll();}});card.addEventListener('click',()=>openPiggy(p.id));list.appendChild(card);});if(piggies.length<10){const add=document.createElement('div');add.className='piggy-card add-card';add.innerHTML='<div style="font-size:3rem;">➕</div><div class="add-text">'+t('newPiggy')+'</div>';add.addEventListener('click',()=>openModal('createModal'));list.appendChild(add);}}
+function openPiggy(id){currentId=id;const p=piggies.find(x=>x.id===id);if(!p)return;document.getElementById('detailScreen').classList.add('active');document.getElementById('detailName').value=p.name||'';document.getElementById('goalInput').value='';document.getElementById('addInput').value='';if(!p.cardCache||p.cardCache.length===0||p.cardCache.reduce((a,b)=>a+b,0)!==p.goal){p.cardCache=generateCards(p.goal);}renderDetail(p);}
+function closeDetail(){const p=piggies.find(x=>x.id===currentId);if(p){p.name=document.getElementById('detailName').value.trim()||'Копилка';save();}document.getElementById('detailScreen').classList.remove('active');renderAll();}
+function renderDetail(p){const cards=p.cardCache;const pct=p.goal>0?Math.min(100,Math.round((p.saved||0)/p.goal*100)):0;const circ=2*Math.PI*44;document.getElementById('detailCircle').style.strokeDashoffset=circ-(pct/100)*circ;document.getElementById('detailPercent').textContent=pct+'%';document.getElementById('detailSaved').textContent=fm(p.saved||0);document.getElementById('detailGoal').textContent=(p.goal>0?t('goal')+': '+fm(p.goal):t('noGoal'));const grid=document.getElementById('cardGrid');grid.innerHTML='';cards.forEach((amount,idx)=>{const card=document.createElement('div');card.className='amount-card'+((p.paidCards||[]).includes(idx)?' paid':'');card.textContent=amount.toLocaleString('ru-RU')+' '+currency.symbol;card.addEventListener('click',()=>{if((p.paidCards||[]).includes(idx)){p.paidCards=p.paidCards.filter(i=>i!==idx);p.saved=Math.max(0,(p.saved||0)-amount);}else{p.paidCards=[...(p.paidCards||[]),idx];p.saved=Math.min(p.goal,(p.saved||0)+amount);}save();renderDetail(p);renderAll();});grid.appendChild(card);});}
+function setGoal(){const p=piggies.find(x=>x.id===currentId);if(!p)return;const v=parseInt(document.getElementById('goalInput').value);if(isNaN(v)||v<1)return;p.goal=v;p.saved=0;p.paidCards=[];p.cardCache=generateCards(v);document.getElementById('goalInput').value='';save();renderDetail(p);renderAll();}
+function addAmount(){const p=piggies.find(x=>x.id===currentId);if(!p||!p.goal||p.goal<=0)return;const v=parseInt(document.getElementById('addInput').value);if(isNaN(v)||v<=0)return;const maxAdd=Math.min(v,p.goal-(p.saved||0));if(maxAdd<=0){document.getElementById('addInput').value='';return;}const cards=p.cardCache;p.paidCards=p.paidCards||[];let remaining=maxAdd;const available=cards.map((amount,idx)=>({idx,amount})).filter(item=>!p.paidCards.includes(item.idx)).sort((a,b)=>b.amount-a.amount);for(const {idx,amount} of available){if(remaining>=amount){p.paidCards.push(idx);remaining-=amount;}if(remaining<=0)break;}if(remaining>0){cards.push(remaining);p.paidCards.push(cards.length-1);}p.saved=Math.min(p.goal,(p.saved||0)+maxAdd);p.cardCache=cards;document.getElementById('addInput').value='';save();renderDetail(p);renderAll();}
+function resetPiggy(){const p=piggies.find(x=>x.id===currentId);if(!p)return;p.saved=0;p.paidCards=[];save();renderDetail(p);renderAll();}
+function openModal(id){document.getElementById(id).classList.add('active');if(id==='settingsModal')updateSettings();if(id==='createModal')renderEmojiGrid('createEmojiGrid');if(id==='emojiModal'&&currentId){const p=piggies.find(x=>x.id===currentId);pendingEmoji=p?p.emoji||'🐷':'🐷';renderEmojiGrid('emojiGrid');}}
+function closeModal(id){document.getElementById(id).classList.remove('active');}
+function renderEmojiGrid(gridId){const grid=document.getElementById(gridId);grid.innerHTML='';EMOJIS.forEach(e=>{const el=document.createElement('span');el.className='emoji-opt'+(e===pendingEmoji?' selected':'');el.textContent=e;el.addEventListener('click',()=>{pendingEmoji=e;grid.querySelectorAll('.emoji-opt').forEach(o=>o.classList.remove('selected'));el.classList.add('selected');});grid.appendChild(el);});}
+function createPiggy(){const name=document.getElementById('newPiggyName').value.trim()||'Копилка';piggies.push({id:Date.now(),name,emoji:pendingEmoji,goal:0,saved:0,paidCards:[],cardCache:[]});save();closeModal('createModal');renderAll();}
+function updateSettings(){document.querySelectorAll('#langOptions .option-btn').forEach(b=>b.classList.toggle('selected',b.dataset.lang===lang));document.querySelectorAll('#themeOptions .color-btn').forEach(b=>b.classList.toggle('selected',b.dataset.theme===theme));const co=document.getElementById('currencyOptions');co.innerHTML='';CURRENCIES.forEach(c=>{const b=document.createElement('button');b.className='option-btn'+(c.code===currency.code?' selected':'');b.textContent=c.symbol+' '+c.code;b.addEventListener('click',()=>{currency=c;piggies.forEach(p=>{p.cardCache=[];p.paidCards=[];});save();updateSettings();renderAll();});co.appendChild(b);});}
 document.getElementById('langOptions').addEventListener('click',e=>{if(e.target.classList.contains('option-btn')){lang=e.target.dataset.lang;save();updateSettings();renderAll();}});
 document.getElementById('themeOptions').addEventListener('click',e=>{if(e.target.classList.contains('color-btn')){theme=e.target.dataset.theme;document.body.className=theme;save();updateSettings();renderSparkles();}});
 document.getElementById('detailName').addEventListener('change',()=>{const p=piggies.find(x=>x.id===currentId);if(p){p.name=document.getElementById('detailName').value.trim()||'Копилка';save();}});
-
 document.body.className=theme;renderSparkles();renderAll();
 setInterval(()=>{document.getElementById('affirmation').textContent=AFF[lang][Math.floor(Math.random()*AFF[lang].length)];},60000);
 </script>
