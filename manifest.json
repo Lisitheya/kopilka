@@ -1,0 +1,25 @@
+{
+    "name": "🌸 Копилочка",
+    "short_name": "Копилочка",
+    "description": "Милое приложение-копилка для накопления денег",
+    "start_url": "/",
+    "scope": "/",
+    "display": "standalone",
+    "background_color": "#fff0f5",
+    "theme_color": "#ff99b9",
+    "orientation": "any",
+    "icons": [
+        {
+            "src": "icon.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "icon.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ]
+}

@@ -9,7 +9,8 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="🌸 Копилочка">
-    <link rel="apple-touch-icon" sizes="180x180" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'><defs><radialGradient id='g' cx='50%25' cy='40%25' r='50%25'><stop offset='0%25' stop-color='%23ffb3c6'/><stop offset='100%25' stop-color='%23ff6b8a'/></radialGradient></defs><circle cx='90' cy='90' r='85' fill='url(%23g)'/><circle cx='90' cy='90' r='78' fill='none' stroke='white' stroke-width='4' stroke-dasharray='16 8'/><text x='90' y='120' text-anchor='middle' font-size='75' font-family='Arial'>🐷</text></svg>">
+    <link rel="apple-touch-icon" sizes="180x180" href="icon.png">
+    <link rel="manifest" href="manifest.json">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Comfortaa:wght@400;700&display=swap');
         :root { --bg: #fff0f5; --card: #ffffff; --text: #5c3d5c; --accent: #ff99b9; --accent-dark: #ff6b8a; --accent-light: #ffd6e8; --progress-bg: #fce4ec; --input-bg: #fff5f8; --border: 28px; --font: 'Nunito', sans-serif; --cute: 'Comfortaa', cursive; }
@@ -128,12 +129,12 @@
 <div class="modal-overlay" id="createModal"><div class="modal-card"><button class="modal-close" onclick="closeModal('createModal')">✕</button><div class="modal-title">✨ Новая копилка</div><input type="text" id="newPiggyName" placeholder="Название" maxlength="30" style="width:100%;padding:10px;border-radius:12px;border:2px solid var(--accent-light);background:var(--input-bg);margin-bottom:10px;"><div class="emoji-grid" id="createEmojiGrid"></div><button class="primary-btn" onclick="createPiggy()">✨ Создать</button></div></div>
 
 <script>
-// ============ SERVICE WORKER (правильный, с кэшированием) ============
+// ============ SERVICE WORKER ============
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js', { scope: '/' })
-            .then(reg => console.log('SW registered:', reg.scope))
-            .catch(err => console.log('SW failed:', err));
+        navigator.serviceWorker.register('sw.js', { scope: '/' })
+            .then(reg => console.log('✅ SW зарегистрирован!', reg))
+            .catch(err => console.log('SW ошибка:', err));
     });
 }
 
@@ -202,12 +203,12 @@ function renderEmojiGrid(gridId) { const grid=document.getElementById(gridId);gr
 function createPiggy() { const name=document.getElementById('newPiggyName').value.trim()||'Копилка';piggies.push({id:Date.now(),name,emoji:pendingEmoji,goal:0,saved:0,paidCards:[],cardCache:[]});save();closeModal('createModal');renderAll(); }
 function updateSettings() { document.querySelectorAll('#langOptions .option-btn').forEach(b=>b.classList.toggle('selected',b.dataset.lang===lang));document.querySelectorAll('#themeOptions .color-btn').forEach(b=>b.classList.toggle('selected',b.dataset.theme===theme));const co=document.getElementById('currencyOptions');co.innerHTML='';CURRENCIES.forEach(c=>{const b=document.createElement('button');b.className='option-btn'+(c.code===currency.code?' selected':'');b.textContent=c.symbol+' '+c.code;b.addEventListener('click',()=>{currency=c;piggies.forEach(p=>{p.cardCache=[];p.paidCards=[];});save();updateSettings();renderAll();});co.appendChild(b);}); }
 
-// ============ PWA INSTALL ============
+// PWA Install
 let deferredPrompt;
 window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
     deferredPrompt = e;
-    console.log('✅ beforeinstallprompt сработал! Можно устанавливать.');
+    console.log('✅ Можно устанавливать PWA!');
 });
 
 document.getElementById('langOptions').addEventListener('click',e=>{if(e.target.classList.contains('option-btn')){lang=e.target.dataset.lang;save();updateSettings();renderAll();}});
